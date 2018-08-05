@@ -1,3 +1,5 @@
+# Solarized by Ethan Schoonover
+# http://ethanschoonover.com/solarized
 if [ "$TERM" = "linux" ]; then
     echo -en "\e]P0073642" #black
     echo -en "\e]P1DC322F" #darkred
