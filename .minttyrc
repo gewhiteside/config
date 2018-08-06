@@ -1,5 +1,8 @@
 BoldAsFont=-1
 ThemeFile=mintty
+Font=Source Code Pro
+FontHeight=11
+CursorType=block
 
 # Solarized by Ethan Schoonover
 # http://ethanschoonover.com/solarized
@@ -23,6 +26,3 @@ Cyan=42,161,152
 BoldCyan=147,161,161
 White=238,232,213
 BoldWhite=253,246,227
-Font=Source Code Pro
-FontHeight=11
-CursorType=block
