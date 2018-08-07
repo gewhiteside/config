@@ -1,0 +1,4 @@
+altscreen on
+escape ^Zz
+vbell off
+termcapinfo xterm ti@:te@
