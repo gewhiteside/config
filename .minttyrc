@@ -3,6 +3,7 @@ ThemeFile=mintty
 Font=Source Code Pro
 FontHeight=11
 CursorType=block
+BellType=0
 
 # Solarized by Ethan Schoonover
 # http://ethanschoonover.com/solarized
