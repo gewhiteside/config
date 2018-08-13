@@ -1,0 +1,8 @@
+[user]
+	name = George Whiteside
+	email = whiteside@reservoir.com
+[push]
+	default = simple
+[core]
+	excludesfile = ~/.gitignore
+	editor = emacs

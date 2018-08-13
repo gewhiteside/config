@@ -1,0 +1,12 @@
+#!/bin/bash
+# Pulls config files from system to this repo
+
+files=$(ls -A --ignore=.git --ignore=pull*)
+pwd=$(pwd)
+cd ~
+for file in $files; do
+  if [ -f $file ]; then
+    cp $file $pwd
+  fi
+done
+cd $pwd
