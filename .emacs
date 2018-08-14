@@ -4,9 +4,6 @@
 ;; turn off bell ring
 (setq ring-bell-function 'ignore)
 
-;; require final newline on save
-(setq require-final-newline t)
-
 ;; set f12 to indent buffer
 (defun indent-buffer ()
   (interactive)
@@ -34,6 +31,18 @@
    c++-mode-hook
    sh-mode-hook)
  (lambda () (add-to-list 'write-file-functions 'delete-trailing-whitespace)))
+
+;; require final newline on save
+(setq require-final-newline t)
+
+;; buffer list opens in current window
+(setq display-buffer-alist '(("\\*Buffer List\\*" display-buffer-same-window)))
+
+;; shell opens in new window
+(setq display-buffer-alist '(("\\*shell\\*" display-buffer-pop-up-window)))
+
+;; split window right first
+(setq split-height-threshold nil)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; C
