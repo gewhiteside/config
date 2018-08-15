@@ -43,6 +43,7 @@
 
 ;; split window right first
 (setq split-height-threshold nil)
+(setq split-width-threshold 80)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; C
