@@ -4,6 +4,9 @@
 ;; turn off bell ring
 (setq ring-bell-function 'ignore)
 
+;; set f9 to call macro
+(global-set-key [f9] 'kmacro-end-and-call-macro)
+
 ;; set f12 to indent buffer
 (defun indent-buffer ()
   (interactive)
@@ -29,20 +32,23 @@
 (add-hook-to-multiple-modes
  '(c-mode-hook
    c++-mode-hook
+   python-mode-hook
+   emacs-lisp-mode-hook
    sh-mode-hook)
  (lambda () (add-to-list 'write-file-functions 'delete-trailing-whitespace)))
 
 ;; require final newline on save
 (setq require-final-newline t)
 
-;; buffer list opens in current window
-(setq display-buffer-alist '(("\\*Buffer List\\*" display-buffer-same-window)))
-
-;; shell opens in new window
-(setq display-buffer-alist '(("\\*shell\\*" display-buffer-pop-up-window)))
-
 ;; split window right first
 (setq split-height-threshold nil)
+(setq split-width-threshold 160)
+
+;; use ibuffer as buffer list
+(global-set-key (kbd "C-x C-b") 'ibuffer)
+
+;; ask before quitting
+(setq confirm-kill-emacs 'y-or-n-p)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; C
