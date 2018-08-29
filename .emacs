@@ -41,19 +41,49 @@
 (setq require-final-newline t)
 
 ;; split window right first
-(setq split-height-threshold nil)
-(setq split-width-threshold 160)
-
-;; use ibuffer as buffer list
-(global-set-key (kbd "C-x C-b") 'ibuffer)
+(setq split-height-threshold nil
+      split-width-threshold 160)
 
 ;; ask before quitting
 (setq confirm-kill-emacs 'y-or-n-p)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; IBuffer
+
+;; use ibuffer as buffer list
+(global-set-key (kbd "C-x C-b") 'ibuffer)
+
+;; turn off prompt to close unmodified buffers
+(setq ibuffer-expert t)
+
+;; hide empty filter groups
+(setq ibufer-show-empty-filter-groups nil)
+
+;; auto refresh buffer list
+(add-hook 'ibuffer-mode-hook (lambda () (ibuffer-auto-mode 1)))
+
+;; set default groups
+(setq my-default-filter-groups
+      '("Special" (or (name . "\*")
+		      (name . "TAGS"))))
+
+;; add default groups
+;; my-groups variable can be overwritten to add other groups
+(setq ibuffer-saved-filter-groups
+      `(("default"
+	 ,my-default-filter-groups))
+      my-groups "default")
+
+;; example group for other project
+;;(load "example-ibuffer-groups.el")
+
+(add-hook 'ibuffer-mode-hook
+	  (lambda () (ibuffer-switch-to-saved-filter-groups my-groups)))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; C
 
-;; set c indentation style
+;; set C indentation style
 (setq c-default-style "linux"
       c-basic-offset 2)
 
@@ -62,5 +92,7 @@
 
 ;; disale << as insert document skeleton
 (add-hook 'sh-mode-hook (lambda () (sh-electric-here-document-mode -1)))
+
+;; set bash indentation
 (setq sh-basic-offset 2
       sh-indentation 2)
