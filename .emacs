@@ -52,6 +52,7 @@
 
 ;; set the face of trailing lines
 (set-face-background 'whitespace-line "red")
+(set-face-background 'whitespace-tab "red")
 (set-face-foreground 'whitespace-line nil)
 
 ;; require final newline on save
@@ -82,20 +83,20 @@
 ;; set default groups
 (setq my-default-filter-groups
       '("Special" (or (name . "\*")
-		      (name . "TAGS"))))
+                      (name . "TAGS"))))
 
 ;; add default groups
 ;; my-groups variable can be overwritten to add other groups
 (setq ibuffer-saved-filter-groups
       `(("default"
-	 ,my-default-filter-groups))
+         ,my-default-filter-groups))
       my-groups "default")
 
 ;; example group for other project
 ;;(load "example-ibuffer-groups.el")
 
 (add-hook 'ibuffer-mode-hook
-	  (lambda () (ibuffer-switch-to-saved-filter-groups my-groups)))
+          (lambda () (ibuffer-switch-to-saved-filter-groups my-groups)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; C
