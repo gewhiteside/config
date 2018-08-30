@@ -59,7 +59,7 @@
 (setq require-final-newline t)
 
 ;; split window right first
-(setq split-height-threshold nil
+(setq split-height-threshold 160
       split-width-threshold 160)
 
 ;; ask before quitting
