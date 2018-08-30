@@ -92,9 +92,6 @@
          ,my-default-filter-groups))
       my-groups "default")
 
-;; example group for other project
-;;(load "example-ibuffer-groups.el")
-
 (add-hook 'ibuffer-mode-hook
           (lambda () (ibuffer-switch-to-saved-filter-groups my-groups)))
 
@@ -114,3 +111,9 @@
 ;; set bash indentation
 (setq sh-basic-offset 2
       sh-indentation 2)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Other
+
+;; load other settings, like project-specific modes or ibuffer groups
+;; (load "~/path-to-project/project.el")
