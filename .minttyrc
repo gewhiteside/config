@@ -29,3 +29,5 @@ FontHeight=11
 CursorType=block
 BellType=0
 Scrollbar=none
+RightClickAction=paste
+WindowShortcuts=no

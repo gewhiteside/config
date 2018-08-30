@@ -4,15 +4,23 @@
 ;; turn off bell ring
 (setq ring-bell-function 'ignore)
 
-;; set f9 to call macro
-(global-set-key [f9] 'kmacro-end-and-call-macro)
-
-;; set f12 to indent buffer
-(defun indent-buffer ()
+;; set f5 to flip the orientation of two buffers
+(defun resplit-window ()
   (interactive)
-  (save-excursion
-    (indent-region (point-min) (point-max) nil)))
-(global-set-key [f12] 'indent-buffer)
+  (other-window 1)
+  (delete-other-windows)
+  (split-window-sensibly (selected-window))
+  (other-window 1)
+  (switch-to-buffer nil)
+  (other-window 1))
+(global-set-key [f5] 'resplit-window)
+
+;; set f12 to format buffer
+(defun format-buffer ()
+  (interactive)
+  (untabify (point-min) (point-max))
+  (indent-region (point-min) (point-max) nil))
+(global-set-key [f12] 'format-buffer)
 
 ;; set fill column for formatting comments/text
 (setq-default fill-column 80)
@@ -36,6 +44,15 @@
    emacs-lisp-mode-hook
    sh-mode-hook)
  (lambda () (add-to-list 'write-file-functions 'delete-trailing-whitespace)))
+
+;; add marker for column 80 and *shudders* tabs
+(require 'whitespace)
+(setq whitespace-style '(face tabs lines-tail))
+(global-whitespace-mode t)
+
+;; set the face of trailing lines
+(set-face-background 'whitespace-line "red")
+(set-face-foreground 'whitespace-line nil)
 
 ;; require final newline on save
 (setq require-final-newline t)
