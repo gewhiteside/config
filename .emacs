@@ -119,6 +119,17 @@
       sh-indentation 2)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Org
+
+;; change level 1 text color
+(add-hook
+ 'org-mode-hook
+ (lambda () (set-face-foreground 'org-level-1 "light blue")))
+
+;; open link in this window
+(setq org-link-frame-setup '(file . find-file))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Other
 
 ;; load other settings, like project-specific modes or ibuffer groups
