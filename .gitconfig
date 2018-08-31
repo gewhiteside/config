@@ -6,3 +6,4 @@
 [core]
 	excludesfile = ~/.gitignore
 	editor = emacs
+	pager = less -+F

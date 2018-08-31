@@ -48,7 +48,13 @@
 ;; add marker for column 80 and *shudders* tabs
 (require 'whitespace)
 (setq whitespace-style '(face tabs lines-tail))
-(global-whitespace-mode t)
+(add-hook-to-multiple-modes
+ '(c-mode-hook
+   c++-mode-hook
+   python-mode-hook
+   emacs-lisp-mode-hook
+   sh-mode-hook)
+ 'whitespace-mode)
 
 ;; set the face of trailing lines
 (set-face-background 'whitespace-line "red")
@@ -75,14 +81,14 @@
 (setq ibuffer-expert t)
 
 ;; hide empty filter groups
-(setq ibufer-show-empty-filter-groups nil)
+(setq ibuffer-show-empty-filter-groups nil)
 
 ;; auto refresh buffer list
 (add-hook 'ibuffer-mode-hook (lambda () (ibuffer-auto-mode 1)))
 
 ;; set default groups
 (setq my-default-filter-groups
-      '("Special" (or (name . "\*")
+      '("special" (or (name . "\*")
                       (name . "TAGS"))))
 
 ;; add default groups

@@ -115,11 +115,3 @@ if ! shopt -oq posix; then
     . /etc/bash_completion
   fi
 fi
-
-# clear before git diff
-git() {
-  if [[ "$1" == "diff" ]]; then
-    command clear
-  fi
-  command git "$@"
-}
