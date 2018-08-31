@@ -127,7 +127,7 @@
  (lambda () (set-face-foreground 'org-level-1 "light blue")))
 
 ;; open link in this window
-(setq org-link-frame-setup '(file . find-file))
+(setq org-link-frame-setup (lambda () (file . find-file)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Other
