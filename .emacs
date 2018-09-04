@@ -71,6 +71,10 @@
 ;; ask before quitting
 (setq confirm-kill-emacs 'y-or-n-p)
 
+;; scroll window
+(global-set-key "\M-n"  (lambda () (interactive) (scroll-up   1)) )
+(global-set-key "\M-p"  (lambda () (interactive) (scroll-down 1)) )
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; IBuffer
 
@@ -87,16 +91,14 @@
 (add-hook 'ibuffer-mode-hook (lambda () (ibuffer-auto-mode 1)))
 
 ;; set default groups
-(setq my-default-filter-groups
-      '("special" (or (name . "\*")
-                      (name . "TAGS"))))
-
-;; add default groups
-;; my-groups variable can be overwritten to add other groups
 (setq ibuffer-saved-filter-groups
-      `(("default"
-         ,my-default-filter-groups))
-      my-groups "default")
+      '(("default"
+         ("org"     (mode . org-mode))
+         ("special" (or (name . "\*")
+                        (name . "TAGS"))))))
+
+;; my-groups can be overwritten by a project-specific default
+(setq my-groups "default")
 
 (add-hook 'ibuffer-mode-hook
           (lambda () (ibuffer-switch-to-saved-filter-groups my-groups)))
