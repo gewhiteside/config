@@ -2,3 +2,7 @@ altscreen on
 escape ^Zz
 vbell off
 termcapinfo xterm ti@:te@
+
+# remove bad keybindings
+bind Z
+bind ^x
