@@ -75,6 +75,12 @@
 (global-set-key "\M-n"  (lambda () (interactive) (scroll-up   1)) )
 (global-set-key "\M-p"  (lambda () (interactive) (scroll-down 1)) )
 
+;; auto-fill
+(global-set-key (kbd "C-c q") 'auto-fill-mode)
+
+;; enable upcase-region
+(put 'upcase-region 'disabled nil)
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; IBuffer
 
@@ -123,10 +129,13 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Org
 
-;; change level 1 text color
+;; swap level 1 and level 3 text colors
 (add-hook
  'org-mode-hook
  (lambda () (set-face-foreground 'org-level-1 "light blue")))
+(add-hook
+ 'org-mode-hook
+ (lambda () (set-face-foreground 'org-level-3 "dark blue")))
 
 ;; open link in this window
 (setq org-link-frame-setup (lambda () (file . find-file)))
@@ -136,3 +145,19 @@
 
 ;; load other settings, like project-specific modes or ibuffer groups
 ;; (load "~/path-to-project/project.el")
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Customize
+
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(org-export-backends (quote (ascii html icalendar latex md odt))))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
