@@ -78,8 +78,14 @@
 ;; auto-fill
 (global-set-key (kbd "C-c q") 'auto-fill-mode)
 
+;; case-insensitive completion
+(setq read-buffer-completion-ignore-case t)
+
 ;; enable upcase-region
 (put 'upcase-region 'disabled nil)
+
+;; indent with spaces
+(setq-default indent-tabs-mode nil)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; IBuffer
