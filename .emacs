@@ -36,7 +36,7 @@
    sh-mode-hook)
  (lambda ()
    ;; delete trailing whitespace
-   (add-to-list 'write-file-functions 'delete-trailing-whitespace)
+   (if set-trailing-whitespace (add-to-list 'write-file-functions 'delete-trailing-whitespace))
    ;; add marker for column 80 and *shudders* tabs
    'whitespace-mode))
 
@@ -53,6 +53,8 @@
  fill-column 80)
 
 (setq
+ ;; turn on delete trailling whitespace
+ set-trailing-whitespace t
  ;; turn on column number
  column-number-mode t
  ;; require final newline on save
