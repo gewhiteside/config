@@ -135,9 +135,8 @@
    (set-face-foreground 'org-level-1 "light blue")
    (set-face-foreground 'org-level-3 "dark blue")
    ;; rebind header navigation keys
-   (define-key org-mode-map (kbd "C-m") 'org-next-visible-heading)
-   (define-key org-mode-map (kbd "C-,") 'org-previous-visible-heading)
-   (define-key org-mode-map (kbd "C-.") 'org-cycle)))
+   (define-key org-mode-map (kbd "C-,") 'org-next-visible-heading)
+   (define-key org-mode-map (kbd "C-.") 'org-previous-visible-heading)))
 
 ;; open link in this window
 (setq org-link-frame-setup (lambda () (file . find-file)))
