@@ -1,9 +1,6 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Global
 
-;; turn off bell ring
-(setq ring-bell-function 'ignore)
-
 ;; set f5 to flip the orientation of two buffers
 (defun resplit-window ()
   (interactive)
@@ -22,13 +19,6 @@
   (indent-region (point-min) (point-max) nil))
 (global-set-key [f12] 'format-buffer)
 
-;; set fill column for formatting comments/text
-(setq-default fill-column 80)
-(setq column-number-mode t)
-
-;; diable menu bar
-(menu-bar-mode -1)
-
 ;; add hook to multiple modes
 (defun add-hook-to-multiple-modes (modes hook)
   (mapc
@@ -36,91 +26,92 @@
      (add-hook mode hook))
    modes))
 
-;; delete trailing whitespace
-(add-hook-to-multiple-modes
- '(c-mode-hook
-   c++-mode-hook
-   python-mode-hook
-   emacs-lisp-mode-hook
-   sh-mode-hook)
- (lambda () (add-to-list 'write-file-functions 'delete-trailing-whitespace)))
-
-;; add marker for column 80 and *shudders* tabs
 (require 'whitespace)
-(setq whitespace-style '(face tabs lines-tail))
+;; common hooks
 (add-hook-to-multiple-modes
  '(c-mode-hook
    c++-mode-hook
    python-mode-hook
    emacs-lisp-mode-hook
    sh-mode-hook)
- 'whitespace-mode)
+ (lambda ()
+   ;; delete trailing whitespace
+   (add-to-list 'write-file-functions 'delete-trailing-whitespace)
+   ;; add marker for column 80 and *shudders* tabs
+   'whitespace-mode))
+
+;; diable menu bar
+(menu-bar-mode -1)
+
+;; enable upcase-region
+(put 'upcase-region 'disabled nil)
+
+(setq-default
+ ;; indent with spaces
+ indent-tabs-mode nil
+ ;; fill column
+ fill-column 80)
+
+(setq
+ ;; turn on column number
+ column-number-mode t
+ ;; require final newline on save
+ require-final-newline t
+ ;; turn off bell ring
+ ring-bell-function 'ignore
+ ;; split window right first
+ split-height-threshold 160
+ split-width-threshold 160
+ ;; ask before quitting
+ confirm-kill-emacs 'y-or-n-p
+ ;; case-insensitive completion
+ read-buffer-completion-ignore-case t)
+
+;; scroll window
+(global-set-key "\M-n"  (lambda () (interactive) (scroll-up   1)) )
+(global-set-key "\M-p"  (lambda () (interactive) (scroll-down 1)) )
+;; auto-fill
+(global-set-key (kbd "C-c q") 'auto-fill-mode)
 
 ;; set the face of trailing lines
 (set-face-background 'whitespace-line "red")
 (set-face-background 'whitespace-tab "red")
 (set-face-foreground 'whitespace-line nil)
 
-;; require final newline on save
-(setq require-final-newline t)
-
-;; split window right first
-(setq split-height-threshold 160
-      split-width-threshold 160)
-
-;; ask before quitting
-(setq confirm-kill-emacs 'y-or-n-p)
-
-;; scroll window
-(global-set-key "\M-n"  (lambda () (interactive) (scroll-up   1)) )
-(global-set-key "\M-p"  (lambda () (interactive) (scroll-down 1)) )
-
-;; auto-fill
-(global-set-key (kbd "C-c q") 'auto-fill-mode)
-
-;; case-insensitive completion
-(setq read-buffer-completion-ignore-case t)
-
-;; enable upcase-region
-(put 'upcase-region 'disabled nil)
-
-;; indent with spaces
-(setq-default indent-tabs-mode nil)
-
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; IBuffer
+
+(add-hook 'ibuffer-mode-hook
+          (lambda ()
+            ;; default groups
+            (ibuffer-switch-to-saved-filter-groups my-groups)
+            ;; auto refresh buffer list
+            (ibuffer-auto-mode 1)))
+
+(setq
+ ;; turn off prompt to close unmodified buffers
+ ibuffer-expert t
+ ;; hide empty filter groups
+ ibuffer-show-empty-filter-groups nil
+ ;; set default groups
+ ibuffer-saved-filter-groups
+ '(("default"
+    ("org"     (mode . org-mode))
+    ("special" (or (name . "\*")
+                   (name . "TAGS")))))
+ ;; my-groups can be overwritten by a project-specific default
+ my-groups "default")
 
 ;; use ibuffer as buffer list
 (global-set-key (kbd "C-x C-b") 'ibuffer)
 
-;; turn off prompt to close unmodified buffers
-(setq ibuffer-expert t)
-
-;; hide empty filter groups
-(setq ibuffer-show-empty-filter-groups nil)
-
-;; auto refresh buffer list
-(add-hook 'ibuffer-mode-hook (lambda () (ibuffer-auto-mode 1)))
-
-;; set default groups
-(setq ibuffer-saved-filter-groups
-      '(("default"
-         ("org"     (mode . org-mode))
-         ("special" (or (name . "\*")
-                        (name . "TAGS"))))))
-
-;; my-groups can be overwritten by a project-specific default
-(setq my-groups "default")
-
-(add-hook 'ibuffer-mode-hook
-          (lambda () (ibuffer-switch-to-saved-filter-groups my-groups)))
-
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; C
 
-;; set C indentation style
-(setq c-default-style "linux"
-      c-basic-offset 2)
+(setq
+ ;; set C indentation style
+ c-default-style "linux"
+ c-basic-offset 2)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Bash
@@ -135,13 +126,16 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Org
 
-;; swap level 1 and level 3 text colors
 (add-hook
  'org-mode-hook
- (lambda () (set-face-foreground 'org-level-1 "light blue")))
-(add-hook
- 'org-mode-hook
- (lambda () (set-face-foreground 'org-level-3 "dark blue")))
+ (lambda ()
+   ;; swap level 1 and level 3 text colors
+   (set-face-foreground 'org-level-1 "light blue")
+   (set-face-foreground 'org-level-3 "dark blue")
+   ;; rebind header navigation keys
+   (define-key org-mode-map (kbd "C-m") 'org-next-visible-heading)
+   (define-key org-mode-map (kbd "C-,") 'org-previous-visible-heading)
+   (define-key org-mode-map (kbd "C-.") 'org-cycle)))
 
 ;; open link in this window
 (setq org-link-frame-setup (lambda () (file . find-file)))
@@ -150,7 +144,7 @@
 ;; Other
 
 ;; load other settings, like project-specific modes or ibuffer groups
-;; (load "~/path-to-project/project.el")
+;; (load "~/path-to-file/file.el")
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Customize
@@ -160,6 +154,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(org-cycle-separator-lines 1)
  '(org-export-backends (quote (ascii html icalendar latex md odt))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
