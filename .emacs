@@ -36,9 +36,10 @@
    sh-mode-hook)
  (lambda ()
    ;; delete trailing whitespace
-   (if set-trailing-whitespace (add-to-list 'write-file-functions 'delete-trailing-whitespace))
+   (if my-delete-trailing-whitespace
+       (add-to-list 'write-contents-functions 'delete-trailing-whitespace))
    ;; add marker for column 80 and *shudders* tabs
-   'whitespace-mode))
+   (whitespace-mode)))
 
 ;; diable menu bar
 (menu-bar-mode -1)
@@ -54,7 +55,9 @@
 
 (setq
  ;; turn on delete trailling whitespace
- set-trailing-whitespace t
+ my-delete-trailing-whitespace t
+ ;; set whitespace style
+ whitespace-style '(face tabs lines-tail)
  ;; turn on column number
  column-number-mode t
  ;; require final newline on save
@@ -63,15 +66,17 @@
  ring-bell-function 'ignore
  ;; split window right first
  split-height-threshold 160
- split-width-threshold 160
+ split-width-threshold  160
  ;; ask before quitting
  confirm-kill-emacs 'y-or-n-p
  ;; case-insensitive completion
- read-buffer-completion-ignore-case t)
+ read-buffer-completion-ignore-case t
+ ;; case-insensitive filenames
+ read-file-name-completion-ignore-case t)
 
 ;; scroll window
-(global-set-key "\M-n"  (lambda () (interactive) (scroll-up   1)) )
-(global-set-key "\M-p"  (lambda () (interactive) (scroll-down 1)) )
+(global-set-key "\M-n" (lambda () (interactive) (scroll-up   1)))
+(global-set-key "\M-p" (lambda () (interactive) (scroll-down 1)))
 ;; auto-fill
 (global-set-key (kbd "C-c q") 'auto-fill-mode)
 
@@ -113,7 +118,7 @@
 (setq
  ;; set C indentation style
  c-default-style "linux"
- c-basic-offset 2)
+ c-basic-offset  2)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Bash
@@ -123,7 +128,7 @@
 
 ;; set bash indentation
 (setq sh-basic-offset 2
-      sh-indentation 2)
+      sh-indentation  2)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Org
