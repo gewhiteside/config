@@ -31,3 +31,6 @@ BellType=0
 Scrollbar=none
 RightClickAction=paste
 WindowShortcuts=no
+CopyAsRTF=no
+MiddleClickAction=void
+PgUpDnScroll=yes
