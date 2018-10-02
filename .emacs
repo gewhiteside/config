@@ -47,6 +47,11 @@
 ;; enable upcase-region
 (put 'upcase-region 'disabled nil)
 
+;; automatically balance windows after vertical split
+(defadvice split-window-right
+    (after balance-windows-after-right-split activate)
+  (balance-windows))
+
 (setq-default
  ;; indent with spaces
  indent-tabs-mode nil
@@ -75,8 +80,8 @@
  read-file-name-completion-ignore-case t)
 
 ;; scroll window
-(global-set-key "\M-n" (lambda () (interactive) (scroll-up   1)))
-(global-set-key "\M-p" (lambda () (interactive) (scroll-down 1)))
+(global-set-key "\M-p"  (lambda () (interactive) (scroll-up   1)) )
+(global-set-key "\M-n"  (lambda () (interactive) (scroll-down 1)) )
 ;; auto-fill
 (global-set-key (kbd "C-c q") 'auto-fill-mode)
 
