@@ -33,4 +33,5 @@ RightClickAction=paste
 WindowShortcuts=no
 CopyAsRTF=no
 MiddleClickAction=void
-PgUpDnScroll=yes
+PgUpDnScroll=no
+Language=en_US
