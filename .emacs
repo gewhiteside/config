@@ -26,8 +26,8 @@
      (add-hook mode hook))
    modes))
 
-(require 'whitespace)
 ;; common hooks
+(require 'whitespace)
 (add-hook-to-multiple-modes
  '(c-mode-hook
    c++-mode-hook
@@ -56,13 +56,11 @@
  ;; indent with spaces
  indent-tabs-mode nil
  ;; fill column
- fill-column 80)
+ fill-column 79)
 
 (setq
  ;; turn on delete trailling whitespace
  my-delete-trailing-whitespace t
- ;; set whitespace style
- whitespace-style '(face tabs lines-tail)
  ;; turn on column number
  column-number-mode t
  ;; require final newline on save
@@ -82,13 +80,20 @@
 ;; scroll window
 (global-set-key "\M-p"  (lambda () (interactive) (scroll-up   1)) )
 (global-set-key "\M-n"  (lambda () (interactive) (scroll-down 1)) )
-;; auto-fill
-(global-set-key (kbd "C-c q") 'auto-fill-mode)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Whitespace
 
 ;; set the face of trailing lines
 (set-face-background 'whitespace-line "red")
 (set-face-background 'whitespace-tab "red")
 (set-face-foreground 'whitespace-line nil)
+
+(setq
+ ;; set style
+ whitespace-style '(face tabs lines-tail)
+ ;; inherit max column from fill column
+ whitespace-line-column nil)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; IBuffer
@@ -120,20 +125,20 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; C
 
+(add-hook
+ 'c-mode-common-hook
+ (lambda()
+   (local-set-key  (kbd "C-c o") 'ff-find-other-file)))
+
 (setq
- ;; set C indentation style
- c-default-style "linux"
- c-basic-offset  2)
+ ;; set C default style
+ c-default-style "linux")
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Bash
 
 ;; disale << as insert document skeleton
 (add-hook 'sh-mode-hook (lambda () (sh-electric-here-document-mode -1)))
-
-;; set bash indentation
-(setq sh-basic-offset 2
-      sh-indentation  2)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Org
