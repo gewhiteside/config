@@ -37,6 +37,14 @@ function clear-title() {
     PS1=$TITLE_PROMPT
 }
 
+# open emacs in a new screen session called emacs, or reattach to one if it
+# already exists
+function screenmacs() {
+    title "screenmacs"
+    screen -dR emacs emacs
+    clear-title
+}
+
 # start ssh agent and kill it on exit
 function ssh-start() {
     eval $(ssh-agent)
