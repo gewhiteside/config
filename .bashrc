@@ -13,7 +13,7 @@ HISTCONTROL=ignoreboth
 shopt -s no_empty_cmd_completion
 
 # set color prompt
-PS1='\e[1;37m\u@\h:\w\$\e[m '
+PS1='\[\e[1;37m\]\u@\h:\w\$\[\e[0m\] '
 
 # colors for ls and grep
 # ignore backup files in ls and grep
