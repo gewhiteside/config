@@ -1,5 +1,5 @@
 # ~/.bashrc
-# Sets up my preferred bash environment
+# George Whiteside
 
 # if not running interactively, don't do anything
 [[ $- != *i* ]] && return
@@ -12,27 +12,29 @@ HISTCONTROL=ignoreboth
 # don't try to complete an empty command
 shopt -s no_empty_cmd_completion
 
-# set color prompt
-PS1='\[\e[1;37m\]\u@\h:\w\$\[\e[0m\] '
-
-# colors for ls and grep
-# ignore backup files in ls and grep
+# colors for ls
 eval "$(dircolors -b)"
-alias ls='ls --color=auto --hide="*~" --hide="*#"'
-alias la='ls -A --color=auto'
-alias grep='grep --color=auto --exclude=*~ --exclude=*#'
-alias fgrep='fgrep --color=auto --exclude=*~ --exclude=*#'
-alias egrep='egrep --color=auto --exclude=*~ --exclude=*#'
 
 # aliases
 if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
 fi
 
-function nscreen() {
-    # TODO: add ability to dispaly this title when reconnecting
-    echo -ne "\e]0;$(whoami)@$(hostname) | screen: $1\a"
-    screen -S $1
+# prompt which updates window title
+TITLE_PROMPT='\[\e]0;\u@\h:\w\a\e[1;37m\]\u@\h:\w\$\[\e[0m\] '
+# prompt which doesn't update window title
+PROMPT='\[\e[1;37m\]\u@\h:\w\$\[\e[0m\] '
+# set color prompt and title
+PS1=$TITLE_PROMPT
+
+# sets static title
+function title() {
+    PS1=$PROMPT
+    echo -ne "\033]0;$(whoami)@$(hostname): $1\a"
+}
+# resets behaivor to set title every prompt
+function clear-title() {
+    PS1=$TITLE_PROMPT
 }
 
 # start ssh agent and kill it on exit

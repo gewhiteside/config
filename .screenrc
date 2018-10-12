@@ -1,3 +1,5 @@
+# ~/.screenrc
+# George Whiteside
 altscreen on
 escape ^Zz
 vbell off
