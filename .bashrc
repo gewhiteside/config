@@ -46,9 +46,9 @@ function screenmacs() {
 }
 
 # opens most recent todo list
-function open-todo() {
+function open-notes() {
     title "notes"
-    cd ~/org/work/todo
+    cd ~/org/work/notes
     emacs $(ls -1 *.org --hide="*~" | sort -r | head -n 1)
     clear-title
 }
