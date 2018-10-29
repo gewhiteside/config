@@ -73,6 +73,8 @@
  ;; split window right first
  split-height-threshold 160
  split-width-threshold  160
+ ;; fit window to buffer
+ fit-window-to-buffer-horizontally t
  ;; ask before quitting
  confirm-kill-emacs 'y-or-n-p
  ;; case-insensitive completion
@@ -142,6 +144,11 @@
 
 ;; disale << as insert document skeleton
 (add-hook 'sh-mode-hook (lambda () (sh-electric-here-document-mode -1)))
+
+;; (setq
+;;  ;; set indentation to 2
+;;  sh-basic-offset 2
+;;  sh-indentation  2)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Org

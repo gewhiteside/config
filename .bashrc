@@ -27,6 +27,9 @@ PROMPT='\[\e[1;37m\]\u@\h:\w\$\[\e[0m\] '
 # set color prompt and title
 PS1=$TITLE_PROMPT
 
+# set C-x-e editor to emacs
+EDITOR=emacs
+
 # sets static title
 function title() {
     PS1=$PROMPT
