@@ -4,6 +4,32 @@
 # if not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
+##### GENERAL #####
+## FUNCTIONS ##
+# open emacs in a new screen session called emacs, or reattach to one if it
+# already exists
+function screenmacs {
+    set-title "screenmacs"
+    screen -dR emacs emacs
+    reset-title
+}
+
+# opens most recent todo list
+function open-notes {
+    set-title "notes"
+    cd ~/org/work/notes
+    emacs $(ls -1 *.org --hide="*~" | sort -r | head -n 1)
+    reset-title
+}
+
+# start ssh agent and kill it on exit
+function ssh-start {
+    eval $(ssh-agent)
+    ssh-add
+    trap "kill $SSH_AGENT_PID" EXIT
+}
+
+## DEFINITIONS ##
 # append to the history file, don't overwrite it
 shopt -s histappend
 # don't put duplicate lines or lines starting with space in the history
@@ -20,45 +46,75 @@ if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
 fi
 
-# prompt which updates window title
-TITLE_PROMPT='\[\e]0;\u@\h:\w\a\e[1;37m\]\u@\h:\w\$\[\e[0m\] '
-# prompt which doesn't update window title
-PROMPT='\[\e[1;37m\]\u@\h:\w\$\[\e[0m\] '
-# set color prompt and title
-PS1=$TITLE_PROMPT
-
 # set C-x-e editor to emacs
 EDITOR=emacs
 
+
+##### PROMPT #####
+## FUNCTIONS ##
+# update PS1 with current title and prompt color
+function update-ps1 { PS1="$TITLE$PROMPT" ;}
+
+# reset PS1 to default
+function reset-ps1 {
+    reset-title
+    reset-color
+    update-ps1
+}
+
 # sets static title
-function title() {
-    PS1=$PROMPT
+function set-title {
+    TITLE=
     echo -ne "\033]0;$(whoami)@$(hostname): $1\a"
+    update-ps1
 }
+
 # resets behaivor to set title every prompt
-function clear-title() {
-    PS1=$TITLE_PROMPT
+function reset-title {
+    TITLE="$DEFAULT_TITLE"
+    update-ps1
 }
 
-# open emacs in a new screen session called emacs, or reattach to one if it
-# already exists
-function screenmacs() {
-    title "screenmacs"
-    screen -dR emacs emacs
-    clear-title
+# set, reset and clear color prompt
+function set-color {
+    COLOR="$1"
+    update-ps1
+}
+function reset-color {
+    COLOR="$DEFAULT_COLOR"
+    update-ps1
+}
+function clear-color {
+    COLOR="0m"
+    update-ps1
 }
 
-# opens most recent todo list
-function open-notes() {
-    title "notes"
-    cd ~/org/work/notes
-    emacs $(ls -1 *.org --hide="*~" | sort -r | head -n 1)
-    clear-title
+# prints the end of the prompt
+function end-prompt {
+    if [ ${#PWD} -gt $LONG_PWD ]; then
+        # for some reason, this newline is surpressed unless it is followed by
+        # something else
+        printf "\n$SUFFIX"
+    else
+        printf "$SUFFIX"
+    fi
 }
 
-# start ssh agent and kill it on exit
-function ssh-start() {
-    eval $(ssh-agent)
-    ssh-add
-    trap "kill $SSH_AGENT_PID" EXIT
-}
+## DEFINITIONS ##
+DEFAULT_TITLE='\[\e]0;\u@\h:\w\a\]'
+TITLE="$DEFAULT_TITLE"
+
+BASE_PROMPT="\u@\h:\w"
+SUFFIX='$ '
+
+# cutoff for a long pwd
+LONG_PWD=40
+
+# keep track of default and current prompt color
+DEFAULT_COLOR="1;37m"
+COLOR="$DEFAULT_COLOR"
+
+PROMPT="\[\e[\$COLOR\]$BASE_PROMPT\$(end-prompt)\[\e[0m\]"
+
+# initialize PS1
+update-ps1
