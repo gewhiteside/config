@@ -11,7 +11,6 @@
 function screenmacs {
     set-title "screenmacs"
     screen -dR emacs emacs
-    reset-title
 }
 
 # opens most recent todo list
@@ -19,7 +18,6 @@ function open-notes {
     set-title "notes"
     cd ~/org/work/notes
     emacs $(ls -1 *.org --hide="*~" | sort -r | head -n 1)
-    reset-title
 }
 
 # start ssh agent and kill it on exit
