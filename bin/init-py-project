@@ -1,0 +1,32 @@
+#!/bin/bash
+# Creates a virtual env, project dir and project env script for a new python
+# project.
+
+# Usage: init-py-project NAME [ROOT]
+
+# check for project name
+if [ -z $1 ]; then
+    echo "please enter a project name"
+    exit 1
+fi
+
+# set root if non-empty
+if [ $2 ]; then
+    root=$2
+else
+    root=$(pwd)
+fi
+
+# create and activate virtual env
+mkdir -p $root/.envs
+cd $root/.envs
+# create virtual env if it doesn't exist
+if [ ! -d $1 ]; then
+    virtualenv $1
+fi
+
+# create project dir and env
+mkdir -p $root/$1
+cd $root/$1
+# add virtualenv activate script to project env
+echo ". $root/.envs/$1/bin/activate" > $1-env
