@@ -63,7 +63,7 @@ function reset-ps1 {
 # sets static title
 function set-title {
     TITLE=
-    echo -ne "\033]0;$(whoami)@$(hostname): $1\a"
+    printf "\e]0;$(whoami)@$(hostname): $1\a"
     update-ps1
 }
 
@@ -87,23 +87,14 @@ function clear-color {
     update-ps1
 }
 
-# prints the end of the prompt
-function end-prompt {
-    if [ ${#PWD} -gt $LONG_PWD ]; then
-        # for some reason, this newline is surpressed unless it is followed by
-        # something else
-        printf "\n$SUFFIX"
-    else
-        printf "$SUFFIX"
-    fi
-}
-
 ## DEFINITIONS ##
 DEFAULT_TITLE='\[\e]0;\u@\h:\w\a\]'
 TITLE="$DEFAULT_TITLE"
 
 BASE_PROMPT="\u@\h:\w"
-SUFFIX='$ '
+
+NEWLINE_IF_LONG='$(if [ ${#PWD} -gt $LONG_PWD ]; then printf "\[\n\]"; fi)'
+SUFFIX="$NEWLINE_IF_LONG\$ "
 
 # cutoff for a long pwd
 LONG_PWD=40
@@ -112,7 +103,7 @@ LONG_PWD=40
 DEFAULT_COLOR="1;37m"
 COLOR="$DEFAULT_COLOR"
 
-PROMPT="\[\e[\$COLOR\]$BASE_PROMPT\$(end-prompt)\[\e[0m\]"
+PROMPT="\[\e[\$COLOR\]$BASE_PROMPT$SUFFIX\[\e[0m\]"
 
 # initialize PS1
 update-ps1
