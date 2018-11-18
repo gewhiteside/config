@@ -44,8 +44,11 @@
    ;; add marker for column 80 and *shudders* tabs
    (whitespace-mode)))
 
-;; diable menu bar
+;; diable menu, tool and scroll bars
 (menu-bar-mode -1)
+(tool-bar-mode -1)
+(toggle-scroll-bar -1)
+
 
 ;; enable upcase-region
 (put 'upcase-region 'disabled nil)
@@ -162,8 +165,8 @@
  'org-mode-hook
  (lambda ()
    ;; swap level 1 and level 3 text colors
-   (set-face-foreground 'org-level-1 "light blue")
-   (set-face-foreground 'org-level-3 "dark blue")
+   ;; (set-face-foreground 'org-level-1 "light blue")
+   ;; (set-face-foreground 'org-level-3 "dark blue")
    ;; rebind header navigation keys
    (define-key org-mode-map (kbd "C-,") 'org-next-visible-heading)
    (define-key org-mode-map (kbd "C-.") 'org-previous-visible-heading)))
@@ -185,6 +188,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(inhibit-startup-screen t)
  '(org-export-backends (quote (ascii html icalendar latex md odt)))
  '(org-startup-truncated nil))
 (custom-set-faces
