@@ -1,7 +1,7 @@
 # ~/.screenrc
 # George Whiteside
 altscreen on
-escape ^Zz
+escape ^\\\
 vbell off
 termcapinfo xterm ti@:te@
 

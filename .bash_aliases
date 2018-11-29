@@ -11,3 +11,6 @@ alias egrep='egrep --color=auto --exclude=*~ --exclude=*#'
 
 # ignore case in less search and turn off bell
 alias less='less -Qi'
+
+# shut up gdb
+alias gdb='gdb -q'

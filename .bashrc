@@ -11,6 +11,7 @@
 function screenmacs {
     set-title "screenmacs"
     screen -dR emacs emacs
+    reset-title
 }
 
 # opens most recent todo list
@@ -18,6 +19,7 @@ function open-notes {
     set-title "notes"
     cd ~/org/work/notes
     emacs $(ls -1 *.org --hide="*~" | sort -r | head -n 1)
+    reset-title
 }
 
 # start ssh agent and kill it on exit
@@ -45,7 +47,7 @@ if [ -f ~/.bash_aliases ]; then
 fi
 
 # set C-x-e editor to emacs
-EDITOR=emacs
+export EDITOR=emacs
 
 
 ##### PROMPT #####
@@ -93,7 +95,7 @@ TITLE="$DEFAULT_TITLE"
 
 BASE_PROMPT="\u@\h:\w"
 
-NEWLINE_IF_LONG='$(if [ ${#PWD} -gt $LONG_PWD ]; then printf "\[\n\]"; fi)'
+NEWLINE_IF_LONG='\[$(if [ ${#PWD} -gt $LONG_PWD ]; then printf "\]\n\["; fi)\]'
 SUFFIX="$NEWLINE_IF_LONG\$ "
 
 # cutoff for a long pwd

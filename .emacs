@@ -46,6 +46,9 @@
 
 ;; diable menu bar
 (menu-bar-mode -1)
+(scroll-bar-mode -1)
+(tool-bar-mode -1)
+
 
 ;; enable upcase-region
 (put 'upcase-region 'disabled nil)
@@ -83,8 +86,17 @@
  read-file-name-completion-ignore-case t)
 
 ;; scroll window
-(global-set-key "\M-p"  (lambda () (interactive) (scroll-up   1)) )
-(global-set-key "\M-n"  (lambda () (interactive) (scroll-down 1)) )
+;; (global-set-key "\M-p"  (lambda () (interactive) (scroll-up   1)))
+;; (global-set-key "\M-n"  (lambda () (interactive) (scroll-down 1)))
+
+(global-set-key "\M-p"  'scroll-up-line)
+(global-set-key "\M-n"  'scroll-down-line)
+
+
+;; switch window
+(global-set-key "\M-i" 'other-window)
+;; TODO: this next line works, but is prohibitively slow. Why?
+;; (global-set-key "\M-\S-i" (lambda () (interactive) (other-window -1)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Whitespace
@@ -185,6 +197,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(inhibit-startup-screen t)
  '(org-export-backends (quote (ascii html icalendar latex md odt)))
  '(org-startup-truncated nil))
 (custom-set-faces
