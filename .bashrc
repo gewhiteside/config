@@ -35,6 +35,8 @@ function resize {
 }
 
 ## DEFINITIONS ##
+# increase history file size
+HISTFILESIZE=1500
 # append to the history file, don't overwrite it
 shopt -s histappend
 # don't put duplicate lines or lines starting with space in the history

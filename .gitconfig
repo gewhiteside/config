@@ -7,3 +7,5 @@
 	excludesfile = ~/.gitignore
 	editor = emacs
 	pager = less -+F
+[color]
+	ui = auto

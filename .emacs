@@ -145,7 +145,8 @@
  'c-mode-common-hook
  (lambda()
    ;; shortcut to find header file in the same directory
-   (local-set-key  (kbd "C-c o") 'ff-find-other-file)))
+   (local-set-key  (kbd "C-c o") 'ff-find-other-file)
+   (c-set-offset 'innamespace [0])))
 
 (setq-default
  ;; default indentation is 4 spaces
