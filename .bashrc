@@ -29,6 +29,11 @@ function ssh-start {
     trap "kill $SSH_AGENT_PID" EXIT
 }
 
+# resize window to default 80x24
+function resize {
+    printf '\e[8;24;80t'
+}
+
 ## DEFINITIONS ##
 # append to the history file, don't overwrite it
 shopt -s histappend
@@ -102,7 +107,7 @@ SUFFIX="$NEWLINE_IF_LONG\$ "
 LONG_PWD=40
 
 # keep track of default and current prompt color
-DEFAULT_COLOR="1;37m"
+DEFAULT_COLOR="0m"
 COLOR="$DEFAULT_COLOR"
 
 PROMPT="\[\e[\$COLOR\]$BASE_PROMPT$SUFFIX\[\e[0m\]"

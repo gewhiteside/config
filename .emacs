@@ -44,11 +44,10 @@
    ;; add marker for column 80 and *shudders* tabs
    (whitespace-mode)))
 
-;; diable menu bar
+;; diable menu, tool and scroll bars
 (menu-bar-mode -1)
 (scroll-bar-mode -1)
 (tool-bar-mode -1)
-
 
 ;; enable upcase-region
 (put 'upcase-region 'disabled nil)
@@ -174,8 +173,8 @@
  'org-mode-hook
  (lambda ()
    ;; swap level 1 and level 3 text colors
-   (set-face-foreground 'org-level-1 "light blue")
-   (set-face-foreground 'org-level-3 "dark blue")
+   ;; (set-face-foreground 'org-level-1 "light blue")
+   ;; (set-face-foreground 'org-level-3 "dark blue")
    ;; rebind header navigation keys
    (define-key org-mode-map (kbd "C-,") 'org-next-visible-heading)
    (define-key org-mode-map (kbd "C-.") 'org-previous-visible-heading)))
