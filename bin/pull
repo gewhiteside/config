@@ -1,0 +1,4 @@
+#!/bin/bash
+# Pull config files from system to this directory.
+
+copy-config ~ .

@@ -1,0 +1,11 @@
+#!/bin/bash
+# Installs config files to home directory from current directory.
+
+cp .bash* .emacs .git?* ~
+
+case $(uname) in
+  Linux)
+    cp .screenrc ~ ;;
+  CYGWIN*)
+    cp .minttyrc ~ ;;
+esac

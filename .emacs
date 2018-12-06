@@ -18,8 +18,8 @@
 ;; set f12 to format buffer
 (defun format-buffer ()
   (interactive)
-  (untabify (point-min) (point-max))
-  (indent-region (point-min) (point-max) nil))
+  (indent-region (point-min) (point-max) nil)
+  (untabify (point-min) (point-max)))
 (global-set-key [f12] 'format-buffer)
 
 ;; add hook to multiple modes
@@ -52,9 +52,12 @@
 ;; enable upcase-region
 (put 'upcase-region 'disabled nil)
 
+;; enable desktop-save-mode
+(desktop-save-mode)
+
 ;; automatically balance windows after vertical split
 (defadvice split-window-right
-    (after balance-windows-after-right-split activate)
+  (after balance-windows-after-right-split activate)
   (balance-windows))
 
 (setq-default
@@ -64,6 +67,8 @@
  fill-column 79)
 
 (setq
+ ;; don't show startup screen
+ inhibit-startup-screen t
  ;; turn on delete trailling whitespace
  my-delete-trailing-whitespace t
  ;; turn on column number
@@ -79,18 +84,14 @@
  fit-window-to-buffer-horizontally t
  ;; ask before quitting
  confirm-kill-emacs 'y-or-n-p
- ;; case-insensitive completion
+ ;; case-insensitive buffers
  read-buffer-completion-ignore-case t
  ;; case-insensitive filenames
  read-file-name-completion-ignore-case t)
 
 ;; scroll window
-;; (global-set-key "\M-p"  (lambda () (interactive) (scroll-up   1)))
-;; (global-set-key "\M-n"  (lambda () (interactive) (scroll-down 1)))
-
 (global-set-key "\M-p"  'scroll-up-line)
 (global-set-key "\M-n"  'scroll-down-line)
-
 
 ;; switch window
 (global-set-key "\M-i" 'other-window)
@@ -117,13 +118,15 @@
 (add-hook 'ibuffer-mode-hook
           (lambda ()
             ;; default groups
-            (ibuffer-switch-to-saved-filter-groups my-groups)
+            (ibuffer-switch-to-saved-filter-groups my-group)
             ;; auto refresh buffer list
             (ibuffer-auto-mode 1)))
 
 (setq
  ;; turn off prompt to close unmodified buffers
  ibuffer-expert t
+ ;; default sorting mode is alphabetic
+ ibuffer-default-sorting-mode 'alphabetic
  ;; hide empty filter groups
  ibuffer-show-empty-filter-groups nil
  ;; set default groups
@@ -132,8 +135,22 @@
     ("org"     (mode . org-mode))
     ("special" (or (name . "\*")
                    (name . "TAGS")))))
- ;; my-groups can be overwritten by a project-specific default
- my-groups "default")
+ ;; my-group can be overwritten by a project-specific default
+ my-group "default"
+ ;; set default sorting to alphabetic
+ ibuffer-default-sorting-mode 'alphabetic
+ ;; set custom formats
+ ibuffer-formats
+ '((mark modified read-only " "
+         (name 40 40 :left :elide)
+         " " filename-and-process)
+   (mark modified read-only " "
+         (name 18 18 :left :elide)
+         " "
+         (size 9 -1 :right)
+         " "
+         (mode 16 16 :left :elide)
+         " " filename-and-process)))
 
 ;; use ibuffer as buffer list
 (global-set-key (kbd "C-x C-b") 'ibuffer)
@@ -159,7 +176,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Bash
 
-;; disale << as insert document skeleton
+;; disale << as insert here document
 (add-hook 'sh-mode-hook (lambda () (sh-electric-here-document-mode -1)))
 
 ;; (setq
@@ -180,29 +197,16 @@
    (define-key org-mode-map (kbd "C-,") 'org-next-visible-heading)
    (define-key org-mode-map (kbd "C-.") 'org-previous-visible-heading)))
 
-;; open link in this window
-(setq org-link-frame-setup (lambda () (file . find-file)))
+(setq
+ ;; open link in this window
+ org-link-frame-setup (lambda () (file . find-file))
+ ;; add markdown to export backends
+ org-export-backends '(ascii html icalendar latex md odt)
+ ;; disable line truncation
+ org-startup-truncated nil)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Other
 
 ;; load other settings, like project-specific modes or ibuffer groups
 ;; (load "~/path-to-file/file.el")
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Customize
-
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(inhibit-startup-screen t)
- '(org-export-backends (quote (ascii html icalendar latex md odt)))
- '(org-startup-truncated nil))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )

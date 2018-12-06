@@ -1,46 +1,57 @@
 # ~/.bashrc
 # George Whiteside
 
-# if not running interactively, don't do anything
+# if shell is not interactive, don't do anything
 [[ $- != *i* ]] && return
 
 ##### GENERAL #####
-## FUNCTIONS ##
-# open emacs in a new screen session called emacs, or reattach to one if it
-# already exists
-function screenmacs {
-    set-title "screenmacs"
+# Open emacs in a new screen session called emacs, or reattach to one if it
+# already exists.
+screenmacs()
+{
+    set_title screenmacs
     screen -dR emacs emacs
-    reset-title
+    reset_title
 }
 
-# opens most recent todo list
-function open-notes {
-    set-title "notes"
+# same as above for a shell
+screenshell()
+{
+    set_title screenshell
+    screen -dR shell
+    reset_title
+}
+
+# open most recent todo list in emacs
+open_notes()
+{
+    set_title notes
     cd ~/org/work/notes
     emacs $(ls -1 *.org --hide="*~" | sort -r | head -n 1)
-    reset-title
+    reset_title
 }
 
-# start ssh agent and kill it on exit
-function ssh-start {
+# start ssh-agent and kill it on exit
+ssh_start()
+{
     eval $(ssh-agent)
     ssh-add
     trap "kill $SSH_AGENT_PID" EXIT
 }
 
 # resize window to default 80x24
-function resize {
+resize()
+{
     printf '\e[8;24;80t'
 }
 
-## DEFINITIONS ##
 # increase history file size
 HISTFILESIZE=1500
-# append to the history file, don't overwrite it
-shopt -s histappend
 # don't put duplicate lines or lines starting with space in the history
 HISTCONTROL=ignoreboth
+
+# append to the history file, don't overwrite it
+shopt -s histappend
 
 # don't try to complete an empty command
 shopt -s no_empty_cmd_completion
@@ -53,66 +64,68 @@ if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
 fi
 
-# set C-x-e editor to emacs
-export EDITOR=emacs
-
 
 ##### PROMPT #####
-## FUNCTIONS ##
 # update PS1 with current title and prompt color
-function update-ps1 { PS1="$TITLE$PROMPT" ;}
+update_ps1() { PS1="$title$prompt"; }
 
 # reset PS1 to default
-function reset-ps1 {
-    reset-title
-    reset-color
-    update-ps1
+reset_ps1()
+{
+    reset_title
+    reset_color
+    update_ps1
 }
 
-# sets static title
-function set-title {
-    TITLE=
+# set and reset static title
+set_title()
+{
+    title=
     printf "\e]0;$(whoami)@$(hostname): $1\a"
-    update-ps1
+    update_ps1
 }
-
-# resets behaivor to set title every prompt
-function reset-title {
-    TITLE="$DEFAULT_TITLE"
-    update-ps1
+reset_title()
+{
+    title="$default_title"
+    update_ps1
 }
 
 # set, reset and clear color prompt
-function set-color {
-    COLOR="$1"
-    update-ps1
+set_color()
+{
+    color="$1"
+    update_ps1
 }
-function reset-color {
-    COLOR="$DEFAULT_COLOR"
-    update-ps1
+reset_color()
+{
+    color="$default_color"
+    update_ps1
 }
-function clear-color {
-    COLOR="0m"
-    update-ps1
+clear_color()
+{
+    color=0m
+    update_ps1
 }
 
-## DEFINITIONS ##
-DEFAULT_TITLE='\[\e]0;\u@\h:\w\a\]'
-TITLE="$DEFAULT_TITLE"
+default_title='\[\e]0;\u@\h:\w\a\]'
+title="$default_title"
 
-BASE_PROMPT="\u@\h:\w"
+default_color='0m'
+color="$default_color"
 
-NEWLINE_IF_LONG='\[$(if [ ${#PWD} -gt $LONG_PWD ]; then printf "\]\n\["; fi)\]'
-SUFFIX="$NEWLINE_IF_LONG\$ "
+# trim base directories in \w when pwd has more than N directories
+PROMPT_DIRTRIM=7
+
+base_prompt='\u@\h:\w'
 
 # cutoff for a long pwd
-LONG_PWD=40
+long_pwd=40
+# print a newline if pwd is long
+newline_if_long='\[$(if [ ${#PWD} -gt $long_pwd ]; then printf "\]\n\["; fi)\]'
 
-# keep track of default and current prompt color
-DEFAULT_COLOR="0m"
-COLOR="$DEFAULT_COLOR"
+suffix="$newline_if_long\\$ "
 
-PROMPT="\[\e[\$COLOR\]$BASE_PROMPT$SUFFIX\[\e[0m\]"
+prompt="\[\e[\$color\]$base_prompt$suffix\[\e[0m\]"
 
 # initialize PS1
-update-ps1
+update_ps1

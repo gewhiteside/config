@@ -1,0 +1,4 @@
+#!/bin/bash
+# Push config files from this directory to the home directory.
+
+copy-config . ~

@@ -1,9 +1,0 @@
-#!/bin/bash
-# Pushes config files from this repo to the system
-
-files=$(ls -1A --ignore=pull* --ignore=push* --ignore=install* --ignore=.git)
-for file in $files; do
-  if [ -f ~/$file ]; then
-    cp $file ~
-  fi
-done

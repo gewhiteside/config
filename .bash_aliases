@@ -9,8 +9,12 @@ alias grep='grep --color=auto --exclude=*~ --exclude=*#'
 alias fgrep='fgrep --color=auto --exclude=*~ --exclude=*#'
 alias egrep='egrep --color=auto --exclude=*~ --exclude=*#'
 
-# ignore case in less search and turn off bell
+# ignore case in search and turn off bell
 alias less='less -Qi'
 
 # shut up gdb
 alias gdb='gdb -q'
+
+# add hyphenated aliases for functions I use interactively
+alias ssh-start=ssh_start
+alias open-notes=open_notes
