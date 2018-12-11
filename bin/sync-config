@@ -26,6 +26,6 @@ copy_if_present()
 }
 
 # copy config files
-copy_if_present . .bash* .emacs .git{config,ignore} .minttyrc .screenrc
+copy_if_present . .bash* .emacs .git{config,ignore} .{input,mintty,screen}rc
 # copy scripts
 copy_if_present bin config-filter

@@ -2,7 +2,7 @@
 # Installs config files, some scripts and sets up git config for this repo.
 
 # install config files
-cp .bash* .emacs .git{config,ignore} ~
+cp .bash* .emacs .git{config,ignore} .inputrc ~
 
 case $(uname) in
   Linux)
