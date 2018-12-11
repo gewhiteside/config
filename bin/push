@@ -1,4 +1,4 @@
 #!/bin/bash
-# Push config files from this directory to the home directory.
+# Push config files and scripts.
 
-copy-config . ~
+bin/sync-config push

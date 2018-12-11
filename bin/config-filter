@@ -1,5 +1,5 @@
 #!/bin/bash
-# filters certain lines from my config files
+# Filters certain lines from my config files.
 # Usage: config-filter {smudge|clean} type...
 
 if [ $1 == clean ]; then

@@ -1,4 +1,4 @@
 #!/bin/bash
-# Pull config files from system to this directory.
+# Pull config files and scripts.
 
-copy-config ~ .
+bin/sync-config pull

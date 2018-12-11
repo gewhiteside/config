@@ -1,7 +1,8 @@
 #!/bin/bash
-# Installs config files to home directory from current directory.
+# Installs config files, some scripts and sets up git config for this repo.
 
-cp .bash* .emacs .git?* ~
+# install config files
+cp .bash* .emacs .git{config,ignore} ~
 
 case $(uname) in
   Linux)
@@ -9,3 +10,18 @@ case $(uname) in
   CYGWIN*)
     cp .minttyrc ~ ;;
 esac
+
+# create machine-specific files
+touch ~/.$(hostname -s){-env,.el}
+
+# create user bin directory
+mkdir -p ~/bin
+# install some scripts
+cp bin/config-filter ~/bin
+
+# set up git config
+filter_include='path = ../.gitfilters'
+if ! grep -q "$filter_include" .git/config; then
+    echo "[include]
+	$filter_include" >>.git/config
+fi

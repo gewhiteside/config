@@ -1,0 +1,31 @@
+#!/bin/bash
+# Copy config files and scripts that are present in the home directory.
+# Usage: sync-config {push|pull}
+
+if [ $1 == push ]; then
+    src=.
+    dest=~
+else # pull
+    src=~
+    dest=.
+fi
+
+# Usage: copy_if_present child_dir files
+# Copies files from src/child_dir, if they exist in the home directory, to
+# src/dest.
+copy_if_present()
+{
+    child_dir=$1
+    shift
+
+    for file in $@; do
+        if [ -f ~/$child_dir/$file ]; then
+            cp $src/$child_dir/$file $dest/$child_dir/$file
+        fi
+    done
+}
+
+# copy config files
+copy_if_present . .bash* .emacs .git{config,ignore} .minttyrc .screenrc
+# copy scripts
+copy_if_present bin config-filter
