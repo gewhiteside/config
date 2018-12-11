@@ -64,6 +64,8 @@ if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
 fi
 
+# other files
+# . /path-to-file/env-file
 
 ##### PROMPT #####
 # update PS1 with current title and prompt color
@@ -98,7 +100,7 @@ set_color()
 }
 reset_color()
 {
-    color="$default_color"
+    color="$my_default_color"
     update_ps1
 }
 clear_color()
@@ -110,8 +112,9 @@ clear_color()
 default_title='\[\e]0;\u@\h:\w\a\]'
 title="$default_title"
 
-default_color='0m'
-color="$default_color"
+# export so it is visible to the git filter
+export my_default_color='0m'
+color="$my_default_color"
 
 # trim base directories in \w when pwd has more than N directories
 PROMPT_DIRTRIM=7

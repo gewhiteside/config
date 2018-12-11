@@ -1,0 +1,41 @@
+#!/bin/bash
+# filters certain lines from my config files
+# Usage: config-filter {smudge|clean} type...
+
+if [ $1 == clean ]; then
+    clean=1
+else
+    clean=
+fi
+shift
+
+sed_args=
+while :; do
+    case $1 in
+        color)
+            smudged="my_default_color='$my_default_color'"
+            cleaned="my_default_color='0m'"
+            ;;
+        load)
+            smudged="(load \\\"~\/.$(hostname -s).el\\\")"
+            cleaned=';; (load \"~\/path-to-file\/file.el\")'
+            ;;
+        source)
+            smudged=". ~\/.$(hostname -s)-env"
+            cleaned='# . \/path-to-file\/env-file'
+            ;;
+        *)
+            break
+    esac
+    if [ "$clean" ]; then
+        from=$smudged
+        to=$cleaned
+    else
+        from=$cleaned
+        to=$smudged
+    fi
+    sed_args+="-e \"s/$from/$to/\" "
+    shift
+done
+
+eval "sed $sed_args"

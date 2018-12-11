@@ -1,8 +1,12 @@
 # ~/.screenrc
 # George Whiteside
+# enable alt screen
 altscreen on
+# change escape character to backslash
 escape ^\\\
+# turn off annoying bell
 vbell off
+# allow scrolling
 termcapinfo xterm ti@:te@
 
 # remove bad keybindings

@@ -1,0 +1,2 @@
+.bashrc filter=color-and-source
+.emacs filter=load

@@ -41,7 +41,7 @@
    ;; delete trailing whitespace
    (if my-delete-trailing-whitespace
        (add-to-list 'write-contents-functions 'delete-trailing-whitespace))
-   ;; add marker for column 80 and *shudders* tabs
+   ;; add marker for column 80 and tabs
    (whitespace-mode)))
 
 ;; diable menu, tool and scroll bars
@@ -84,9 +84,8 @@
  fit-window-to-buffer-horizontally t
  ;; ask before quitting
  confirm-kill-emacs 'y-or-n-p
- ;; case-insensitive buffers
+ ;; case-insensitive buffers and filenames
  read-buffer-completion-ignore-case t
- ;; case-insensitive filenames
  read-file-name-completion-ignore-case t)
 
 ;; scroll window
@@ -115,12 +114,13 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; IBuffer
 
-(add-hook 'ibuffer-mode-hook
-          (lambda ()
-            ;; default groups
-            (ibuffer-switch-to-saved-filter-groups my-group)
-            ;; auto refresh buffer list
-            (ibuffer-auto-mode 1)))
+(add-hook
+ 'ibuffer-mode-hook
+ (lambda ()
+   ;; default groups
+   (ibuffer-switch-to-saved-filter-groups my-group)
+   ;; auto refresh buffer list
+   (ibuffer-auto-mode 1)))
 
 (setq
  ;; turn off prompt to close unmodified buffers
@@ -162,22 +162,29 @@
  'c-mode-common-hook
  (lambda()
    ;; shortcut to find header file in the same directory
-   (local-set-key  (kbd "C-c o") 'ff-find-other-file)
-   (c-set-offset 'innamespace [0])))
+   (local-set-key (kbd "C-c o") 'ff-find-other-file)))
 
-(setq-default
- ;; default indentation is 4 spaces
- c-basic-offset 4)
+;; my personal C style
+(c-add-style
+ "whiteside"
+ '("linux"
+   ;; set indentation to 4
+   (c-basic-offset . 4)
+   ;; turn off indentation from namespaces
+   (c-offsets-alist . ((innamespace . 0)))))
 
 (setq
  ;; set C default style
- c-default-style "linux")
+ c-default-style "whiteside")
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Bash
 
-;; disale << as insert here document
-(add-hook 'sh-mode-hook (lambda () (sh-electric-here-document-mode -1)))
+(add-hook
+ 'sh-mode-hook
+ (lambda ()
+   ;; disale << as insert here document
+   (sh-electric-here-document-mode -1)))
 
 ;; (setq
 ;;  ;; set indentation to 2
@@ -194,8 +201,8 @@
    ;; (set-face-foreground 'org-level-1 "light blue")
    ;; (set-face-foreground 'org-level-3 "dark blue")
    ;; rebind header navigation keys
-   (define-key org-mode-map (kbd "C-,") 'org-next-visible-heading)
-   (define-key org-mode-map (kbd "C-.") 'org-previous-visible-heading)))
+   (local-set-key (kbd "C-,") 'org-next-visible-heading)
+   (local-set-key (kbd "C-.") 'org-previous-visible-heading)))
 
 (setq
  ;; open link in this window
@@ -206,7 +213,7 @@
  org-startup-truncated nil)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Other
+;; Other files
 
-;; load other settings, like project-specific modes or ibuffer groups
+;; load project-specific modes and ibuffer groups
 ;; (load "~/path-to-file/file.el")
