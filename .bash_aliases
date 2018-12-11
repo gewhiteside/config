@@ -9,9 +9,6 @@ alias grep='grep --color=auto --exclude=*~ --exclude=*#'
 alias fgrep='fgrep --color=auto --exclude=*~ --exclude=*#'
 alias egrep='egrep --color=auto --exclude=*~ --exclude=*#'
 
-# ignore case in search and turn off bell
-alias less='less -Qi'
-
 # shut up gdb
 alias gdb='gdb -q'
 

@@ -11,4 +11,7 @@ PATH=$PATH:$HOME/bin
 # set default editor to emacs
 EDITOR=emacs
 
-export PATH EDITOR
+# default less options--turn off bell and ignore case in search
+LESS='Qi'
+
+export PATH EDITOR LESS
