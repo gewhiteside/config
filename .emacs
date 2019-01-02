@@ -100,13 +100,13 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Whitespace
 
-;; set the face of trailing lines
+;; set the face of trailing lines and tabs
+(set-face-foreground 'whitespace-line nil)
 (set-face-background 'whitespace-line "red")
 (set-face-background 'whitespace-tab "red")
-(set-face-foreground 'whitespace-line nil)
 
 (setq
- ;; set style
+ ;; highlight long lines and tabs
  whitespace-style '(face tabs lines-tail)
  ;; inherit max column from fill column
  whitespace-line-column nil)
@@ -160,7 +160,7 @@
 
 (add-hook
  'c-mode-common-hook
- (lambda()
+ (lambda ()
    ;; shortcut to find header file in the same directory
    (local-set-key (kbd "C-c o") 'ff-find-other-file)))
 
@@ -183,7 +183,7 @@
 (add-hook
  'sh-mode-hook
  (lambda ()
-   ;; disale << as insert here document
+   ;; disable << as insert here document
    (sh-electric-here-document-mode -1)))
 
 ;; (setq
@@ -197,9 +197,10 @@
 (add-hook
  'org-mode-hook
  (lambda ()
-   ;; swap level 1 and level 3 text colors
+   ;; ;; swap level 1 and level 3 text colors
    ;; (set-face-foreground 'org-level-1 "light blue")
    ;; (set-face-foreground 'org-level-3 "dark blue")
+
    ;; rebind header navigation keys
    (local-set-key (kbd "C-,") 'org-next-visible-heading)
    (local-set-key (kbd "C-.") 'org-previous-visible-heading)))
