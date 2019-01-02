@@ -46,8 +46,11 @@
 
 ;; diable menu, tool and scroll bars
 (menu-bar-mode -1)
-(scroll-bar-mode -1)
-(tool-bar-mode -1)
+;; scroll and tool bar mode are void functions on some systems
+(if (fboundp 'scroll-bar-mode)
+    (scroll-bar-mode -1))
+(if (fboundp 'tool-bar-mode)
+    (tool-bar-mode -1))
 
 ;; enable upcase-region
 (put 'upcase-region 'disabled nil)
@@ -57,7 +60,7 @@
 
 ;; automatically balance windows after vertical split
 (defadvice split-window-right
-  (after balance-windows-after-right-split activate)
+    (after balance-windows-after-right-split activate)
   (balance-windows))
 
 (setq-default
