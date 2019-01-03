@@ -1,0 +1,13 @@
+#!/bin/bash
+# Moves some files and then symlinks it to its old location.
+# Usage: mv-ln DEST SOURCE...
+
+dest="$1"
+shift
+
+for file in "$@"; do
+    filename="${file##*/}"
+    src="${file%/*}"
+    mv "$src/$filename" "$dest"
+    ln -s "$dest/$filename" "$src"
+done

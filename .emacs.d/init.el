@@ -63,6 +63,9 @@
     (after balance-windows-after-right-split activate)
   (balance-windows))
 
+;; add my elisp dir to load path
+(add-to-list 'load-path "~/.emacs.d/elisp")
+
 (setq-default
  ;; indent with spaces
  indent-tabs-mode nil
