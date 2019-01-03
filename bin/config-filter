@@ -17,12 +17,12 @@ while :; do
             cleaned="my_default_color='0m'"
             ;;
         load)
-            smudged="(load \\\"~\/.$(hostname -s).el\\\")"
+            smudged="(load \\\"$(hostname -s).el\\\")"
             cleaned=';; (load \"~\/path-to-file\/file.el\")'
             ;;
         source)
-            smudged=". ~\/.$(hostname -s)-env"
-            cleaned='# . \/path-to-file\/env-file'
+            smudged=". ~\/.bash_$(hostname -s)"
+            cleaned='# . ~\/path-to-file\/file'
             ;;
         *)
             break

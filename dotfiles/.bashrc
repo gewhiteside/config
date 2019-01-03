@@ -65,7 +65,7 @@ if [ -f ~/.bash_aliases ]; then
 fi
 
 # other files
-# . /path-to-file/env-file
+# . ~/path-to-file/file
 
 ##### PROMPT #####
 # update PS1 with current title and prompt color

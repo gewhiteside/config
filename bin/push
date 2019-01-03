@@ -1,4 +1,0 @@
-#!/bin/bash
-# Push config files and scripts.
-
-bin/sync-config push
