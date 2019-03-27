@@ -212,7 +212,8 @@
 
 ;;; Bash
 
-;; TODO: Have *_bash files be recognized by sh-mode/sh[bash]-mode.
+;; Use sh-mode to edit *_bash files.
+(add-to-list 'auto-mode-alist '("_bash\\'" . sh-mode))
 
 (add-hook
  'sh-mode-hook

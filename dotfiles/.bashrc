@@ -120,13 +120,19 @@ GIT_PS1_SHOWCOLORHINTS=1
 # "Cache" the git info before each the prompt so that it can both be printed in
 # the prompt and be checked in prompt_len without havind to call __git_ps1
 # twice as doing so takes a significant amount of time with larger repos.
-set_git_info() { git_info=$(__git_ps1); }
+set_git_info() { _git_info=$(__git_ps1); }
 PROMPT_COMMAND=set_git_info
+
+# Interactively enable or disable git information in the prompt. This is
+# important becauase some repos are large enough that getting their status
+# every time the user is prompted imposes a significant delay.
+enable_git_info() { PROMPT_COMMAND=set_git_info; }
+disable_git_info() { unset PROMPT_COMMAND _git_info; }
 
 # This value is initialized above without wrapping escape characters.
 git_color="\[\e[$git_color\]"
 
-prompt="$prompt$git_color\$git_info"
+prompt="$prompt$git_color\$_git_info"
 
 
 ## SUFFIX ##
@@ -139,7 +145,7 @@ prompt_len()
     local pwd_prompt_var="$(pwd_prompt)"
     local hostname_short="${HOSTNAME%%.*}"
     echo $((${#env} + ${#USER} + ${#hostname_short} + ${#pwd_prompt_var} \
-                    + ${#git_info} + 4))
+                    + ${#_git_info} + 4))
 }
 
 # Print a newline if the prompt is too long. This can't be a function, as the
