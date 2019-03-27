@@ -1,0 +1,9 @@
+[ui]
+username = George Whiteside <whiteside@reservoir.com>
+
+[extensions]
+color =
+pager =
+
+[pager]
+pager = less -RX
