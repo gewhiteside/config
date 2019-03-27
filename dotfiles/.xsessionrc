@@ -1,0 +1,5 @@
+# ~/.xsessionrc
+# George Whiteside
+
+# Source my bash profile when logging in using a display manager.
+source ~/.bash_profile
