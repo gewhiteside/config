@@ -1,4 +1,0 @@
-#!/bin/bash
-# Pull config files and scripts.
-
-bin/sync-config pull

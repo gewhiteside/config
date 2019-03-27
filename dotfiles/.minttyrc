@@ -1,10 +1,10 @@
 # ~/.minttyrc
 # George Whiteside
 
-# Solarized by Ethan Schoonover
+# Solarized (Light) by Ethan Schoonover
 # http://ethanschoonover.com/solarized
-ForegroundColour=131,148,150
-BackgroundColour=0,43,54
+ForegroundColour=101,123,131
+BackgroundColour=253,246,227
 CursorColour=220,50,47
 
 Black=7,54,66
@@ -24,9 +24,9 @@ BoldCyan=147,161,161
 White=238,232,213
 BoldWhite=253,246,227
 
+
 # My settings
-BoldAsFont=-1
-ThemeFile=mintty
+ThemeFile=
 Font=Source Code Pro
 FontHeight=11
 CursorType=block
@@ -38,3 +38,7 @@ CopyAsRTF=no
 MiddleClickAction=void
 PgUpDnScroll=no
 Language=en_US
+
+# Change the color and weight of bolded fonts.
+BoldAsColour=yes
+BoldAsFont=yes
