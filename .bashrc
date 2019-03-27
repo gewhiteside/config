@@ -1,37 +1,25 @@
 # ~/.bashrc
 # George Whiteside
 
-# if shell is not interactive, don't do anything
+# If shell is not interactive, don't do anything.
 [[ $- != *i* ]] && return
 
 ##### GENERAL #####
-# Open emacs in a new screen session called emacs, or reattach to one if it
-# already exists.
-screenmacs()
-{
-    set_title screenmacs
-    screen -dR emacs emacs
-    reset_title
-}
+# Increase the size of the  history file.
+HISTFILESIZE=3000
+# Don't put duplicate lines or lines starting with space in the history.
+HISTCONTROL=ignoreboth
 
-# same as above for a shell
-screenshell()
-{
-    set_title screenshell
-    screen -dR shell
-    reset_title
-}
+# Append to the history file, don't overwrite it.
+shopt -s histappend
 
-# open most recent todo list in emacs
-open_notes()
-{
-    set_title notes
-    cd ~/org/work/notes
-    emacs $(ls -1 *.org --hide="*~" | sort -r | head -n 1)
-    reset_title
-}
+# Don't try to complete an empty command.
+shopt -s no_empty_cmd_completion
 
-# start ssh-agent and kill it on exit
+# Add colors for ls.
+eval "$(dircolors -b)"
+
+# Start ssh-agent and kill it on exit.
 ssh_start()
 {
     eval $(ssh-agent)
@@ -39,96 +27,132 @@ ssh_start()
     trap "kill $SSH_AGENT_PID" EXIT
 }
 
-# resize window to default 80x24
-resize()
-{
-    printf '\e[8;24;80t'
-}
 
-# increase history file size
-HISTFILESIZE=1500
-# don't put duplicate lines or lines starting with space in the history
-HISTCONTROL=ignoreboth
+##### MACHINE-SPECIFIC ENVIRONMNET #####
+# The following variables are intialized to a default value below. They can be
+# changed in the machine-specific environment file "~/.$(hostname -s)_bash" to
+# override the default behavior.
 
-# append to the history file, don't overwrite it
-shopt -s histappend
+# Color of the environment indicator in the prompt.
+env_color='36m'
+# Color of user and host names in the prompt.
+user_host_color='32m'
+# Color of symbols in the prompt (i.e. : and \$).
+symbol_color='0m'
+# Color of the pwd in the prompt.
+pwd_color='34m'
+# Color of the git information in the prompt.
+git_color='33m'
 
-# don't try to complete an empty command
-shopt -s no_empty_cmd_completion
 
-# colors for ls
-eval "$(dircolors -b)"
+#### OTHER FILES ####
+source ~/.bash_aliases
 
-# aliases
-if [ -f ~/.bash_aliases ]; then
-    . ~/.bash_aliases
-fi
+# Source machine-specific environment.
+# source ~/path-to-file/file
 
-# other files
-# . /path-to-file/env-file
+## GIT
+source ~/.git-completion.bash
+source ~/.git-prompt.sh
+
 
 ##### PROMPT #####
-# update PS1 with current title and prompt color
-update_ps1() { PS1="$title$prompt"; }
+## TITLE ##
+title='\[\e]0;\u@\h:\w\a\]'
+prompt="$title"
 
-# reset PS1 to default
-reset_ps1()
-{
-    reset_title
-    reset_color
-    update_ps1
-}
 
-# set and reset static title
-set_title()
-{
-    title=
-    printf "\e]0;$(whoami)@$(hostname): $1\a"
-    update_ps1
-}
-reset_title()
-{
-    title="$default_title"
-    update_ps1
-}
+## ENVIRONMENT INDICATOR ##
+env=
 
-# set, reset and clear color prompt
-set_color()
-{
-    color="$1"
-    update_ps1
-}
-reset_color()
-{
-    color="$my_default_color"
-    update_ps1
-}
-clear_color()
-{
-    color=0m
-    update_ps1
-}
+# This value is initialized above without wrapping escape characters.
+env_color="\[\e[$env_color\]"
 
-default_title='\[\e]0;\u@\h:\w\a\]'
-title="$default_title"
+# Set and clear the environment indicator.
+set_env() { env="($1) "; }
+clear_env() { env=; }
 
-# export so it is visible to the git filter
-export my_default_color='0m'
-color="$my_default_color"
+prompt="$prompt$env_color\$env"
 
-# trim base directories in \w when pwd has more than N directories
+
+## USER AND HOST ##
+user_host='\u@\h'
+
+# These values are initialized above without wrapping escape characters.
+user_host_color="\[\e[$user_host_color\]"
+symbol_color="\[\e[$symbol_color\]"
+
+prompt="$prompt$user_host_color$user_host$symbol_color:"
+
+
+## PWD ##
+# TODO: Remove when I have implemented this for myself.
+# Trim base directories in \w when pwd has more than N directories.
 PROMPT_DIRTRIM=7
 
-base_prompt='\u@\h:\w'
+# TODO: Trim base directories when pwd is large.
+# TODO: Document this function.
+# Should be called every time the user is prompted.
+pwd_prompt()
+{
+    local tmp=$PWD
+    # Replace $HOME with tilde.
+    tmp="${tmp/$HOME/~}"
+    # Replace $pr with ellipses.
+    [ $pr ] && tmp="${tmp/${pr#~/}\//.../}"
+    echo "$tmp"
+}
 
-# cutoff for a long pwd
-long_pwd=40
-# print a newline if pwd is long
-newline_if_long='\[$(if [ ${#PWD} -gt $long_pwd ]; then printf "\]\n\["; fi)\]'
+# This value is initialized above without wrapping escape characters.
+pwd_color="\[\e[$pwd_color\]"
 
-suffix="$newline_if_long\\$ "
+prompt="$prompt$pwd_color\$(pwd_prompt)"
 
-prompt="\[\e[\$color\]$base_prompt$suffix\[\e[0m\]"
 
-# initialize PS1
-update_ps1
+## GIT ##
+# See ~/.git-prompt.sh for more information.
+# Set what information to show.
+GIT_PS1_SHOWDIRTYSTATE=1
+GIT_PS1_SHOWSTASHSTATE=1
+GIT_PS1_SHOWUNTRACKEDFILES=1
+GIT_PS1_SHOWCOLORHINTS=1
+
+# "Cache" the git info before each the prompt so that it can both be printed in
+# the prompt and be checked in prompt_len without havind to call __git_ps1
+# twice as doing so takes a significant amount of time with larger repos.
+set_git_info() { git_info=$(__git_ps1); }
+PROMPT_COMMAND=set_git_info
+
+# This value is initialized above without wrapping escape characters.
+git_color="\[\e[$git_color\]"
+
+prompt="$prompt$git_color\$git_info"
+
+
+## SUFFIX ##
+# Cutoff for a long prompt.
+long_prompt=50
+
+# Calculates the length of the prompt (without a potential newline).
+prompt_len()
+{
+    local pwd_prompt_var="$(pwd_prompt)"
+    local hostname_short="${HOSTNAME%%.*}"
+    echo $((${#env} + ${#USER} + ${#hostname_short} + ${#pwd_prompt_var} \
+                    + ${#git_info} + 4))
+}
+
+# Print a newline if the prompt is too long. This can't be a function, as the
+# newline is only printed if this is "inlined".
+newline_if_long='\[$([ $(prompt_len) -gt $long_prompt ] && printf "\]\n\[")\]'
+
+# Use the same color as the user and host names for the trailing symbol.
+suffix="$newline_if_long$symbol_color\\$ "
+
+no_color="\[\e[0m\]"
+
+prompt="$prompt$suffix$no_color"
+
+
+## PROMPT INIT ##
+PS1="$prompt"

@@ -8,5 +8,6 @@
 	editor = emacs
         # git less options--enable color and don't clear screen
         pager = less -RX
+        # pager = cat
 [color]
 	ui = auto

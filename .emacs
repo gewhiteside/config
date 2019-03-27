@@ -2,7 +2,7 @@
 ;; George Whiteside
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Global
+;; Global 
 
 ;; set f5 to flip the orientation of two buffers
 (defun resplit-window ()
@@ -32,8 +32,7 @@
 ;; common hooks
 (require 'whitespace)
 (add-hook-to-multiple-modes
- '(c-mode-hook
-   c++-mode-hook
+ '(c-mode-common-hook
    python-mode-hook
    emacs-lisp-mode-hook
    sh-mode-hook)
@@ -46,11 +45,8 @@
 
 ;; diable menu, tool and scroll bars
 (menu-bar-mode -1)
-;; scroll and tool bar mode are void functions on some systems
-(if (fboundp 'scroll-bar-mode)
-    (scroll-bar-mode -1))
-(if (fboundp 'tool-bar-mode)
-    (tool-bar-mode -1))
+(scroll-bar-mode -1)
+(tool-bar-mode -1)
 
 ;; enable upcase-region
 (put 'upcase-region 'disabled nil)
@@ -60,7 +56,7 @@
 
 ;; automatically balance windows after vertical split
 (defadvice split-window-right
-    (after balance-windows-after-right-split activate)
+  (after balance-windows-after-right-split activate)
   (balance-windows))
 
 (setq-default
@@ -216,8 +212,13 @@
  ;; disable line truncation
  org-startup-truncated nil)
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Other files
+
+;;; Shell
+(add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
+
+
+
+;;; Other files
 
 ;; load project-specific modes and ibuffer groups
 ;; (load "~/path-to-file/file.el")
