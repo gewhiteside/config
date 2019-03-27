@@ -34,15 +34,15 @@ ssh_start()
 # override the default behavior.
 
 # Color of the environment indicator in the prompt.
-env_color='36m'
+env_color='0;36m'
 # Color of user and host names in the prompt.
-user_host_color='32m'
+user_host_color='1;32m'
 # Color of symbols in the prompt (i.e. : and \$).
 symbol_color='0m'
 # Color of the pwd in the prompt.
-pwd_color='34m'
+pwd_color='1;34m'
 # Color of the git information in the prompt.
-git_color='33m'
+git_color='0;33m'
 
 
 #### OTHER FILES ####
@@ -97,7 +97,7 @@ pwd_prompt()
 {
     local tmp=$PWD
     # Replace $HOME with tilde.
-    tmp="${tmp/$HOME/~}"
+    tmp="${tmp/$HOME/\~}"
     # Replace $pr with ellipses.
     [ $pr ] && tmp="${tmp/${pr#~/}\//.../}"
     echo "$tmp"
