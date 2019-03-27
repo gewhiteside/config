@@ -9,33 +9,24 @@ else
 fi
 shift
 
-sed_args=
-while :; do
-    case $1 in
-        color)
-            smudged="my_default_color='$my_default_color'"
-            cleaned="my_default_color='0m'"
-            ;;
-        load)
-            smudged="(load \\\"$(hostname -s).el\\\")"
-            cleaned=';; (load \"~\/path-to-file\/file.el\")'
-            ;;
-        source)
-            smudged=". ~\/.bash_$(hostname -s)"
-            cleaned='# . ~\/path-to-file\/file'
-            ;;
-        *)
-            break
-    esac
-    if [ "$clean" ]; then
-        from=$smudged
-        to=$cleaned
-    else
-        from=$cleaned
-        to=$smudged
-    fi
-    sed_args+="-e \"s/$from/$to/\" "
-    shift
-done
+case $1 in
+    load)
+        smudged='(load \"~\/.emacs.d\/elisp\/'$(hostname -s)'.el\")'
+        cleaned=';; (load \"~\/path-to-file\/file.el\")'
+        ;;
+    source)
+        smudged=". ~\/.bash_$(hostname -s)"
+        cleaned='# . ~\/path-to-file\/file'
+        ;;
+esac
 
+if [ "$clean" ]; then
+    from=$smudged
+    to=$cleaned
+else
+    from=$cleaned
+    to=$smudged
+fi
+
+sed_args+="-e \"s/$from/$to/\" "
 eval "sed $sed_args"

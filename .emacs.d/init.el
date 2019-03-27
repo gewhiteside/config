@@ -55,8 +55,20 @@
 ;; enable upcase-region
 (put 'upcase-region 'disabled nil)
 
-;; enable desktop-save-mode
-(desktop-save-mode)
+;; Enable desktop-save-mode. If running as a daemon, wait until the first frame
+;; has been created.
+(if (daemonp)
+    (add-hook
+     'after-make-frame-functions
+     (lambda (frame)
+       (unless desktop-save-mode
+         (desktop-save-mode 1)
+         (desktop-read))))
+  (desktop-save-mode))
+
+;; Set default buffer. This prevents emacs from running as a daemon on my
+;; Windows machine, so only enable it for non-daemon instances.
+(unless (daemonp) (setq initial-buffer-choice 'ibuffer))
 
 ;; automatically balance windows after vertical split
 (defadvice split-window-right
@@ -119,6 +131,9 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; IBuffer
+
+;; make *Ibuffer* live
+;; (if (daemonp) (ibuffer))
 
 (add-hook
  'ibuffer-mode-hook
