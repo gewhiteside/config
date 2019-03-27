@@ -4,36 +4,36 @@
 # Options are passed directly to ln (see man ln). Some usefull options are
 # --force and --interactive.
 
-# symlink dotfiles to ~
+# Symlink dotfiles to home directory.
 ln -s "$@" $(pwd)/dotfiles/.[!.]*[!~] ~
 
-# create ~/.emacs.d and ~/.emacs.d/elisp if they don't already exist
+# Create ~/.emacs.d and ~/.emacs.d/elisp if they don't already exist.
 mkdir -p ~/.emacs.d/elisp
-# symlink emacs init to .emacs.d
+# Symlink emacs init file to .emacs.d.
 ln -s "$@" $(pwd)/.emacs.d/init.el ~/.emacs.d
-# symlink elisp files to .emacs.d/elisp
+# Symlink elisp files to .emacs.d/elisp.
 ln -s "$@" $(pwd)/.emacs.d/elisp/*[!~] ~/.emacs.d/elisp
 
-# create user bin directory
+# Create user bin directory.
 mkdir -p ~/bin
-# symlink some scripts
+# Symlink some scripts.
 ln -s "$@" $(pwd)/bin/{config-filter,mv-ln} ~/bin
 
-# remove irrelevant dotfiles for certain systems
+# Remove irrelevant dotfiles for certain systems.
 case $(uname) in
   Linux)
-      rm ~/.minttyrc ;;
+      rm ~/.mintty* ;;
   CYGWIN*)
       rm ~/.screenrc ;;
 esac
 
-# create machine-specific bash init file
+# Create machine-specific bash init file.
 touch ~/.bash_$(hostname -s)
 
-# create machine-specific emacs init file
+# Create machine-specific emacs init file.
 touch ~/.emacs.d/elisp/$(hostname -s).el
 
-# set up git config for this repo
+# Set up git config for this repo.
 filter_include='path = ../.gitfilters'
 if ! grep -q "$filter_include" .git/config; then
     echo "[include]
