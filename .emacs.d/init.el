@@ -212,8 +212,9 @@
 
 ;;; Bash
 
-;; Use sh-mode to edit *_bash files.
+;; Use sh-mode to edit *_bash and bash_* files.
 (add-to-list 'auto-mode-alist '("_bash\\'" . sh-mode))
+(add-to-list 'auto-mode-alist '("bash_[_\w]*" . sh-mode))
 
 (add-hook
  'sh-mode-hook
@@ -237,8 +238,9 @@
    ;; (set-face-foreground 'org-level-3 "dark blue")
 
    ;; Rebind header navigation keys.
-   (local-set-key (kbd "C-,") 'org-next-visible-heading)
-   (local-set-key (kbd "C-.") 'org-previous-visible-heading)))
+   ;; TODO: Check if these functions are called outline-* or org-*.
+   (local-set-key (kbd "C-,") 'outline-next-visible-heading)
+   (local-set-key (kbd "C-.") 'outline-previous-visible-heading)))
 
 (setq
  ;; Open link in this window.

@@ -1,12 +1,18 @@
 # ~/.bash_aliases
 # George Whiteside
 
-# Colors for ls and grep. Also, ignore backup files in ls and grep.
+# Use colors when appropriate and ignore backup files in ls and grep.
 alias ls='ls --color=auto --hide="*~" --hide="*#"'
 alias la='ls -A --color=auto'
-alias grep='grep --color=auto --exclude=*~ --exclude=*#'
-alias fgrep='fgrep --color=auto --exclude=*~ --exclude=*#'
-alias egrep='egrep --color=auto --exclude=*~ --exclude=*#'
+
+grep_opts='--color=auto --exclude=*~ --exclude=*#'
+_set_grep_opts()
+{
+    for grep in grep egrep fgrep rgrep; do
+        alias $grep="$grep $grep_opts"
+    done
+}
+_set_grep_opts
 
 # Shut up gdb.
 alias gdb='gdb -q'

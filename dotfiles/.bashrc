@@ -45,10 +45,25 @@ pwd_color='1;34m'
 git_color='0;33m'
 
 
+#### ENVIRONMENT INDICATOR ####
+# These variables and functions will be used in setting prompt
+# information. However, they may be used in the machine-specific setup and
+# therefore they need to be defined before that file is sourced.
+env=
+
+# This value is initialized above without wrapping escape characters.
+env_color="\[\e[$env_color\]"
+
+# Set and clear the environment indicator.
+set_env() { env="($1) "; }
+clear_env() { env=; }
+
+
 #### OTHER FILES ####
 source ~/.bash_aliases
 
-# Source machine-specific environment.
+# Source machine-specific environment. In order to pick up color changes, this
+# file should be sourced after the default color definitions above.
 # source ~/path-to-file/file
 
 ## GIT
@@ -63,15 +78,7 @@ prompt="$title"
 
 
 ## ENVIRONMENT INDICATOR ##
-env=
-
-# This value is initialized above without wrapping escape characters.
-env_color="\[\e[$env_color\]"
-
-# Set and clear the environment indicator.
-set_env() { env="($1) "; }
-clear_env() { env=; }
-
+# See the ENVIRONMENT INDICATOR section above for the relevant definitions.
 prompt="$prompt$env_color\$env"
 
 

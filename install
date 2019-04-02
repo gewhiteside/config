@@ -36,6 +36,5 @@ touch ~/.emacs.d/elisp/$(hostname -s).el
 # Set up git config for this repo.
 filter_include='path = ../.gitfilters'
 if ! grep -q "$filter_include" .git/config; then
-    echo "[include]
-	$filter_include" >>.git/config
+    echo -e "[include]\n\t$filter_include" >>.git/config
 fi

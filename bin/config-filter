@@ -15,8 +15,8 @@ case $1 in
         cleaned=';; (load \"~\/path-to-file\/file.el\")'
         ;;
     source)
-        smudged=". ~\/.bash_$(hostname -s)"
-        cleaned='# . ~\/path-to-file\/file'
+        smudged="source ~\/\.bash_$(hostname -s)"
+        cleaned='# source ~\/path-to-file\/file'
         ;;
 esac
 
