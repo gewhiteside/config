@@ -5,7 +5,7 @@
 	default = simple
 [core]
 	excludesfile = ~/.gitignore
-	editor = emacs
+	editor = emacs --no-desktop
         # git less options--enable color and don't clear screen.
         pager = less -RX
         # When using a shell inside emacs, cat should be used as the pager.
