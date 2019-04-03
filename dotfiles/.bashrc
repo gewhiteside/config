@@ -45,7 +45,7 @@ pwd_color='1;34m'
 git_color='0;33m'
 
 
-#### ENVIRONMENT INDICATOR ####
+## ENVIRONMENT INDICATOR ##
 # These variables and functions will be used in setting prompt
 # information. However, they may be used in the machine-specific setup and
 # therefore they need to be defined before that file is sourced.
@@ -58,6 +58,19 @@ env_color="\[\e[$env_color\]"
 set_env() { env="($1) "; }
 clear_env() { env=; }
 
+## PWD ##
+# TODO: Trim base directories when pwd is large.
+# TODO: Document this function.
+# Should be called every time the user is prompted.
+pwd_prompt()
+{
+    local tmp=$PWD
+    # Replace $HOME with tilde.
+    tmp="${tmp/$HOME/\~}"
+    # Replace $pr with ellipses.
+    [ $pr ] && tmp="${tmp/${pr#~/}\//.../}"
+    echo "$tmp"
+}
 
 #### OTHER FILES ####
 source ~/.bash_aliases
@@ -97,18 +110,7 @@ prompt="$prompt$user_host_color$user_host$symbol_color:"
 # Trim base directories in \w when pwd has more than N directories.
 PROMPT_DIRTRIM=7
 
-# TODO: Trim base directories when pwd is large.
-# TODO: Document this function.
-# Should be called every time the user is prompted.
-pwd_prompt()
-{
-    local tmp=$PWD
-    # Replace $HOME with tilde.
-    tmp="${tmp/$HOME/\~}"
-    # Replace $pr with ellipses.
-    [ $pr ] && tmp="${tmp/${pr#~/}\//.../}"
-    echo "$tmp"
-}
+# See the above PWD section for the definition of pwd_prompt.
 
 # This value is initialized above without wrapping escape characters.
 pwd_color="\[\e[$pwd_color\]"
