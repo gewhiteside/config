@@ -5,8 +5,16 @@ if [ -f ~/.bashrc ]; then
     . ~/.bashrc
 fi
 
-# Start an ssh-agent.
-eval $(ssh-agent)
+# Check for an ssh-agent. If there isn't one, start one.
+# TODO: What happens if I am running more than one ssh-agent?
+SSH_AGENT_PID=$(ps -C ssh-agent -o pid=)
+if [ $SSH_AGENT_PID ]; then
+    export SSH_AGENT_PID
+    export SSH_AUTH_SOCK=~/.ssh/ssh-agent-socket
+else
+    eval $(ssh-agent -a ~/.ssh/ssh-agent-socket)
+fi
+
 
 # Add my bin to path.
 PATH=$PATH:$HOME/bin
