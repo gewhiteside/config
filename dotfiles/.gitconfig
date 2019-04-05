@@ -12,3 +12,8 @@
         # pager = cat
 [color]
 	ui = auto
+[alias]
+	co = checkout
+	br = branch
+	ci = commit
+	st = status
