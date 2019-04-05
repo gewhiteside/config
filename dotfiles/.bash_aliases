@@ -8,9 +8,12 @@ alias la='ls -A --color=auto'
 grep_opts='--color=auto --exclude=*~ --exclude=*#'
 _set_grep_opts()
 {
-    for grep in grep egrep fgrep rgrep; do
+    for grep in grep egrep fgrep; do
         alias $grep="$grep $grep_opts"
     done
+
+    # Not all distros have an rgpep.
+    alias rgrep="grep -r $grep_opts"
 }
 _set_grep_opts
 
