@@ -74,7 +74,7 @@
 
 ;; Set default buffer. This prevents emacs from running as a daemon on my
 ;; Windows machine, so only enable it for non-daemon instances.
-(unless (daemonp) (setq initial-buffer-choice 'ibuffer))
+;; (unless (daemonp) (setq initial-buffer-choice 'ibuffer))
 
 ;; Automatically balance windows after vertical split.
 (defadvice split-window-right

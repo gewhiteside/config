@@ -18,9 +18,10 @@ fi
 # Add my bin to path.
 PATH=$PATH:$HOME/bin
 
-# Set my default editor to emacs. Don't set desktop-save mode for these emacs
-# sessions.
-EDITOR='emacs --no-desktop'
+# Set my default editor to emacs. Don't set desktop-save-mode, don't use a
+# window system, and don't confirm killing these sessions.
+EDITOR='emacs --no-desktop --no-window-system \
+--eval "(setq confirm-kill-emacs nil)"'
 
 # Set my default less options--turn off bell and ignore case in search.
 LESS='Qi'
