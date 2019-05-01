@@ -1,9 +1,10 @@
 # ~/.bash_profile
 # George Whiteside
 
-if [ -f ~/.bashrc ]; then
-    . ~/.bashrc
-fi
+[ -f ~/.bashrc ] && source ~/.bashrc
+
+# Mount remote filesystems.
+[ -f ~/dev-tools/bash_sshfs ] && source bash_sshfs
 
 # Check for an ssh-agent. If there isn't one, start one.
 # TODO: What happens if I am running more than one ssh-agent?
