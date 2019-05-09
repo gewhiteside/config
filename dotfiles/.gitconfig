@@ -16,3 +16,5 @@
 	br = branch
 	ci = commit
 	st = status
+[pretty]
+	ref = %h (\"%s\", %ad)
