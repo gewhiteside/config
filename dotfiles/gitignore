@@ -3,4 +3,5 @@
 .#*
 *.patch
 *.log
+*.error
 *.pyc
