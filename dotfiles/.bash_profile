@@ -26,4 +26,8 @@ EDITOR='emacs --no-desktop --no-window-system \
 # Set my default less options--turn off bell and ignore case in search.
 LESS='Qi'
 
-export PATH EDITOR LESS
+# Set default grep options.
+GREP_OPTIONS='--color=auto --binary-files=without-match --directories=skip
+--exclude=*~ --exclude=*# --exclude-dir=.git'
+
+export PATH EDITOR LESS GREP_OPTIONS

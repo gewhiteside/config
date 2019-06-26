@@ -1,20 +1,25 @@
 [user]
-	name = George Whiteside
-	email = whiteside@reservoir.com
+        name = George Whiteside
+        email = whiteside@reservoir.com
 [push]
-	default = simple
+        default = simple
 [core]
-	excludesfile = ~/.gitignore
+        excludesfile = ~/.gitignore
         # git less options--enable color and don't clear screen.
         pager = less -RX
         # When using a shell inside emacs, cat should be used as the pager.
         # pager = cat
 [color]
-	ui = auto
+        ui = auto
 [alias]
-	co = checkout
-	br = branch
-	ci = commit
-	st = status
+        co = checkout
+        br = branch
+        ci = commit
+        st = status
+        show-oneline = !git --no-pager show -s --oneline --no-decorate
 [pretty]
-	ref = %h (\"%s\", %ad)
+        ref = %h (\"%s\", %ad)
+[log]
+        decorate = true
+[diff]
+        renames = true
