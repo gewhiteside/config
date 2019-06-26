@@ -5,24 +5,11 @@
 alias ls='ls --color=auto --hide="*~" --hide="*#"'
 alias la='ls -A --color=auto'
 
-# TODO: Use GREP_OPTIONS environment variable (man grep).
-grep_opts='--color=auto --exclude=*~ --exclude=*#'
-_set_grep_opts()
-{
-    for grep in grep egrep fgrep; do
-        alias $grep="$grep $grep_opts"
-    done
-
-    # Not all distros have an rgpep.
-    alias rgrep="grep -r $grep_opts"
-}
-_set_grep_opts
+# Not all distros have an rgrep.
+type rgrep &> /dev/null || alias rgrep='grep -r'
 
 # Shut up gdb.
 alias gdb='gdb -q'
-
-# Add hyphenated aliases for functions I use interactively.
-alias ssh-start=ssh_start
 
 # Alias common screen commands.
 alias screenmacs='screen -dR emacs emacs'
