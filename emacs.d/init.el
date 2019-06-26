@@ -114,7 +114,9 @@
  confirm-kill-emacs 'y-or-n-p
  ;; Case-insensitive buffers and filenames.
  read-buffer-completion-ignore-case t
- read-file-name-completion-ignore-case t)
+ read-file-name-completion-ignore-case t
+ ;; Sentences are terminated with a single space.
+ sentence-end-double-space nil)
 
 ;; Scroll up and down a line.
 (global-set-key "\M-p"  'scroll-up-line)
