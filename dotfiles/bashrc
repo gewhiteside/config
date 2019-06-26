@@ -170,4 +170,9 @@ prompt="$prompt$suffix$no_color"
 
 
 ## PROMPT INIT ##
-PS1="$prompt"
+# If the terminal is dumb, use a dumb prompt.
+if [ "$TERM" == "dumb" ]; then
+    PS1="> "
+else
+    PS1="$prompt"
+fi

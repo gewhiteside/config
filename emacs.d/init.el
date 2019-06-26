@@ -116,7 +116,9 @@
  read-buffer-completion-ignore-case t
  read-file-name-completion-ignore-case t
  ;; Sentences are terminated with a single space.
- sentence-end-double-space nil)
+ sentence-end-double-space nil
+ ;; Tramp should use a dump terminal.
+ tramp-terminal-type "dumb")
 
 ;; Scroll up and down a line.
 (global-set-key "\M-p"  'scroll-up-line)
