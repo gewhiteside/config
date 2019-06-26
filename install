@@ -44,7 +44,7 @@ ln -s "$@" $PWD/ssh/config ~/.ssh
 # Xfce. NOTE: The "Launch GNOME services on startup" checkbox must be unchecked
 # under the "Advanced" tab of xfce4-session-settings, otherwise Xfce will just
 # start the GNOME keyring.
-if type xfce4-session >/dev/null; then
+if type xfce4-session >/dev/null && [ "$DISPLAY" ]; then
     xfconf-query -c xfce4-session -p /startup/ssh-agent/enabled -n -t bool \
                  -s false
     xfconf-query -c xfce4-session -p /startup/gpg-agent/enabled -n -t bool \
