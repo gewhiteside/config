@@ -214,7 +214,8 @@
 
 ;;; Bash
 
-;; Use sh-mode to edit *_bash and bash_* files.
+;; Use sh-mode to edit bashrc, *_bash, and bash_* files.
+(add-to-list 'auto-mode-alist '("bashrc\\'" . sh-mode))
 (add-to-list 'auto-mode-alist '("_bash\\'" . sh-mode))
 (add-to-list 'auto-mode-alist '("bash_[_\w]*" . sh-mode))
 

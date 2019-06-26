@@ -3,9 +3,6 @@
 
 [ -f ~/.bashrc ] && source ~/.bashrc
 
-# Mount remote filesystems.
-[ -f ~/dev-tools/bash_sshfs ] && source bash_sshfs
-
 # Check for an ssh-agent. If there isn't one, start one.
 # TODO: What happens if I am running more than one ssh-agent?
 SSH_AGENT_PID=$(pgrep -u $USER ssh-agent)
@@ -15,6 +12,9 @@ if [ $SSH_AGENT_PID ]; then
 else
     eval $(ssh-agent -a ~/.ssh/ssh-agent-socket)
 fi
+
+# Mount remote filesystems.
+[ -f ~/dev-tools/bash_sshfs ] && source ~/dev-tools/bash_sshfs
 
 # Add my bin to path.
 PATH=$PATH:$HOME/bin
