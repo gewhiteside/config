@@ -66,7 +66,7 @@ pwd_prompt()
 {
     local tmp=$PWD
     # Replace $HOME with tilde.
-    tmp="${tmp/$HOME/\~}"
+    tmp=${tmp/$HOME/'~'}
     # Replace $pr with ellipses.
     [ $pr ] && tmp="${tmp/${pr#~/}\//.../}"
     echo "$tmp"
