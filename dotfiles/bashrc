@@ -27,7 +27,6 @@ ssh_start()
     trap "kill $SSH_AGENT_PID" EXIT
 }
 
-
 ##### MACHINE-SPECIFIC ENVIRONMNET #####
 # The following variables are intialized to a default value below. They can be
 # changed in the machine-specific environment file "~/.$(hostname -s)_bash" to
@@ -74,6 +73,8 @@ pwd_prompt()
 
 #### OTHER FILES ####
 source ~/.bash_aliases
+[ -f ~/dev-tools/bash_screen ] && source ~/dev-tools/bash_screen
+[ -f ~/dev-tools/bash_tmux ] && source ~/dev-tools/bash_tmux
 
 # Source machine-specific environment. In order to pick up color changes, this
 # file should be sourced after the default color definitions above.
