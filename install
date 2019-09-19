@@ -44,40 +44,21 @@ ln -s "$@" $PWD/ssh/config ~/.ssh
 # Xfce. NOTE: The "Launch GNOME services on startup" checkbox must be unchecked
 # under the "Advanced" tab of xfce4-session-settings, otherwise Xfce will just
 # start the GNOME keyring.
-if type xfce4-session >/dev/null && [ "$DISPLAY" ]; then
+if type xfce4-session &>/dev/null && [ "$DISPLAY" ]; then
     xfconf-query -c xfce4-session -p /startup/ssh-agent/enabled -n -t bool \
                  -s false
     xfconf-query -c xfce4-session -p /startup/gpg-agent/enabled -n -t bool \
                  -s false
 fi
 
-# Disable GNOME keyring components, if this is a system with GNOME.
-if [ -f /etc/xdg/autostart/gnome-keyring-ssh.desktop ]; then
-    # The user's local XDG autostart config files live in this directory.
-    mkdir -p ~/.config/autostart
-
-    # Copy the system's gnome-keyring config files to the user's local
-    # directory and disable autostart for them.
-    cp /etc/xdg/autostart/gnome-keyring-*.desktop ~/.config/autostart
-    for file in ~/.config/autostart/gnome-keyring-*.desktop; do
-        echo "Hidden=true" >>$file
-    done
-fi
-
 
 # Remove irrelevant dotfiles for certain systems.
 case $(uname) in
-  Linux)
+  Linux|Darwin)
       rm ~/.mintty* ;;
   CYGWIN*)
       rm ~/.screenrc ;;
 esac
-
-# Create machine-specific bash init file.
-touch ~/.bash_$(hostname -s)
-
-# Create machine-specific emacs init file.
-touch ~/.emacs.d/elisp/$(hostname -s).el
 
 # Configure git for this repo.
 filter_include='path = ../.gitfilters'

@@ -21,14 +21,14 @@ PATH=$PATH:$HOME/bin
 
 # Set my default editor to emacs. Don't set desktop-save-mode, don't use a
 # window system, and don't confirm killing these sessions.
-EDITOR='emacs --no-desktop --no-window-system \
---eval "(setq confirm-kill-emacs nil)"'
+EDITOR='emacs --no-desktop --no-window-system'
+EDITOR+=' --eval "(setq confirm-kill-emacs nil)"'
 
 # Set my default less options--turn off bell and ignore case in search.
 LESS='Qi'
 
 # Set default grep options.
-GREP_OPTIONS='--color=auto --binary-files=without-match --directories=skip
---exclude=*~ --exclude=*# --exclude-dir=.git'
+GREP_OPTIONS='--color=auto --binary-files=without-match --directories=skip'
+GREP_OPTIONS+=' --exclude=*~ --exclude=*# --exclude-dir=.git'
 
 export PATH EDITOR LESS GREP_OPTIONS

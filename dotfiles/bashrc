@@ -17,7 +17,7 @@ shopt -s histappend
 shopt -s no_empty_cmd_completion
 
 # Add colors for ls.
-eval "$(dircolors -b)"
+type dircolors &>/dev/null && eval "$(dircolors -b)"
 
 # Start ssh-agent and kill it on exit.
 ssh_start()
