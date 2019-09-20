@@ -16,6 +16,16 @@ for dotfile in $config/dotfiles/*[!~]; do
     ln -s "$@" $dotfile ~/.${dotfile##*/}
 done
 
+# Remove irrelevant dotfiles for certain systems.
+case $(uname) in
+  Linux)
+      rm ~/.mintty* ;;
+  Darwin)
+      rm ~/.mintty* ~/.xsessionrc ;;
+  CYGWIN*)
+      rm ~/.screenrc ;;
+esac
+
 
 ## Emacs
 # Create ~/.emacs.d and ~/.emacs.d/elisp if they don't already exist.
@@ -40,6 +50,7 @@ mkdir -p ~/.ssh
 # Symlink the ssh config file.
 ln -s "$@" $PWD/ssh/config ~/.ssh
 
+# TODO(whiteside): Try to use the system keyring, if convenient.
 # Don't let Xfce start {ssh,gpg}-agent on login, if this is a system with
 # Xfce. NOTE: The "Launch GNOME services on startup" checkbox must be unchecked
 # under the "Advanced" tab of xfce4-session-settings, otherwise Xfce will just
@@ -50,15 +61,6 @@ if type xfce4-session &>/dev/null && [ "$DISPLAY" ]; then
     xfconf-query -c xfce4-session -p /startup/gpg-agent/enabled -n -t bool \
                  -s false
 fi
-
-
-# Remove irrelevant dotfiles for certain systems.
-case $(uname) in
-  Linux|Darwin)
-      rm ~/.mintty* ;;
-  CYGWIN*)
-      rm ~/.screenrc ;;
-esac
 
 # Configure git for this repo.
 filter_include='path = ../.gitfilters'

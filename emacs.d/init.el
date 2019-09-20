@@ -129,6 +129,10 @@
 ;; TODO: this next line works, but is prohibitively slow. Why?
 ;; (global-set-key "\M-\S-i" (lambda () (interactive) (other-window -1)))
 
+;; If /usr/local/bin exists, add it to the executable path.
+(if (file-directory-p "/usr/local/bin")
+    (add-to-list 'exec-path "/usr/local/bin" t))
+
 
 ;;; Whitespace
 
