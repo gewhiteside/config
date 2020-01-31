@@ -35,11 +35,11 @@ ssh_start()
 # Color of the environment indicator in the prompt.
 env_color='0;36m'
 # Color of user and host names in the prompt.
-user_host_color='1;32m'
+user_host_color='0;32m'
 # Color of symbols in the prompt (i.e. : and \$).
 symbol_color='0m'
 # Color of the pwd in the prompt.
-pwd_color='1;34m'
+pwd_color='0;34m'
 # Color of the git information in the prompt.
 git_color='0;33m'
 
@@ -75,6 +75,10 @@ pwd_prompt()
 source ~/.bash_aliases
 [ -f ~/dev-tools/bash_screen ] && source ~/dev-tools/bash_screen
 [ -f ~/dev-tools/bash_tmux ] && source ~/dev-tools/bash_tmux
+
+if [ "$(uname)" == "Darwin" -a -f ~/dev-tools/osx/bash_osx ]; then
+    source ~/dev-tools/osx/bash_osx
+fi
 
 # Source machine-specific environment. In order to pick up color changes, this
 # file should be sourced after the default color definitions above.

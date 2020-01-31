@@ -118,7 +118,9 @@
  ;; Sentences are terminated with a single space.
  sentence-end-double-space nil
  ;; Tramp should use a dump terminal.
- tramp-terminal-type "dumb")
+ tramp-terminal-type "dumb"
+ ;; Change the smerge command prefix to something easier.
+ smerge-command-prefix "\C-cv")
 
 ;; Scroll up and down a line.
 (global-set-key "\M-p"  'scroll-up-line)

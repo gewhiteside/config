@@ -19,3 +19,6 @@ GREP_OPTIONS='--color=auto --binary-files=without-match --directories=skip'
 GREP_OPTIONS+=' --exclude=*~ --exclude=*# --exclude-dir=.git'
 
 export PATH EDITOR LESS GREP_OPTIONS
+
+# Turn off the bash deprecation warning on Catalina.
+export BASH_SILENCE_DEPRECATION_WARNING=1
