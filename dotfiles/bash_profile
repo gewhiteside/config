@@ -4,7 +4,7 @@
 [ -f ~/.bashrc ] && source ~/.bashrc
 
 # Add my bin to path.
-PATH=$PATH:$HOME/bin
+PATH=$HOME/bin:$PATH
 
 # Set my default editor to emacs. Don't set desktop-save-mode, don't use a
 # window system, and don't confirm killing these sessions.

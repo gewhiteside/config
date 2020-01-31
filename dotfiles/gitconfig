@@ -23,3 +23,10 @@
         decorate = true
 [diff]
         renames = true
+[rebase]
+        autosquash = true
+[rerere]
+	enabled = true
+        autoupdate = true
+[pager]
+	branch = off

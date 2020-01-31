@@ -19,3 +19,6 @@ alias gdb='gdb -q'
 # Alias shutdown and restart.
 alias shutdown='shutdown now'
 alias restart='shutdown -r now'
+
+# Shorten less to l.
+alias l='less'

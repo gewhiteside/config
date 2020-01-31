@@ -5,3 +5,5 @@
 *.log
 *.error
 *.pyc
+*.DS_Store
+._*
