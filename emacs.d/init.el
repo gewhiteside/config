@@ -100,7 +100,7 @@
  ;; Turn on column number.
  column-number-mode t
  ;; Allow desktop-save-mode to remember remote files.
- ;; desktop-files-not-to-save "^$"
+ desktop-files-not-to-save "^$"
  ;; Require final newline on save.
  require-final-newline t
  ;; Turn off bell ring.
