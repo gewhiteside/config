@@ -3,6 +3,17 @@
 
 [ -f ~/.bashrc ] && source ~/.bashrc
 
+if [ $(uname) != Darwin ]; then
+    # Check for an ssh-agent. If there isn't one, start one.
+    SSH_AGENT_PID=$(pgrep -u $USER ssh-agent)
+    if [ $SSH_AGENT_PID ]; then
+        export SSH_AGENT_PID
+        export SSH_AUTH_SOCK=~/.ssh/ssh-agent-socket
+    else
+        eval $(ssh-agent -a ~/.ssh/ssh-agent-socket)
+    fi
+fi
+
 # Add my bin to path.
 PATH=$HOME/bin:$PATH
 
