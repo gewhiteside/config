@@ -199,7 +199,6 @@
 
 
 ;;; C
-
 (add-hook
  'c-mode-common-hook
  (lambda ()
@@ -240,7 +239,6 @@
 
 
 ;;; Org
-
 (add-hook
  'org-mode-hook
  (lambda ()
@@ -262,7 +260,6 @@
  org-startup-truncated nil)
 
 
-;;; Other files
-
-;; Load machine-specific configuration.
-;; (load "~/path-to-file/file.el")
+;;; Reservoir
+(if (file-exists-p "~/reservoir/reservoir.el")
+    (load "~/reservoir/reservoir.el"))

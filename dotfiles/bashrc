@@ -79,18 +79,11 @@ pwd_prompt()
 
 #### OTHER FILES ####
 source ~/.bash_aliases
-[ -f ~/dev-tools/bash_screen ] && source ~/dev-tools/bash_screen
-[ -f ~/dev-tools/bash_tmux ] && source ~/dev-tools/bash_tmux
 
-if [ "$(uname)" == "Darwin" -a -f ~/dev-tools/osx/bash_osx ]; then
-    source ~/dev-tools/osx/bash_osx
-fi
+## Reservoir bash configuration.
+[ -f ~/reservoir/bash_reservoir ] && source ~/reservoir/bash_reservoir
 
-# Source machine-specific environment. In order to pick up color changes, this
-# file should be sourced after the default color definitions above.
-# source ~/path-to-file/file
-
-## GIT
+## Git
 source ~/.git-completion.bash
 source ~/.git-prompt.sh
 

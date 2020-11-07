@@ -16,16 +16,6 @@ for dotfile in $config/dotfiles/*[!~]; do
     ln -s "$@" $dotfile ~/.${dotfile##*/}
 done
 
-# Remove irrelevant dotfiles for certain systems.
-case $(uname) in
-  Linux)
-      rm ~/.mintty* ;;
-  Darwin)
-      rm ~/.mintty* ~/.xsessionrc ;;
-  CYGWIN*)
-      rm ~/.screenrc ;;
-esac
-
 
 ## Emacs
 # Create ~/.emacs.d and ~/.emacs.d/elisp if they don't already exist.
@@ -37,36 +27,11 @@ ln -s "$@" $config/emacs.d/init.el ~/.emacs.d
 ln -s "$@" $config/emacs.d/elisp/*[!~] ~/.emacs.d/elisp
 
 
-## Scripts
-# Create user bin directory.
-mkdir -p ~/bin
-# Symlink some scripts.
-ln -s "$@" $config/bin/{config-filter,mv-ln} ~/bin
-
-
 ## SSH
+# Set the permissions for the ssh config. It must be read/write
+# for the user, and not writable by others.
+chmod 644 $config/ssh/config
 # Create user ssh directory.
 mkdir -p ~/.ssh
 # Symlink the ssh config file.
 ln -s "$@" $config/ssh/config ~/.ssh
-# Fix the permissions.
-chmod go-rwx $config/ssh/config
-
-
-# TODO(whiteside): Try to use the system keyring, if convenient.
-# Don't let Xfce start {ssh,gpg}-agent on login, if this is a system with
-# Xfce. NOTE: The "Launch GNOME services on startup" checkbox must be unchecked
-# under the "Advanced" tab of xfce4-session-settings, otherwise Xfce will just
-# start the GNOME keyring.
-if type xfce4-session &>/dev/null && [ "$DISPLAY" ]; then
-    xfconf-query -c xfce4-session -p /startup/ssh-agent/enabled -n -t bool \
-                 -s false
-    xfconf-query -c xfce4-session -p /startup/gpg-agent/enabled -n -t bool \
-                 -s false
-fi
-
-# Configure git for this repo.
-filter_include='path = ../.gitfilters'
-if ! grep -q "$filter_include" .git/config; then
-    echo -e "[include]\n\t$filter_include" >>.git/config
-fi

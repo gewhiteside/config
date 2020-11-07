@@ -1,6 +1,0 @@
-[filter "source"]
-	smudge = config-filter smudge source
-	clean = config-filter clean source
-[filter "load"]
-	smudge = config-filter smudge load
-	clean = config-filter clean load

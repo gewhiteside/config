@@ -31,6 +31,7 @@
         autoupdate = true
 [pager]
         branch = off
+        # See <git>/contrib/diff-higlight/README for more information.
         log = diff-highlight | less -X
         show = diff-highlight | less -X
         diff = diff-highlight | less -X
