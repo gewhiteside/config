@@ -1,8 +1,6 @@
-# ~/.bash_aliases
-# George Whiteside
-
-# Use colors when appropriate and, if supported, ignore backup files in ls.
-if [ "$(uname)" == Darwin ]; then
+# Use colors when appropriate and, if supported, ignore backup files while
+# using ls.
+if [ "$(uname)" = Darwin ]; then
     alias ls='ls -G'
     alias la='ls -AG'
 else
@@ -22,10 +20,6 @@ type rgrep &> /dev/null || alias rgrep="grep -r"
 
 # Shut up gdb.
 alias gdb='gdb -q'
-
-# Alias shutdown and restart.
-alias shutdown='shutdown now'
-alias restart='shutdown -r now'
 
 # Shorten less to l.
 alias l='less'

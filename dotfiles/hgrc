@@ -6,4 +6,4 @@ color =
 pager =
 
 [pager]
-pager = less -RX
+pager = less -X

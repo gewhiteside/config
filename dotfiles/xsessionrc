@@ -1,6 +1,3 @@
-# -*-Sh-*-
-# ~/.xsessionrc
-# George Whiteside
-
+# -*-sh-*-
 # Source my bash profile when logging in using a display manager.
 source ~/.bash_profile

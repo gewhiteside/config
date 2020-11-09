@@ -1,15 +1,14 @@
-# ~/.screenrc
-# George Whiteside
-# enable alt screen
+# Enable alternate screen support. This is needed for clearing the screen after exiting
+# a program.
 altscreen on
-# change escape character to backslash
-escape ^\\\
-# turn off annoying bell
-vbell off
-# allow scrolling
-termcapinfo xterm ti@:te@
 
-# remove bad keybindings
+# Change the command character to backslash.
+escape ^\\\
+
+# Turn off the annoying visual bell.
+vbell off
+
+# Unbind bad keybindings.
 bind Z
 bind ^x
 

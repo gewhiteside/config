@@ -1,6 +1,3 @@
-# ~/.bash_profile
-# George Whiteside
-
 [ -f ~/.bashrc ] && source ~/.bashrc
 
 if [ $(uname) != Darwin ]; then
@@ -22,7 +19,8 @@ PATH=$HOME/bin:$PATH
 EDITOR='emacs --no-desktop --no-window-system'
 EDITOR+=' --eval "(setq confirm-kill-emacs nil)"'
 
-# Set my default less options--turn off bell and ignore case in search.
+# Set default less options--turn off the terminal bell, display raw control
+# characters for ANSI color escape sequences, and ignore case in search.
 LESS='RQi'
 
 export PATH EDITOR LESS

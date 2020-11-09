@@ -1,0 +1,142 @@
+# Inspired by https://github.com/rhopfer/bash-prompt.
+
+# When tracing using set -x, add the name of the current shell or shell script
+# and the current line within the current script or function.
+PS4='+$0:$LINENO:'
+
+# Only print PROMPT_DIRTRIM trailing directories in the prompt.
+PROMPT_DIRTRIM=3
+
+# This variable should be set to name:path. Name is the name of the current
+# project to be displayed before the prompt. Path is the path of the project
+# root. When in a subdirectory of the project, display the project root as the
+# base of the working directory instead of ~ or /.
+#
+# e.g., PROJECT=config:~/config -> (config) config/emacs.d/elisp $
+PROJECT=
+
+prompt() {
+    local -A colors
+    # Color of the project indicator in the prompt.
+    colors[project]="0;36" # Cyan
+    # Color of user and host names in the prompt.
+    colors[user_host]="0;32" # Green
+    # Color of the pwd in the prompt.
+    colors[pwd]="0;34" # Blue
+    # Color of the git information in the prompt.
+    colors[git]="0;33" # Yellow
+    # Default color.
+    colors[default]="0" # Default
+
+    # For each setting, add the proper escape keys.
+    for setting in "${!colors[@]}"; do
+        colors["$setting"]="\[\e[${colors[$setting]}m\]"
+    done
+
+    # Project
+    local project_name="${PROJECT%:*}"
+    local project=
+    local project_length=0
+    if [ "$project_name" ]; then
+        project="($project_name) "
+        project_length="${#project}"
+        project="${colors[project]}$project${colors[default]}"
+    fi
+
+    # User and host
+    local user=
+    # Display the current user if it isn't whiteside.
+    [ "$USER" != whiteside ] && user="$USER"
+    local host=
+    # Display the host when connected with SSH.
+    [ "$SSH_CONNECTION" ] && host="@$(hostname -s)"
+
+    local user_host="$user$host"
+    local user_host_length=0
+    if [ "$user_host" ]; then
+        user_host="$user_host:"
+        user_host_length="${#user_host}"
+        user_host="${colors[user_host]}$user_host${colors[default]}"
+    fi
+
+    # PWD
+    local base=
+    local raw_suffix=
+
+    # Use the project root as the base directory
+    local project_root="${PROJECT#*:}"
+
+    # If the project root is set in PROJECT and pwd is a subdirectory, use the
+    # project root as the base of pwd.
+    if [ "$project_root" ] && [[ "$PWD" == "$project_root"?* ]]; then
+        base="${project_root##*/}"
+        raw_suffix="${PWD#$project_root}"
+    elif [[ "$PWD" == "$HOME"* ]]; then
+        # Use tilde as the base if pwd is HOME or a sbdirectory.
+        base='~'
+        raw_suffix="${PWD#$HOME}"
+    else
+        base=''
+        raw_suffix="$PWD"
+    fi
+
+    # Trim directories which exceed PROMPT_DIRTRIM.
+    local count=0
+    local dir=
+    local suffix=
+    while [ "$raw_suffix" ]; do
+        dir="${raw_suffix##*/}"
+        suffix="${dir}/${suffix}"
+
+        count=$((count + 1))
+        raw_suffix="${raw_suffix%/$dir}"
+        if [ "$PROMPT_DIRTRIM" ] && [ "$PROMPT_DIRTRIM" -gt 0 ] \
+               && [ "$PROMPT_DIRTRIM" -eq "$count" ]; then
+            break
+        fi
+    done
+
+    # If there are still directories in the suffix due to the value of
+    # PROMPT_DIRTRIM, add ellipses to the suffix.
+    [ "$raw_suffix" ] && suffix=".../$suffix"
+
+    # If suffix isn't empty, insert a slash between the suffix and the base and
+    # trim the trailing slash.
+    [ "$suffix" ] && suffix="/${suffix%/}"
+
+    local pwd="$base$suffix"
+    local pwd_length="${#pwd}"
+    pwd="${colors[pwd]}$pwd${colors[default]}"
+
+    # Git
+    # Set what information to show. See ~/.git-prompt.sh for more information.
+    GIT_PS1_SHOWDIRTYSTATE=1
+    GIT_PS1_SHOWSTASHSTATE=1
+    GIT_PS1_SHOWUNTRACKEDFILES=1
+    GIT_PS1_SHOWCOLORHINTS=1
+
+    local git=$(__git_ps1)
+    local git_length=0
+    if [ "$git" ]; then
+        git_length="${#git}"
+        git="${colors[git]}$git${colors[default]}"
+    fi
+
+    # Set the terminal title.
+    local title="\u@\h"
+    title="\[\e]0;$title\a\]"
+
+    # If the prompt is more than 50 characters long, then print the final
+    # symbol on the next line.
+    PS1="$title$project$user_host$pwd$git"
+    local length=$((project_length + user_host_length + pwd_length \
+                                   + git_length))
+
+    if [ "${length}" -gt 50 ]; then
+        PS1="$PS1\n\$ "
+    else
+        PS1="$PS1 \$ "
+    fi
+}
+
+PROMPT_COMMAND=prompt
