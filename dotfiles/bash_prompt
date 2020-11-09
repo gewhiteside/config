@@ -15,7 +15,16 @@ PROMPT_DIRTRIM=3
 # e.g., PROJECT=config:~/config -> (config) config/emacs.d/elisp $
 PROJECT=
 
+# Set what git information to show. See ~/.git-prompt.sh for more information.
+GIT_PS1_SHOWDIRTYSTATE=1
+GIT_PS1_SHOWSTASHSTATE=1
+GIT_PS1_SHOWUNTRACKEDFILES=1
+GIT_PS1_SHOWCOLORHINTS=1
+
+
 prompt() {
+    local retval="$?"
+
     local -A colors
     # Color of the project indicator in the prompt.
     colors[project]="0;36" # Cyan
@@ -25,6 +34,8 @@ prompt() {
     colors[pwd]="0;34" # Blue
     # Color of the git information in the prompt.
     colors[git]="0;33" # Yellow
+    # Color of the final symbol if the last exit status is non-zero.
+    colors[error]="0;31" # Red
     # Default color.
     colors[default]="0" # Default
 
@@ -52,11 +63,12 @@ prompt() {
     [ "$SSH_CONNECTION" ] && host="@$(hostname -s)"
 
     local user_host="$user$host"
-    local user_host_length=0
+    local user_host_length="${#user_host}"
     if [ "$user_host" ]; then
-        user_host="$user_host:"
-        user_host_length="${#user_host}"
-        user_host="${colors[user_host]}$user_host${colors[default]}"
+        user_host="$user_host"
+        # Add the length of the trailing colon.
+        user_host_length=$((user_host_length + 1))
+        user_host="${colors[user_host]}$user_host${colors[default]}:"
     fi
 
     # PWD
@@ -109,22 +121,20 @@ prompt() {
     pwd="${colors[pwd]}$pwd${colors[default]}"
 
     # Git
-    # Set what information to show. See ~/.git-prompt.sh for more information.
-    GIT_PS1_SHOWDIRTYSTATE=1
-    GIT_PS1_SHOWSTASHSTATE=1
-    GIT_PS1_SHOWUNTRACKEDFILES=1
-    GIT_PS1_SHOWCOLORHINTS=1
-
     local git=$(__git_ps1)
-    local git_length=0
-    if [ "$git" ]; then
-        git_length="${#git}"
-        git="${colors[git]}$git${colors[default]}"
-    fi
+    local git_length="${#git}"
+    [ "$git" ] && git="${colors[git]}$git${colors[default]}"
 
     # Set the terminal title.
     local title="\u@\h"
     title="\[\e]0;$title\a\]"
+
+    # If the last exit status is non-zero, print the exit code and make the
+    # final symbol red.
+    local final_symbol='\$'
+    if [ "$retval" -ne 0 ]; then
+        final_symbol="${colors[error]}$final_symbol${colors[default]}"
+    fi
 
     # If the prompt is more than 50 characters long, then print the final
     # symbol on the next line.
@@ -133,9 +143,9 @@ prompt() {
                                    + git_length))
 
     if [ "${length}" -gt 50 ]; then
-        PS1="$PS1\n\$ "
+        PS1="$PS1\n$final_symbol "
     else
-        PS1="$PS1 \$ "
+        PS1="$PS1 $final_symbol "
     fi
 }
 
