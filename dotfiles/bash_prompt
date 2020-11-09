@@ -145,7 +145,7 @@ prompt() {
     if [ "${length}" -gt 50 ]; then
         PS1="$PS1\n$final_symbol "
     else
-        PS1="$PS1 $final_symbol "
+        PS1="$PS1$final_symbol "
     fi
 }
 
