@@ -92,6 +92,10 @@
 ;; Change the tab highlight color.
 (set-face-background 'whitespace-tab "orange red")
 
+;; Turn off whitespace visualization from global-whitespace-mode by disabling
+;; local whitespace-mode.
+(global-set-key (kbd "C-c w") (lambda () (interactive) (whitespace-mode 0)))
+
 
 
 ;; IBuffer
