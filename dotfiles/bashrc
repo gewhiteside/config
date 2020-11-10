@@ -6,7 +6,7 @@ HISTFILESIZE=3000
 # Don't put duplicate lines or lines starting with space in the history.
 HISTCONTROL=ignoreboth
 # Time stamp commands in the history file.
-HISTTIMEFORMAT=
+HISTTIMEFORMAT="%F %T "
 
 # Append to the history file, don't overwrite it.
 shopt -s histappend
