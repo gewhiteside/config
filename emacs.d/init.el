@@ -15,6 +15,7 @@
 (load "llvm/emacs.el")
 (load "llvm/llvm-mode.el")
 (load "llvm/tablegen-mode.el")
+(load "clang-tools/clang-format.el")
 
 (if (file-exists-p "~/reservoir/reservoir.el")
     (load "~/reservoir/reservoir.el"))
@@ -138,7 +139,12 @@
  'c-mode-common-hook
  (lambda ()
    ;; Set key to find header file in the same directory.
-   (local-set-key (kbd "C-c o") 'ff-find-other-file)))
+   (local-set-key (kbd "C-c o") 'ff-find-other-file)
+   (local-set-key (kbd "C-M-<tab>") 'clang-format-region)
+   ;; Set key to format the whole buffer.
+   (local-set-key (kbd "C-c f")
+                  (lambda () (interactive)
+                    (clang-format-region (point-min) (point-max))))))
 
 ;; Set C default style.
 (setq c-default-style "llvm.org")
