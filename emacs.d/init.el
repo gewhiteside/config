@@ -54,6 +54,9 @@
 (if (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
 (if (fboundp 'tool-bar-mode) (tool-bar-mode -1))
 
+;; Enable fill column indicator.
+(global-display-fill-column-indicator-mode)
+
 ;; Enable upcase-region.
 (put 'upcase-region 'disabled nil)
 
