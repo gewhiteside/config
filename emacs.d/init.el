@@ -76,7 +76,7 @@
 ;; SMerge
 ;;
 ;; Change the command prefix to something easier.
-(setq smerge-command-prefix "\C-cv")
+(setq smerge-command-prefix (kbd "C-c s"))
 
 
 
