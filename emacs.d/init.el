@@ -88,11 +88,12 @@
 
 
 ;; Whitespace
-(setq
- ;; Hightlight tabs.
- whitespace-style '(face tabs)
- ;; Use whitespace-mode in all major modes that support it.
- global-whitespace-mode t)
+;;
+;; Hightlight tabs.
+(setq whitespace-style '(face tabs))
+
+;; Use whitespace-mode in all major modes that support it.
+(global-whitespace-mode)
 
 ;; Change the tab highlight color.
 (set-face-background 'whitespace-tab "orange red")
