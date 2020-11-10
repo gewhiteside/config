@@ -8,6 +8,7 @@
 (if (file-directory-p "/usr/local/bin")
     (add-to-list 'exec-path "/usr/local/bin" t))
 
+(require 'ibuf-ext)
 (require 'whitespace)
 
 ;; LLVM
@@ -101,15 +102,14 @@
 
 
 
-;; IBuffer
+;; IBuffer (https://www.emacswiki.org/emacs/IbufferMode)
 (add-hook
  'ibuffer-mode-hook
  (lambda ()
-   ;; Switch to my default filter groups if I have set them.
-   (if (boundp my-default-groups)
-       (ibuffer-switch-to-saved-filter-groups my-default-groups))
    ;; Auto refresh buffer list.
-   (ibuffer-auto-mode 1)))
+   (ibuffer-auto-mode 1)
+   ;; Don't show a fill column indicator in IBuffer.
+   (display-fill-column-indicator-mode 0)))
 
 (setq
  ;; Turn off prompt to close unmodified buffers.
@@ -122,6 +122,9 @@
  ibuffer-formats
  '((mark modified read-only " "
          (name 40 40 :left :elide) " " filename-and-process)))
+
+;; Don't show special buffers.
+(add-to-list 'ibuffer-never-show-predicates "^\\*")
 
 ;; Use ibuffer as buffer list.
 (global-set-key (kbd "C-x C-b") 'ibuffer)
