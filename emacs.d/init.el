@@ -58,12 +58,12 @@
 (put 'upcase-region 'disabled nil)
 
 ;; Scroll up and down a line.
-(global-set-key "\M-p"  'scroll-up-line)
-(global-set-key "\M-n"  'scroll-down-line)
+(global-set-key (kbd "M-p") 'scroll-up-line)
+(global-set-key (kbd "M-n") 'scroll-down-line)
 
 ;; Switch windows with an easier key.
-(global-set-key "\M-i" 'other-window)
-(global-set-key "\M-\S-i" (lambda () (interactive) (other-window -1)))
+(global-set-key (kbd "M-i") 'other-window)
+(global-set-key (kbd "M-I") (lambda () (interactive) (other-window -1)))
 
 
 
