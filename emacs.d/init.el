@@ -11,10 +11,11 @@
 (require 'ibuf-ext)
 (require 'whitespace)
 
-;; LLVM
+(load "cmake/cmake-mode.el")
 (load "llvm/emacs.el")
+(load "llvm/llvm-mode.el")
+(load "llvm/tablegen-mode.el")
 
-;; Reservoir
 (if (file-exists-p "~/reservoir/reservoir.el")
     (load "~/reservoir/reservoir.el"))
 
