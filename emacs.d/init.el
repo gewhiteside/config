@@ -1,24 +1,41 @@
+;; -*- flycheck-disabled-checkers: (emacs-lisp-checkdoc) -*-
+
 ;; Add my elisp directory and its subdirectories to the load path (
 ;; https://www.emacswiki.org/emacs/LoadPath).
 (let ((default-directory  "~/.emacs.d/elisp/"))
   (normal-top-level-add-to-load-path '("."))
   (normal-top-level-add-subdirs-to-load-path))
 
-;; If /usr/local/bin exists, add it to the executable path.
-(if (file-directory-p "/usr/local/bin")
-    (add-to-list 'exec-path "/usr/local/bin" t))
-
-(require 'ibuf-ext)
-(require 'whitespace)
-
-(load "cmake/cmake-mode.el")
 (load "llvm/emacs.el")
 (load "llvm/llvm-mode.el")
 (load "llvm/tablegen-mode.el")
-(load "clang-tools/clang-format.el")
+(load "~/reservoir/reservoir.el" 'noerror)
 
-(if (file-exists-p "~/reservoir/reservoir.el")
-    (load "~/reservoir/reservoir.el"))
+;; Store customization info in a separate file so this file isn't polluted.
+(setq custom-file "~/.emacs.d/elisp/custom.el")
+(load custom-file 'noerror)
+
+
+
+;; MELPA
+(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
+(package-initialize)
+(setq package-selected-packages
+      '(ggtags projectile flycheck clang-format cmake-mode))
+(package-install-selected-packages)
+
+
+
+;; Load features.
+(require 'cc-vars)
+(require 'clang-format)
+(require 'desktop)
+(require 'ibuf-ext)
+(require 'org)
+(require 'package)
+(require 'sh-script)
+(require 'smerge-mode)
+(require 'whitespace)
 
 
 
@@ -52,6 +69,9 @@
  indent-tabs-mode nil
  ;; Set fill column to 80.
  fill-column 80)
+
+;; Add /usr/local/bin to the executable path.
+(add-to-list 'exec-path "/usr/local/bin")
 
 ;; Disable menu, tool and scroll bars.
 (menu-bar-mode -1)
@@ -110,13 +130,14 @@
 
 
 ;; Whitespace
-;;
-;; Hightlight tabs.
-(setq whitespace-style '(face tabs))
+(setq
+ ;; Hightlight tabs.
+ whitespace-style '(face tabs)
+ ;; Enable whitespace visualization for given modes.
+ whitespace-global-modes
+ '(c-mode c++-mode sh-mode elisp-mode cmake-mode python-mode))
 
-;; Use global-whitespace-mode in all major modes that support it, except
-;; text-mode. text-mode will use local whitespace-mode when appropriate.
-(setq global-whitespace-modes '(not text-mode))
+(global-whitespace-mode)
 
 ;; Change the tab highlight color.
 (set-face-background 'whitespace-tab "orange red")
@@ -197,8 +218,25 @@
 
 (setq
  ;; Open links in this window.
- org-link-frame-setup (lambda () (file . find-file))
+ org-link-frame-setup '((file . find-file))
  ;; Add markdown to export backends.
  org-export-backends '(ascii html icalendar latex md odt)
  ;; Disable line truncation.
  org-startup-truncated nil)
+
+
+
+;; Flycheck
+(global-flycheck-mode)
+
+;; Display the error list on the bottom of the frame occupying a tenth of the
+;; height of the frame.
+;;
+;; https://www.flycheck.org/en/latest/user/error-list.html#tune-error-list-display
+(add-to-list 'display-buffer-alist
+             `(,(rx bos "*Flycheck errors*" eos)
+              (display-buffer-reuse-window
+               display-buffer-in-side-window)
+              (side            . bottom)
+              (reusable-frames . visible)
+              (window-height   . 0.1)))
