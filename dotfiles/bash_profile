@@ -6,7 +6,7 @@
 if [ $(uname) != Darwin ]; then
     # Check for an ssh-agent. If there isn't one, start one.
     SSH_AGENT_PID=$(pgrep -u $USER ssh-agent)
-    if [ $SSH_AGENT_PID ]; then
+    if [ "$SSH_AGENT_PID" ]; then
         export SSH_AGENT_PID
         export SSH_AUTH_SOCK=~/.ssh/ssh-agent-socket
     else
@@ -25,11 +25,7 @@ EDITOR+=' --eval "(setq confirm-kill-emacs nil)"'
 # Set my default less options--turn off bell and ignore case in search.
 LESS='RQi'
 
-# Set default grep options.
-GREP_OPTIONS='--color=auto --binary-files=without-match --directories=skip'
-GREP_OPTIONS+=' --exclude=*~ --exclude=*# --exclude-dir=.git'
-
-export PATH EDITOR LESS GREP_OPTIONS
+export PATH EDITOR LESS
 
 # Turn off the bash deprecation warning on Catalina.
 export BASH_SILENCE_DEPRECATION_WARNING=1
