@@ -27,6 +27,12 @@ ssh_start()
     trap "kill $SSH_AGENT_PID" EXIT
 }
 
+# Search for a string only in CMake files.
+grep-cmake() {
+    find -iname '*cmake*' -exec grep -H "$@" '{}' \;
+}
+
+
 ##### MACHINE-SPECIFIC ENVIRONMNET #####
 # The following variables are intialized to a default value below. They can be
 # changed in the machine-specific environment file "~/.$(hostname -s)_bash" to
