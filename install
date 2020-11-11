@@ -41,14 +41,17 @@ ln -s "$@" $config/emacs.d/elisp/*[!~] ~/.emacs.d/elisp
 # Create user bin directory.
 mkdir -p ~/bin
 # Symlink some scripts.
-ln -s "$@" $(pwd)/bin/{config-filter,mv-ln} ~/bin
+ln -s "$@" $config/bin/{config-filter,mv-ln} ~/bin
 
 
 ## SSH
 # Create user ssh directory.
 mkdir -p ~/.ssh
 # Symlink the ssh config file.
-ln -s "$@" $PWD/ssh/config ~/.ssh
+ln -s "$@" $config/ssh/config ~/.ssh
+# Fix the permissions.
+chmod go-rwx $config/ssh/config
+
 
 # TODO(whiteside): Try to use the system keyring, if convenient.
 # Don't let Xfce start {ssh,gpg}-agent on login, if this is a system with
