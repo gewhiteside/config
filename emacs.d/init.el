@@ -82,6 +82,18 @@
 
 
 
+;; Git
+(add-to-list 'auto-mode-alist '("COMMIT_EDITMSG\\'" . text-mode))
+
+;; Shorten the fill column of Git commit messages and disable whitespace-mode
+;; because the default template includes tabs.
+(add-hook 'text-mode-hook
+          (lambda () (if (string-equal "COMMIT_EDITMSG" (buffer-name))
+                         (setq fill-column 70)
+                       (whitespace-mode))))
+
+
+
 ;; SMerge
 ;;
 ;; Change the command prefix to something easier.
@@ -102,8 +114,9 @@
 ;; Hightlight tabs.
 (setq whitespace-style '(face tabs))
 
-;; Use whitespace-mode in all major modes that support it.
-(global-whitespace-mode)
+;; Use global-whitespace-mode in all major modes that support it, except
+;; text-mode. text-mode will use local whitespace-mode when appropriate.
+(setq global-whitespace-modes '(not text-mode))
 
 ;; Change the tab highlight color.
 (set-face-background 'whitespace-tab "orange red")
