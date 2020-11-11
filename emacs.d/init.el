@@ -43,7 +43,9 @@
  read-buffer-completion-ignore-case t
  read-file-name-completion-ignore-case t
  ;; Sentences are terminated with a single space.
- sentence-end-double-space nil)
+ sentence-end-double-space nil
+ ;; Open the *scratch* buffer in fundamental-mode.
+ initial-major-mode 'fundamental-mode)
 
 (setq-default
  ;; Indent with spaces.
