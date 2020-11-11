@@ -59,9 +59,6 @@
 (if (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
 (if (fboundp 'tool-bar-mode) (tool-bar-mode -1))
 
-;; Enable fill column indicator.
-(global-display-fill-column-indicator-mode)
-
 ;; Enable upcase-region.
 (put 'upcase-region 'disabled nil)
 
@@ -72,6 +69,16 @@
 ;; Switch windows with an easier key.
 (global-set-key (kbd "M-i") 'other-window)
 (global-set-key (kbd "M-I") (lambda () (interactive) (other-window -1)))
+
+
+
+;; Fill column indicator
+(global-display-fill-column-indicator-mode)
+
+;; Disable the fill column indicator in certain modes.
+(mapc (lambda (mode)
+        (add-hook mode (lambda () (display-fill-column-indicator-mode 0))))
+      '(help-mode-hook completion-list-mode-hook))
 
 
 
