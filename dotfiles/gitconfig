@@ -2,7 +2,7 @@
         name = George Whiteside
         email = whiteside@reservoir.com
 [push]
-        default = simple
+	default = upstream
 [core]
         excludesfile = ~/.gitignore
         # git less options--enable color and don't clear screen.
