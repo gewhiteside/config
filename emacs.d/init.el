@@ -176,7 +176,7 @@
 
 
 
-;; C
+;; C/C++
 (add-hook
  'c-mode-common-hook
  (lambda ()
@@ -190,6 +190,9 @@
 
 ;; Set C default style.
 (setq c-default-style "llvm.org")
+
+;; Use c++-mode for .h files.
+(add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode))
 
 
 
