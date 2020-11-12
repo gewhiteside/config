@@ -206,6 +206,7 @@
 (add-to-list 'auto-mode-alist '("\\.?bashrc\\'" . sh-mode))
 (add-to-list 'auto-mode-alist '("_bash\\'" . sh-mode))
 (add-to-list 'auto-mode-alist '("\\.?bash_" . sh-mode))
+(add-to-list 'auto-mode-alist '("bash-fc" . sh-mode))
 
 
 
