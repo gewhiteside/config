@@ -1,7 +1,8 @@
 ;; -*- flycheck-disabled-checkers: (emacs-lisp-checkdoc) -*-
 
-;; Add my elisp directory and its subdirectories to the load path (
-;; https://www.emacswiki.org/emacs/LoadPath).
+;; Add my elisp directory and its subdirectories to the load path
+;;
+;; https://www.emacswiki.org/emacs/LoadPath
 (let ((default-directory  "~/.emacs.d/elisp/"))
   (normal-top-level-add-to-load-path '("."))
   (normal-top-level-add-subdirs-to-load-path))
@@ -233,10 +234,10 @@
 ;; height of the frame.
 ;;
 ;; https://www.flycheck.org/en/latest/user/error-list.html#tune-error-list-display
-(add-to-list 'display-buffer-alist
-             `(,(rx bos "*Flycheck errors*" eos)
-              (display-buffer-reuse-window
-               display-buffer-in-side-window)
-              (side            . bottom)
-              (reusable-frames . visible)
-              (window-height   . 0.1)))
+(add-to-list
+ 'display-buffer-alist
+ `(,(rx bos "*Flycheck errors*" eos)
+   (display-buffer-reuse-window display-buffer-in-side-window)
+   (side            . bottom)
+   (reusable-frames . visible)
+   (window-height   . 0.1)))
