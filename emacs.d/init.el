@@ -1,11 +1,9 @@
 ;; -*- flycheck-disabled-checkers: (emacs-lisp-checkdoc) -*-
-
+;;
 ;; Add my elisp directory and its subdirectories to the load path
 ;;
 ;; https://www.emacswiki.org/emacs/LoadPath
-(let ((default-directory  "~/.emacs.d/elisp/"))
-  (normal-top-level-add-to-load-path '("."))
-  (normal-top-level-add-subdirs-to-load-path))
+(add-to-list 'load-path "~/.emacs.d/elisp/")
 
 (load "llvm/emacs.el")
 (load "llvm/llvm-mode.el")
