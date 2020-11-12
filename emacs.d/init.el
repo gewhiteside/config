@@ -14,6 +14,7 @@
 
 
 ;; MELPA
+(require 'package)
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
 (package-initialize)
 (setq package-selected-packages
@@ -27,7 +28,6 @@
 (require 'desktop)
 (require 'ibuf-ext)
 (require 'org)
-(require 'package)
 (require 'sh-script)
 (require 'smerge-mode)
 (require 'whitespace)
