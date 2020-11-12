@@ -19,6 +19,3 @@ shopt -s histappend
 # Don't try to complete an empty command.
 shopt -s no_empty_cmd_completion
 
-# Add colors for ls.
-type dircolors &>/dev/null && eval "$(dircolors -b)"
-
