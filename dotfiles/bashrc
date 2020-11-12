@@ -19,3 +19,5 @@ shopt -s histappend
 # Don't try to complete an empty command.
 shopt -s no_empty_cmd_completion
 
+# Add an alias for setting raw mouse input on OS X.
+alias raw-mouse="defaults write .GlobalPreferences com.apple.mouse.scaling -1"
