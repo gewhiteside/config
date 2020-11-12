@@ -15,9 +15,9 @@ alias gdb='gdb -q'
 alias l='less'
 
 # Set default grep options.
-grep_options='--color=auto --binary-files=without-match
+grep_options='--color=auto --binary-files=without-match \
 --exclude=*~ --exclude=*# --exclude-dir=.git'
 alias grep="grep --directories=skip ${grep_options}"
 alias rgrep="grep --directories=recurse ${grep_options}"
-alias rgrep-cmake="grep --directories=recurse --include='[Cc][Mm]ake*'
+alias rgrep-cmake="grep --directories=recurse --include='[Cc][Mm]ake*' \
 ${grep_options}"
