@@ -1,8 +1,5 @@
 ;; -*- flycheck-disabled-checkers: (emacs-lisp-checkdoc) -*-
-;;
-;; Add my elisp directory and its subdirectories to the load path
-;;
-;; https://www.emacswiki.org/emacs/LoadPath
+
 (add-to-list 'load-path "~/.emacs.d/elisp/")
 
 (load "llvm/emacs.el")
@@ -20,12 +17,11 @@
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
 (package-initialize)
 (setq package-selected-packages
-      '(ggtags projectile flycheck clang-format cmake-mode))
+      '(ggtags projectile flycheck clang-format cmake-mode markdown-mode))
 (package-install-selected-packages)
 
 
 
-;; Load features.
 (require 'cc-vars)
 (require 'clang-format)
 (require 'desktop)
@@ -95,9 +91,8 @@
 (global-display-fill-column-indicator-mode)
 
 ;; Disable the fill column indicator in certain modes.
-(mapc (lambda (mode)
-        (add-hook mode (lambda () (display-fill-column-indicator-mode 0))))
-      '(help-mode-hook completion-list-mode-hook))
+(dolist (hook '(help-mode-hook completion-list-mode-hook))
+  (add-hook hook (lambda () (display-fill-column-indicator-mode 0))))
 
 
 
@@ -130,13 +125,11 @@
 
 ;; Whitespace
 (setq
- ;; Hightlight tabs.
+ ;; Highlight tabs.
  whitespace-style '(face tabs)
  ;; Enable whitespace visualization for given modes.
  whitespace-global-modes
- '(c-mode c++-mode sh-mode elisp-mode cmake-mode python-mode))
-
-(global-whitespace-mode)
+ '(c-mode c++-mode sh-mode emacs-lisp-mode cmake-mode python-mode))
 
 ;; Change the tab highlight color.
 (set-face-background 'whitespace-tab "orange red")
@@ -171,7 +164,7 @@
 ;; Don't show special buffers.
 (add-to-list 'ibuffer-never-show-predicates "^\\*")
 
-;; Use ibuffer as buffer list.
+;; Use IBuffer as buffer list.
 (global-set-key (kbd "C-x C-b") 'ibuffer)
 
 
@@ -215,7 +208,7 @@
 (add-hook
  'org-mode-hook
  (lambda ()
-   ;; Rebind header navigation keys.
+   ;; Re-bind header navigation keys.
    (local-set-key (kbd "C-,") 'outline-next-visible-heading)
    (local-set-key (kbd "C-.") 'outline-previous-visible-heading)))
 
@@ -243,3 +236,19 @@
    (side            . bottom)
    (reusable-frames . visible)
    (window-height   . 0.1)))
+
+
+
+;; Flyspell
+;;
+;; Enable flyspell-mode and bind ispell-buffer in text modes.
+(dolist (hook '(text-mode-hook markdown-mode-hook))
+  (add-hook hook (lambda() (flyspell-mode)
+                    (local-set-key (kbd "C-c i") 'ispell-buffer))))
+
+;; Enable flyspell-prog-mode and bind ispell-comments-and-strings in programming
+;; modes.
+(dolist (hook '(c-mode-common-hook sh-mode-hook emacs-lisp-mode-hook
+                                   cmake-mode-hook python-mode-hook))
+  (add-hook hook (lambda() (flyspell-prog-mode)
+                   (local-set-key (kbd "C-c i") 'ispell-comments-and-strings))))
