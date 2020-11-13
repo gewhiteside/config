@@ -79,10 +79,13 @@ prompt() {
     local project_root="${PROJECT#*:}"
 
     # If the project root is set in PROJECT and pwd is a subdirectory, use the
-    # project root as the base of pwd.
+    # first subdirectory of the project root as the base of pwd.
     if [ "$project_root" ] && [[ "$PWD" == "$project_root"?* ]]; then
-        base="${project_root##*/}"
-        raw_suffix="${PWD#$project_root}"
+        # Trim the project root from the beggining of pwd.
+        base="${PWD#$project_root/}"
+        # Trim the children of the first subdirectory.
+        base="${base%%/*}"
+        raw_suffix="${PWD#$project_root/$base}"
     elif [[ "$PWD" == "$HOME"* ]]; then
         # Use tilde as the base if pwd is HOME or a sbdirectory.
         base='~'
