@@ -21,3 +21,19 @@ shopt -s no_empty_cmd_completion
 
 # Add an alias for setting raw mouse input on OS X.
 alias raw-mouse="defaults write .GlobalPreferences com.apple.mouse.scaling -1"
+
+# If PROJECT is empty, just use the builtin cd. If PROJECT is not empty, with no
+# arguments, cd to the project root. Otherwise, cd without following symlinks
+# and without standard output.
+cd() {
+    if [ -z "$PROJECT" ]; then
+        command cd "$@"
+        return
+    fi
+
+    if [ "$#" -eq 0 ]; then
+        command cd "${PROJECT#*:}"
+    else
+        command cd -P "$@" >/dev/null
+    fi
+}
