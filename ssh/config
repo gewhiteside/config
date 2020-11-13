@@ -1,5 +1,5 @@
-# Only MacOS has the following option.
-IgnoreUnknown UseKeychain
+# Don't error if these options are unknown.
+IgnoreUnknown AddKeysToAgent,UseKeychain
 
 AddKeysToAgent yes
 UseKeychain yes
