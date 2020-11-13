@@ -13,7 +13,6 @@ PROMPT_DIRTRIM=3
 # base of the working directory instead of ~ or /.
 #
 # e.g., PROJECT=config:~/config -> (config) config/emacs.d/elisp $
-PROJECT=
 
 # Set what git information to show. See ~/.git-prompt.sh for more information.
 GIT_PS1_SHOWDIRTYSTATE=1
