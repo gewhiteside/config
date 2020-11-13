@@ -248,7 +248,7 @@
 
 ;; Enable flyspell-prog-mode and bind ispell-comments-and-strings in programming
 ;; modes.
-(dolist (hook '(c-mode-common-hook sh-mode-hook emacs-lisp-mode-hook
-                                   cmake-mode-hook python-mode-hook))
+(dolist (hook '(c-mode-common-hook emacs-lisp-mode-hook cmake-mode-hook
+                                   python-mode-hook))
   (add-hook hook (lambda() (flyspell-prog-mode)
                    (local-set-key (kbd "C-c i") 'ispell-comments-and-strings))))
