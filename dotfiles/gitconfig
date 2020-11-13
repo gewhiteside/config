@@ -16,6 +16,7 @@
         br = branch
         st = status
         show-oneline = !git --no-pager show --no-patch --no-decorate --oneline
+	cm = commit
 [pretty]
         ref = %h (\"%s\", %ad)
 [log]
