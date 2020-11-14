@@ -15,11 +15,16 @@ fi
 PATH=$HOME/bin:$PATH
 
 # Set my default editor to emacs. Don't set desktop-save-mode, don't use a
-# window system, and don't confirm killing these sessions.
+# window system, and don't confirm killing these sessions. If emacs isn't
+# installed, use vim.
 #
 # NB: Using a \ before a new line causes issues, so just use += instead.
-EDITOR='emacs --no-desktop --no-window-system '
-EDITOR+='--eval "(setq confirm-kill-emacs nil)"'
+if type emacs &>/dev/null; then
+    EDITOR='emacs --no-desktop --no-window-system '
+    EDITOR+='--eval "(setq confirm-kill-emacs nil)"'
+else
+    EDITOR=vim
+fi
 
 # Set default less options--turn off the terminal bell, display raw control
 # characters for ANSI color escape sequences, and ignore case in search.
