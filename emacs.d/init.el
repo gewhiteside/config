@@ -57,7 +57,11 @@
  ;; Sentences are terminated with a single space.
  sentence-end-double-space nil
  ;; Open the *scratch* buffer in fundamental-mode.
- initial-major-mode 'fundamental-mode)
+ initial-major-mode 'fundamental-mode
+ ;; Disable the transparent toolbar on macOS.
+ default-frame-alist '((ns-transparent-titlebar . nil))
+ ;; Default to the home directory.
+ default-directory "~/")
 
 (setq-default
  ;; Indent with spaces.
