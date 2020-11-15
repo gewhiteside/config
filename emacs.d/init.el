@@ -18,7 +18,7 @@
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
 (package-initialize)
 (setq package-selected-packages
-      '(ggtags projectile flycheck clang-format cmake-mode markdown-mode))
+      '(ggtags projectile flycheck clang-format cmake-mode markdown-mode magit))
 (package-install-selected-packages)
 
 
