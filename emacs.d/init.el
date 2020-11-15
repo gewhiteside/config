@@ -118,7 +118,8 @@
 ;; SMerge
 ;;
 ;; Change the command prefix to something easier.
-(setq smerge-command-prefix (kbd "C-c s"))
+(add-hook 'smerge-mode-hook
+          (lambda () (local-set-key (kbd "C-c s") smerge-basic-map)))
 
 
 
