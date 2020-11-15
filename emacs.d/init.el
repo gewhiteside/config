@@ -26,6 +26,7 @@
 (require 'cc-vars)
 (require 'clang-format)
 (require 'desktop)
+(require 'git-commit)
 (require 'ibuf-ext)
 (require 'org)
 (require 'projectile)
@@ -102,14 +103,15 @@
 
 
 ;; Git
-(add-to-list 'auto-mode-alist '("COMMIT_EDITMSG\\'" . text-mode))
+(setq
+ ;; Set the max length of the summary line.
+ git-commit-summary-max-length 50
+ ;; Check for both a non-empty second line and a long summary line.
+ git-commit-style-convention-checks
+ '(non-empty-second-line overlong-summary-line))
 
-;; Shorten the fill column of Git commit messages and disable whitespace-mode
-;; because the default template includes tabs.
-(add-hook 'text-mode-hook
-          (lambda () (if (string-equal "COMMIT_EDITMSG" (buffer-name))
-                         (setq fill-column 70)
-                       (whitespace-mode))))
+;; Set the fill column in git-commit-mode to 72 characters.
+(add-hook 'git-commit-mode-hook (lambda () (setq fill-column 72)))
 
 
 
