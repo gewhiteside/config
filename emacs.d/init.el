@@ -168,8 +168,9 @@
  '((mark modified read-only " "
          (name 40 40 :left :elide) " " filename-and-process)))
 
-;; Don't show special buffers.
-(add-to-list 'ibuffer-never-show-predicates "^\\*")
+;; Don't show special buffers and non-status magit buffers.
+(dolist (predicate '("^\\*" "^magit-"))
+  (add-to-list 'ibuffer-never-show-predicates predicate))
 
 ;; Use IBuffer as buffer list.
 (global-set-key (kbd "C-x C-b") 'ibuffer)
