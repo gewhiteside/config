@@ -28,6 +28,7 @@
 (require 'desktop)
 (require 'ibuf-ext)
 (require 'org)
+(require 'projectile)
 (require 'sh-script)
 (require 'smerge-mode)
 (require 'whitespace)
@@ -256,3 +257,11 @@
                                    python-mode-hook))
   (add-hook hook (lambda() (flyspell-prog-mode)
                    (local-set-key (kbd "C-c i") 'ispell-comments-and-strings))))
+
+
+
+;; Projectile
+(projectile-mode)
+
+;; Set the projectile prefix key.
+(define-key projectile-mode-map (kbd "C-c a") 'projectile-command-map)
