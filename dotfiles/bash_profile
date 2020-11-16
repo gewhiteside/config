@@ -30,13 +30,16 @@ fi
 # characters for ANSI color escape sequences, and ignore case in search.
 LESS='RQi'
 
-# If diff-highlight can't be found or this terminal is dumb, set the Git pager
-# to cat.
-if ! type diff-highlight &>/dev/null || [ "$TERM" = "dumb" ]; then
-    export GIT_PAGER='cat'
+# If the current terminal is dumb, set the pager to cat. If the terminal isn't
+# dumb and diff-highlight can't be found, set GIT_PAGER to the value of
+# core.pager so that the pager.<cmd> settings are ignore.
+if [ "$TERM" = "dumb" ]; then
+    GIT_PAGER='cat'
+elif ! type diff-highlight &>/dev/null; then
+    GIT_PAGER="$(git config --global core.pager)"
 fi
 
-export PATH EDITOR LESS
+export PATH EDITOR LESS GIT_PAGER
 
 # Turn off the bash deprecation warning on Catalina.
 export BASH_SILENCE_DEPRECATION_WARNING=1
