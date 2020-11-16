@@ -93,6 +93,13 @@
 (global-set-key (kbd "M-i") 'other-window)
 (global-set-key (kbd "M-I") (lambda () (interactive) (other-window -1)))
 
+;; A list of text modes for adding common hooks.
+(defvar text-modes '(text-mode-hook markdown-mode-hook))
+
+;; A list of programming modes for adding common hooks.
+(defvar prog-modes '(c-mode-common-hook emacs-lisp-mode-hook cmake-mode-hook
+                                   python-mode-hook))
+
 
 
 ;; Fill column indicator
@@ -251,18 +258,19 @@
 
 
 
-;; Flyspell
+;; Flyspell and auto fill
 ;;
-;; Enable flyspell-mode and bind ispell-buffer in text modes.
-(dolist (hook '(text-mode-hook markdown-mode-hook))
-  (add-hook hook (lambda() (flyspell-mode)
-                    (local-set-key (kbd "C-c i") 'ispell-buffer))))
+;; Enable flyspell-mode and auto-fill-mode and bind ispell-buffer in text modes.
+(dolist (hook text-modes)
+  (add-hook hook (lambda() (flyspell-mode) (auto-fill-mode)
+                   (local-set-key (kbd "C-c i") 'ispell-buffer))))
 
-;; Enable flyspell-prog-mode and bind ispell-comments-and-strings in programming
-;; modes.
-(dolist (hook '(c-mode-common-hook emacs-lisp-mode-hook cmake-mode-hook
-                                   python-mode-hook))
-  (add-hook hook (lambda() (flyspell-prog-mode)
+;; Enable flyspell-prog-mode auto-fill-mode and bind ispell-comments-and-strings
+;; in programming modes.
+(dolist (hook prog-modes)
+  (add-hook hook (lambda() (flyspell-prog-mode) (auto-fill-mode)
+                   ;; Only auto-fill inside comments.
+                   (setq comment-auto-fill-only-comments t)
                    (local-set-key (kbd "C-c i") 'ispell-comments-and-strings))))
 
 
