@@ -164,12 +164,12 @@
  ibuffer-expert t
  ;; Hide empty filter groups.
  ibuffer-show-empty-filter-groups nil
- ;; Set default sorting to alphabetic.
- ibuffer-default-sorting-mode 'alphabetic
+ ;; Set default sorting to major mode.
+ ibuffer-default-sorting-mode 'major-mode
  ;; Set custom formats.
  ibuffer-formats
- '((mark modified read-only " "
-         (name 40 40 :left :elide) " " filename-and-process)))
+ '((mark modified read-only " " (name 40 40 :left :elide) " "
+         (mode 16 16 :left :elide) " " filename-and-process)))
 
 ;; Don't show special buffers and non-status magit buffers.
 (dolist (predicate '("^\\*" "^magit-"))
