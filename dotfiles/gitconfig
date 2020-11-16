@@ -40,6 +40,6 @@
         show = diff-highlight | less -X
         diff = diff-highlight | less -X
 [pull]
-	ff = only
+        rebase = true
 [merge]
 	ff = only
