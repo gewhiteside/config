@@ -63,7 +63,9 @@
  ;; Disable the transparent toolbar on macOS.
  default-frame-alist '((ns-transparent-titlebar . nil))
  ;; Default to the home directory.
- default-directory "~/")
+ default-directory "~/"
+ ;; Select the help window when it is opened.
+ help-window-select t)
 
 (setq-default
  ;; Indent with spaces.
