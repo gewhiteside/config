@@ -104,7 +104,7 @@
 
 ;; A list of programming modes for adding common hooks.
 (defvar prog-modes '(c-mode-common-hook emacs-lisp-mode-hook cmake-mode-hook
-                                   python-mode-hook))
+                                   python-mode-hook sh-mode-hook))
 
 
 
@@ -286,6 +286,9 @@
                    ;; Only auto-fill inside comments.
                    (setq comment-auto-fill-only-comments t)
                    (local-set-key (kbd "C-c i") 'ispell-comments-and-strings))))
+
+;; Disable flyspell in sh-mode. There are too many non-English strings.
+(add-hook 'sh-mode-hook (lambda () (flyspell-mode 0)))
 
 
 
