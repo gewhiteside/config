@@ -73,7 +73,8 @@
  ;; Set fill column to 80.
  fill-column 80)
 
-;; Add /usr/local/bin to the executable path.
+;; Add /usr/local/bin to the executable path. This is needed for programs
+;; installed by Homebrew on mac OS.
 (add-to-list 'exec-path "/usr/local/bin")
 
 ;; Disable menu, tool and scroll bars.
