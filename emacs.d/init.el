@@ -34,6 +34,7 @@
 (require 'smerge-mode)
 (require 'tramp)
 (require 'whitespace)
+(require 'magit-diff)
 
 
 
@@ -127,6 +128,14 @@
 
 ;; Set the fill column in git-commit-mode to 72 characters.
 (add-hook 'git-commit-mode-hook (lambda () (setq fill-column 72)))
+
+
+
+;; Magit
+;;
+;; When visiting a file from a hunk, open it in another window.
+(define-key magit-hunk-section-map (kbd "RET")
+  'magit-diff-visit-file-other-window)
 
 
 
