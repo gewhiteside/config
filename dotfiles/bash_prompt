@@ -22,6 +22,12 @@ GIT_PS1_SHOWCOLORHINTS=1
 
 
 prompt() {
+    # If this is a TRAMP session, then use an exceedingly simple prompt.
+    if [[ "$INSIDE_EMACS" == *"tramp"* ]]; then
+        PS1='\$'
+        return
+    fi
+
     local retval="$?"
 
     local -A colors
