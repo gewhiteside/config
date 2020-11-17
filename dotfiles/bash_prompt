@@ -38,13 +38,15 @@ prompt() {
     # Default color.
     colors[default]="0" # Default
 
-    # For each setting, add the proper escape keys.
+    # Add the escape sequence for colors. If this terminal is dumb, clear the
+    # settings instead.
     for setting in "${!colors[@]}"; do
-        colors["$setting"]="\[\e[${colors[$setting]}m\]"
+        if [ "$TERM" = "dumb" ]; then
+            colors["$setting"]=
+        else
+            colors["$setting"]="\[\e[${colors[$setting]}m\]"
+        fi
     done
-
-    # If this terminal is dumb, don't colorize the prompt.
-    [ "$TERM" = "dumb" ] && unset colors
 
     # Project
     local project_name="${PROJECT%:*}"
