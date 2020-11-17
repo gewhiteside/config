@@ -32,6 +32,7 @@
 (require 'projectile)
 (require 'sh-script)
 (require 'smerge-mode)
+(require 'tramp)
 (require 'whitespace)
 
 
@@ -72,6 +73,9 @@
  indent-tabs-mode nil
  ;; Set fill column to 80.
  fill-column 80)
+
+;; Use the path assigned to the remote user to search for remote programs.
+(add-to-list 'tramp-remote-path 'tramp-own-remote-path)
 
 ;; Add /usr/local/bin to the executable path. This is needed for programs
 ;; installed by Homebrew on mac OS.
