@@ -43,6 +43,9 @@ prompt() {
         colors["$setting"]="\[\e[${colors[$setting]}m\]"
     done
 
+    # If this terminal is dumb, don't colorize the prompt.
+    [ "$TERM" = "dumb" ] && unset colors
+
     # Project
     local project_name="${PROJECT%:*}"
     local project=
@@ -130,6 +133,9 @@ prompt() {
     # Set the terminal title.
     local title="\u@\h"
     title="\[\e]0;$title\a\]"
+
+    # If this terminal is dumb, don't set the title.
+    [ "$TERM" = "dumb" ] && unset title
 
     # If the last exit status is non-zero, print the exit code and make the
     # final symbol red.
