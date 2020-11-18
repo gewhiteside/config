@@ -1,4 +1,6 @@
-;; -*- flycheck-disabled-checkers: (emacs-lisp-checkdoc) -*-
+;;; init.el --- My Emacs configuration
+;;; Commentary:
+;;; Code:
 
 (add-to-list 'load-path "~/.emacs.d/elisp/")
 
@@ -297,3 +299,6 @@
 
 ;; Set the projectile prefix key.
 (define-key projectile-mode-map (kbd "C-c a") 'projectile-command-map)
+
+(provide 'init)
+;;; init.el ends here
