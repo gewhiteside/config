@@ -15,7 +15,9 @@
 
 
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; MELPA
+
 (require 'package)
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
 (package-initialize)
@@ -25,6 +27,9 @@
 
 
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Load features
+
 (require 'cc-vars)
 (require 'clang-format)
 (require 'desktop)
@@ -40,7 +45,9 @@
 
 
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; General settings
+
 (setq
  ;; Don't show startup screen.
  inhibit-startup-screen t
@@ -107,7 +114,9 @@
 
 
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Fill column indicator
+
 (global-display-fill-column-indicator-mode)
 
 ;; Disable the fill column indicator in certain modes.
@@ -117,7 +126,9 @@
 
 
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Git
+
 (setq
  ;; Set the max length of the summary line.
  git-commit-summary-max-length 50
@@ -138,6 +149,7 @@
 
 
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; SMerge
 
 ;; Change the command prefix to something easier.
@@ -146,7 +158,9 @@
 
 
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Desktop save
+
 (desktop-save-mode)
 
 ;; Save all files (including remote files).
@@ -154,7 +168,9 @@
 
 
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Whitespace
+
 (setq
  ;; Highlight tabs.
  whitespace-style '(face tabs)
@@ -171,7 +187,9 @@
 
 
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; IBuffer (https://www.emacswiki.org/emacs/IbufferMode)
+
 (add-hook
  'ibuffer-mode-hook
  (lambda ()
@@ -201,7 +219,9 @@
 
 
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; C/C++
+
 (add-hook
  'c-mode-common-hook
  (lambda ()
@@ -221,7 +241,9 @@
 
 
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Bash
+
 (add-hook
  'sh-mode-hook
  (lambda ()
@@ -236,7 +258,9 @@
 
 
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Org
+
 (add-hook
  'org-mode-hook
  (lambda ()
@@ -254,6 +278,8 @@
 
 
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
 ;; Flycheck
 (global-flycheck-mode)
 
@@ -270,6 +296,7 @@
 
 
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Flyspell and auto fill
 
 ;; Enable flyspell-mode and auto-fill-mode and bind ispell-buffer in text modes.
@@ -290,7 +317,9 @@
 
 
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Projectile
+
 (projectile-mode)
 
 ;; Set the projectile prefix key.
@@ -298,6 +327,7 @@
 
 
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; TRAMP
 
 ;; Allow the method to be omitted.
