@@ -142,7 +142,7 @@
 
 
 ;; SMerge
-;;
+
 ;; Change the command prefix to something easier.
 (add-hook 'smerge-mode-hook
           (lambda () (local-set-key (kbd "C-c s") smerge-basic-map)))
@@ -261,9 +261,8 @@
 (global-flycheck-mode)
 
 ;; Display the error list on the bottom of the frame occupying a tenth of the
-;; height of the frame.
-;;
-;; https://www.flycheck.org/en/latest/user/error-list.html#tune-error-list-display
+;; height of the frame
+;; (https://www.flycheck.org/en/latest/user/error-list.html#tune-error-list-display).
 (add-to-list
  'display-buffer-alist
  `(,(rx bos "*Flycheck errors*" eos)
@@ -275,7 +274,7 @@
 
 
 ;; Flyspell and auto fill
-;;
+
 ;; Enable flyspell-mode and auto-fill-mode and bind ispell-buffer in text modes.
 (dolist (hook text-modes)
   (add-hook hook (lambda() (flyspell-mode) (auto-fill-mode)
