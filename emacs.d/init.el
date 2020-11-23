@@ -1,5 +1,10 @@
 ;;; init.el --- My Emacs configuration
 ;;; Commentary:
+
+;; A lot of this configuration is inspired by Steve Purcell's Emacs
+;; configuration (https://github.com/purcell/emacs.d) and Spacemacs
+;; (https://develop.spacemacs.org/).
+
 ;;; Code:
 
 (add-to-list 'load-path "~/.emacs.d/elisp/")
