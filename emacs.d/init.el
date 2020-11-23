@@ -51,6 +51,7 @@
 (require 'cc-vars)
 (require 'clang-format)
 (require 'desktop)
+(require 'exec-path-from-shell)
 (require 'git-commit)
 (require 'ibuf-ext)
 (require 'llvm-mode)
@@ -125,10 +126,6 @@
  indent-tabs-mode nil
  ;; Set fill column to 80.
  fill-column 80)
-
-;; Add /usr/local/bin to the executable path. This is needed for programs
-;; installed by Homebrew on mac OS.
-(add-to-list 'exec-path "/usr/local/bin")
 
 ;; Disable menu, tool and scroll bars.
 (menu-bar-mode -1)
@@ -382,6 +379,21 @@
 
 ;; Use the path assigned to the remote user to search for remote programs.
 (add-to-list 'tramp-remote-path 'tramp-own-remote-path)
+
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Environment variables
+
+;; In addition to PATH and MANPATH, set GIT_PAGER from the shell.
+(add-to-list 'exec-path-from-shell-variables "GIT_PAGER")
+
+;; My environment variables are set in bash_profile, so a non-interactive, login
+;; shell is sufficient.
+(setq exec-path-from-shell-arguments '("--login"))
+
+;; Only set variables from the shell if Emacs is running on a window system.
+(when window-system (exec-path-from-shell-initialize))
 
 
 (provide 'init)
