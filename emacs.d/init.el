@@ -144,6 +144,8 @@
 (global-set-key (kbd "M-i") 'other-window)
 (global-set-key (kbd "M-I") (lambda () (interactive) (other-window -1)))
 
+(global-set-key (kbd "C-c C-s") 'sort-lines)
+
 ;; A list of text modes for adding common hooks.
 (defvar text-modes '(text-mode-hook markdown-mode-hook))
 
