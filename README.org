@@ -9,16 +9,29 @@ of any given tool which supports this configuration may be lower.
 - Git 2.21.1
 
 * Improvements
-** Emacs
-*** TODO Use text-mode and prog-mode instead of manual lists of modes
-*** TODO Only enable whitespace and fill column indicator in prog/text modes
-*** TODO Prefer define-key over local-set-key
-*** TODO diff-highlight
+** Emacs [0/8]
+*** General
+**** TODO Use text-mode and prog-mode instead of manual lists of modes
+**** TODO Only enable whitespace and fill column indicator in prog/text modes
+**** TODO Prefer define-key over local-set-key
+*** Spacemacs
+**** TODO C/C++
+https://develop.spacemacs.org/layers/+lang/c-c++/README.html
+
+**** TODO Semantic
+https://develop.spacemacs.org/layers/LAYERS.html#semantic
+
+**** TODO diff-highlight
 https://develop.spacemacs.org/layers/+source-control/version-control/README.html
 
-*** TODO Semantic
-https://develop.spacemacs.org/layers/LAYERS.html#semantic
-** ssh
+**** TODO CMake
+https://develop.spacemacs.org/layers/+tools/cmake/README.html
+
+**** TODO LSP
+https://develop.spacemacs.org/layers/+tools/lsp/README.html
+
+
+** ssh [0/2]
 *** TODO Agent forwarding
 *** TODO Remote Emacs killing
 Make sure that killing text in Emacs running in tmux on a remote machine copies
