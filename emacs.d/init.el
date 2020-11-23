@@ -15,7 +15,7 @@
 (load "~/reservoir/reservoir.el" 'noerror)
 
 ;; Store customization info in a separate file so this file isn't polluted.
-(setq custom-file "~/.emacs.d/elisp/custom.el")
+(setq custom-file (expand-file-name "custom.el" user-emacs-directory))
 (load custom-file 'noerror)
 
 
