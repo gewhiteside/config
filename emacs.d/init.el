@@ -30,10 +30,17 @@
 
 (require 'package)
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
+;; Because package-initialize is called in this file, don't call it on startup.
+(setq package-enable-at-startup nil)
 (package-initialize)
+
 (setq package-selected-packages
       '(ggtags projectile flycheck clang-format cmake-mode markdown-mode magit))
-(package-install-selected-packages)
+
+(dolist (package package-selected-packages)
+  (unless (package-installed-p package)
+    (package-refresh-contents)
+    (package-install-selected-packages)))
 
 
 
