@@ -35,7 +35,8 @@
 (package-initialize)
 
 (setq package-selected-packages
-      '(ggtags projectile flycheck clang-format cmake-mode markdown-mode magit))
+      '(projectile flycheck clang-format cmake-mode markdown-mode magit
+                   exec-path-from-shell xclip ibuffer-vc))
 
 (dolist (package package-selected-packages)
   (unless (package-installed-p package)
