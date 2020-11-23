@@ -365,6 +365,9 @@
 
 (projectile-mode)
 
+(setq projectile-mode-line-function
+      (lambda () (format " Proj[%s]" (projectile-project-name))))
+
 ;; Set the projectile prefix key.
 (define-key projectile-mode-map (kbd "C-c a") 'projectile-command-map)
 
