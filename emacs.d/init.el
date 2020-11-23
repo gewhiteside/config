@@ -94,10 +94,13 @@
  sentence-end-double-space nil
  ;; Open the *scratch* buffer in fundamental-mode.
  initial-major-mode 'fundamental-mode
+ initial-scratch-message "Welcome, Mr. Whiteside.\n\n"
  ;; Default to the home directory.
  default-directory "~/"
  ;; Select the help window when it is opened.
- help-window-select t)
+ help-window-select t
+ uniquify-buffer-name-style 'reverse
+ make-backup-files nil)
 
 ;; Remove mode-line-mule-info and VC information from the mode line.
 (setq-default
