@@ -305,12 +305,8 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Org
 
-(add-hook
- 'org-mode-hook
- (lambda ()
-   ;; Re-bind header navigation keys.
-   (local-set-key (kbd "C-,") 'outline-next-visible-heading)
-   (local-set-key (kbd "C-.") 'outline-previous-visible-heading)))
+(define-key org-mode-map (kbd "C-,") 'outline-next-visible-heading)
+(define-key org-mode-map (kbd "C-.") 'outline-previous-visible-heading)
 
 (setq
  ;; Open links in this window.
@@ -358,6 +354,9 @@
 
 ;; Disable flyspell in sh-mode. There are too many non-English strings.
 (add-hook 'sh-mode-hook (lambda () (flyspell-mode 0)))
+
+(define-key flyspell-mode-map (kbd "C-,") nil)
+(define-key flyspell-mode-map (kbd "C-.") nil)
 
 
 
