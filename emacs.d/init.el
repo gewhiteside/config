@@ -7,8 +7,11 @@
 
 ;;; Code:
 
-(add-to-list 'load-path "~/.emacs.d/elisp/")
 
+;; Add elisp and its subdirectories to the load path.
+(let ((default-directory (expand-file-name "elisp" user-emacs-directory)))
+  (normal-top-level-add-to-load-path '("."))
+  (normal-top-level-add-subdirs-to-load-path))
 
 ;; Store customization info in a separate file so this file isn't polluted.
 (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
