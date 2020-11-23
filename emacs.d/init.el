@@ -7,6 +7,8 @@
 
 ;;; Code:
 
+;; (setq debug-on-error t)
+
 (let ((minimum-version "27.1"))
   (when (version< emacs-version minimum-version)
     (error "This Emacs is outdated--this configuration requires v%s or higher"
