@@ -94,8 +94,6 @@
  sentence-end-double-space nil
  ;; Open the *scratch* buffer in fundamental-mode.
  initial-major-mode 'fundamental-mode
- ;; Disable the transparent toolbar on macOS.
- default-frame-alist '((ns-transparent-titlebar . nil))
  ;; Default to the home directory.
  default-directory "~/"
  ;; Select the help window when it is opened.
@@ -163,6 +161,9 @@
 (dolist (hook '(help-mode-hook completion-list-mode-hook shell-mode-hook
                                dired-mode-hook))
   (add-hook hook (lambda () (display-fill-column-indicator-mode 0))))
+;; Disable the transparent toolbar on macOS.
+(push '(ns-transparent-titlebar . nil)
+ (alist-get 'ns window-system-default-frame-alist))
 
 
 
