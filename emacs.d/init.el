@@ -9,10 +9,6 @@
 
 (add-to-list 'load-path "~/.emacs.d/elisp/")
 
-(load "llvm/emacs.el")
-(load "llvm/llvm-mode.el")
-(load "llvm/tablegen-mode.el")
-(load "~/reservoir/reservoir.el" 'noerror)
 
 ;; Store customization info in a separate file so this file isn't polluted.
 (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
@@ -40,13 +36,19 @@
 (require 'desktop)
 (require 'git-commit)
 (require 'ibuf-ext)
+(require 'llvm-mode)
 (require 'org)
 (require 'projectile)
+(require 'reservoir "~/reservoir/reservoir.el" 'noerror)
 (require 'sh-script)
 (require 'smerge-mode)
+(require 'tablegen-mode)
 (require 'tramp)
 (require 'whitespace)
 (require 'magit-diff)
+
+;; The LLVM style isn't provided, so just load the file.
+(load "llvm/emacs.el")
 
 
 
