@@ -410,5 +410,18 @@ Open this file with function `view-mode' and kill the buffer with q."
             (add-hook 'after-save-hook 'check-parens)))
 
 
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Highlight custom keywords
+
+;; Highlight NB and TODO in programming modes.
+(add-hook
+ 'prog-mode-hook
+ (lambda ()
+   (font-lock-add-keywords
+    nil `(("\\(\\(?:TODO\\|NB\\)\\(?:(\\w*)\\)?:?\\)" 1
+           'font-lock-constant-face prepend)))))
+
+
 (provide 'init)
 ;;; init.el ends here
