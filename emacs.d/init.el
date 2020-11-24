@@ -62,6 +62,7 @@
 (require 'llvm-mode)
 (require 'magit-diff)
 (require 'org)
+(require 'paren)
 (require 'projectile)
 (require 'reservoir "~/reservoir/reservoir.el" 'noerror)
 (require 'sh-script)
