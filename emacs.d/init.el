@@ -55,6 +55,7 @@
 (require 'git-commit)
 (require 'ibuf-ext)
 (require 'llvm-mode)
+(require 'magit-diff)
 (require 'org)
 (require 'projectile)
 (require 'reservoir "~/reservoir/reservoir.el" 'noerror)
@@ -63,7 +64,6 @@
 (require 'tablegen-mode)
 (require 'tramp)
 (require 'whitespace)
-(require 'magit-diff)
 
 ;; The LLVM style isn't provided, so just load the file.
 (load "llvm/emacs.el")
