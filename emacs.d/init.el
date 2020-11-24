@@ -52,6 +52,8 @@
 (require 'clang-format)
 (require 'desktop)
 (require 'exec-path-from-shell)
+(require 'flycheck)
+(require 'flyspell)
 (require 'git-commit)
 (require 'hideshow)
 (require 'ibuf-ext)
@@ -64,6 +66,7 @@
 (require 'smerge-mode)
 (require 'tablegen-mode)
 (require 'tramp)
+(require 'view)
 (require 'whitespace)
 
 ;; The LLVM style isn't provided, so just load the file.
