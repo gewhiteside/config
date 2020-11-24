@@ -264,6 +264,9 @@
 
 (add-hook 'prog-mode-hook 'whitespace-mode)
 
+;; Don't show whitespace when view-mode is enabled.
+(add-hook 'view-mode-hook (lambda () (whitespace-mode 0)))
+
 ;; Highlight tabs.
 (setq whitespace-style '(face tabs))
 
