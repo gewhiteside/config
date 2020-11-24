@@ -257,6 +257,25 @@
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; isearch/occur
+
+;; https://www.emacswiki.org/emacs/SearchAtPoint
+(global-set-key (kbd "C-S-s") 'isearch-forward-symbol-at-point)
+
+;; DEL during isearch should edit the search string, not jump back to the
+;; previous result.
+(define-key isearch-mode-map [remap isearch-delete-char] 'isearch-del-char)
+
+(define-key isearch-mode-map (kbd "C-c o") 'isearch-occur)
+
+;; Switch to the Occur buffer if any match is found.
+(add-hook 'occur-hook
+          (lambda () (unless (eq (get-buffer "*Occur*") (window-buffer))
+                       (switch-to-buffer-other-window "*Occur*"))))
+
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; C/C++
 
 (add-hook
