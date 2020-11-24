@@ -281,12 +281,8 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Fill column indicator
 
-(global-display-fill-column-indicator-mode)
-
-;; Disable the fill column indicator in certain modes.
-(dolist (hook '(help-mode-hook completion-list-mode-hook shell-mode-hook
-                               dired-mode-hook))
-  (add-hook hook (lambda () (display-fill-column-indicator-mode 0))))
+(dolist (hook '(prog-mode-hook text-mode-hook))
+  (add-hook hook 'display-fill-column-indicator-mode))
 
 
 
