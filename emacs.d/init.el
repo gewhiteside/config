@@ -161,6 +161,7 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Frames
+
 (add-to-list 'default-frame-alist '(width  . 230))
 (add-to-list 'default-frame-alist '(height . 85))
 
@@ -311,6 +312,7 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Flycheck
+
 (global-flycheck-mode)
 
 (setq flycheck-emacs-lisp-load-path 'inherit)
