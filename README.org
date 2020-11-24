@@ -10,13 +10,17 @@ of any given tool which supports this configuration may be lower.
 
 * Improvements
 ** Emacs
-*** TODO General
+*** DONE General
 - [X] Use text-mode and prog-mode instead of manual lists of modes
 - [X] Only enable whitespace and fill column indicator in prog/text modes
-- [ ] Prefer define-key over local-set-key
-- [ ] Add word delimiters to TODO highlighting
-- [ ] Separate flyspell and auto fill
-- [ ] Combine Git and SMerge
+- [X] Add word delimiters to TODO highlighting
+- [X] Separate flyspell and auto fill
+- [X] Combine Git and SMerge
+- [X] Prefer define-key over local-set-key
+
+
+*** TODO Purcell
+init-ivy
 
 
 *** TODO Spacemacs
@@ -28,12 +32,8 @@ of any given tool which supports this configuration may be lower.
 - [ ] LSP https://develop.spacemacs.org/layers/+tools/lsp/README.html
 
 
-*** TODO Purcell
-init-ivy
+** TODO ssh
+- [ ] Agent forwarding
+- [ ] Make sure that killing text in Emacs running in tmux on a remote machine
+  copies the text to the client system's clipboard.
 
-
-** ssh
-*** TODO Agent forwarding
-*** TODO Remote Emacs killing
-Make sure that killing text in Emacs running in tmux on a remote machine copies
-the text to the client system's clipboard.
