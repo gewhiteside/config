@@ -395,5 +395,20 @@
 (when window-system (exec-path-from-shell-initialize))
 
 
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Emacs Lisp
+
+(defun whiteside/set-zipped-el-read-only ()
+  "If this elisp file ends with .el.gz, then open it for viewing, not editing.
+Open this file with function `view-mode' and kill the buffer with q."
+  (when (and buffer-file-name (string-match-p "\\.el\\.gz\\'" buffer-file-name))
+    (view-mode) (setq view-exit-action 'kill-buffer)))
+
+(add-hook 'emacs-lisp-mode-hook
+          (lambda () (whiteside/set-zipped-el-read-only)
+            (add-hook 'after-save-hook 'check-parens)))
+
+
 (provide 'init)
 ;;; init.el ends here
