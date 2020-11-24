@@ -36,7 +36,7 @@
 
 (setq package-selected-packages
       '(projectile flycheck clang-format cmake-mode markdown-mode magit
-                   exec-path-from-shell xclip ibuffer-vc ivy counsel))
+                   exec-path-from-shell xclip ibuffer-vc ivy counsel company))
 
 (dolist (package package-selected-packages)
   (unless (package-installed-p package)
@@ -51,6 +51,7 @@
 (require 'cc-mode)
 (require 'cc-vars)
 (require 'clang-format)
+(require 'company)
 (require 'desktop)
 (require 'exec-path-from-shell)
 (require 'flycheck)
@@ -304,6 +305,25 @@
 
 (ivy-mode)
 (counsel-mode)
+
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Company
+
+(global-company-mode)
+
+;; Use tab to activate company completion when the current line has been
+;; indented.
+(setq tab-always-indent 'complete)
+(define-key company-mode-map [remap completion-at-point] 'company-complete)
+
+;; Use company instead of dabbrev-expand.
+(define-key company-mode-map (kbd "M-/") 'company-complete)
+
+;; Use the same keys as ivy.
+(define-key company-active-map (kbd "C-n") 'company-select-next)
+(define-key company-active-map (kbd "C-p") 'company-select-previous)
 
 
 
