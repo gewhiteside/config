@@ -268,6 +268,13 @@
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Show parentheses
+
+(add-hook 'emacs-lisp-mode-hook 'show-paren-mode)
+
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Fill column indicator and auto fill
 
 (dolist (hook '(prog-mode-hook text-mode-hook))
