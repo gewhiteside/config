@@ -78,20 +78,15 @@
 ;; General settings
 
 (setq
- ;; Don't show startup screen.
  inhibit-startup-screen t
- ;; Turn on column number.
  column-number-mode t
- ;; Require final newline on save.
  require-final-newline t
  ;; Turn off bell ring.
  ring-bell-function 'ignore
  ;; Split the current window vertically if it is more than 160 columns.
  split-height-threshold nil
  split-width-threshold 160
- ;; Fit window to buffer horizontally as well as vertically.
  fit-window-to-buffer-horizontally t
- ;; Ask before quitting.
  confirm-kill-emacs 'y-or-n-p
  ;; Case-insensitive buffer and file names.
  read-buffer-completion-ignore-case t
@@ -101,7 +96,6 @@
  ;; Open the *scratch* buffer in fundamental-mode.
  initial-major-mode 'fundamental-mode
  initial-scratch-message "Welcome, Mr. Whiteside.\n\n"
- ;; Default to the home directory.
  default-directory "~/"
  ;; Select the help window when it is opened.
  help-window-select t
@@ -133,7 +127,7 @@
 
 ;; Disable menu, tool and scroll bars.
 (menu-bar-mode 0)
-;; Scroll and tool bar mode are void functions on some systems.
+;; scroll-bar-mode and tool-bar-mode can be void.
 (if (fboundp 'scroll-bar-mode) (scroll-bar-mode 0))
 (if (fboundp 'tool-bar-mode) (tool-bar-mode 0))
 
@@ -264,7 +258,7 @@
 
 (add-hook 'prog-mode-hook 'whitespace-mode)
 
-;; Highlight tabs
+;; Highlight tabs.
 (setq whitespace-style '(face tabs))
 
 ;; Change the tab highlight color.
