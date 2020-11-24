@@ -9,32 +9,30 @@ of any given tool which supports this configuration may be lower.
 - Git 2.21.1
 
 * Improvements
-** Emacs [0/11]
-*** General
-**** TODO Use text-mode and prog-mode instead of manual lists of modes
-**** TODO Only enable whitespace and fill column indicator in prog/text modes
-**** TODO Prefer define-key over local-set-key
-**** TODO Add word delimiters to TODO highlighting
-**** TODO Separate flyspell and auto fill
-**** TODO Combine Git and SMerge
-*** Spacemacs
-**** TODO C/C++
-https://develop.spacemacs.org/layers/+lang/c-c++/README.html
-
-**** TODO Semantic
-https://develop.spacemacs.org/layers/LAYERS.html#semantic
-
-**** TODO diff-highlight
-https://develop.spacemacs.org/layers/+source-control/version-control/README.html
-
-**** TODO CMake
-https://develop.spacemacs.org/layers/+tools/cmake/README.html
-
-**** TODO LSP
-https://develop.spacemacs.org/layers/+tools/lsp/README.html
+** Emacs
+*** TODO General
+- [X] Use text-mode and prog-mode instead of manual lists of modes
+- [X] Only enable whitespace and fill column indicator in prog/text modes
+- [ ] Prefer define-key over local-set-key
+- [ ] Add word delimiters to TODO highlighting
+- [ ] Separate flyspell and auto fill
+- [ ] Combine Git and SMerge
 
 
-** ssh [0/2]
+*** TODO Spacemacs
+- [ ] C/C++ https://develop.spacemacs.org/layers/+lang/c-c++/README.html
+- [ ] Semantic https://develop.spacemacs.org/layers/LAYERS.html#semantic
+- [ ] diff-highlight
+  https://develop.spacemacs.org/layers/+source-control/version-control/README.html
+- [ ] CMake https://develop.spacemacs.org/layers/+tools/cmake/README.html
+- [ ] LSP https://develop.spacemacs.org/layers/+tools/lsp/README.html
+
+
+*** TODO Purcell
+init-ivy
+
+
+** ssh
 *** TODO Agent forwarding
 *** TODO Remote Emacs killing
 Make sure that killing text in Emacs running in tmux on a remote machine copies
