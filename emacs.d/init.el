@@ -434,14 +434,15 @@ function `view-mode' and kill the buffer with q."
 (setq
  ;; Open links in this window.
  org-link-frame-setup '((file . find-file))
- ;; Add markdown to export backends.
- org-export-backends '(ascii html icalendar latex md odt)
  ;; Disable line truncation.
  org-startup-truncated nil
  ;; TODO statistics cover all entries in the subtree.
  org-hierarchical-todo-statistics nil
  ;; Don't show any separator lines in the outline.
  org-cycle-separator-lines 0)
+
+;; Add markdown to export backends.
+(add-to-list 'org-export-backends 'md)
 
 (define-key org-mode-map (kbd "C-,") 'outline-next-visible-heading)
 (define-key org-mode-map (kbd "C-.") 'outline-previous-visible-heading)
