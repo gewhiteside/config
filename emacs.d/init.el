@@ -199,6 +199,9 @@
 ;; Save all files (including remote files).
 (setq desktop-files-not-to-save "^$")
 
+;; Also save some of the minibuffer history.
+(add-to-list 'desktop-globals-to-save '(minibuffer-history . 50))
+
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
