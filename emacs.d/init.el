@@ -132,10 +132,10 @@
  fill-column 80)
 
 ;; Disable menu, tool and scroll bars.
-(menu-bar-mode -1)
+(menu-bar-mode 0)
 ;; Scroll and tool bar mode are void functions on some systems.
-(if (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
-(if (fboundp 'tool-bar-mode) (tool-bar-mode -1))
+(if (fboundp 'scroll-bar-mode) (scroll-bar-mode 0))
+(if (fboundp 'tool-bar-mode) (tool-bar-mode 0))
 
 ;; Enable upcase-region.
 (put 'upcase-region 'disabled nil)
@@ -218,7 +218,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; IBuffer (https://www.emacswiki.org/emacs/IbufferMode)
 
-(add-hook 'ibuffer-hook (lambda () (ibuffer-vc-set-filter-groups-by-vc-root)))
+(add-hook 'ibuffer-hook 'ibuffer-vc-set-filter-groups-by-vc-root)
 
 (setq
  ;; Turn off prompt to close unmodified buffers.
@@ -401,7 +401,7 @@
  'sh-mode-hook
  (lambda ()
    ;; Disable << as insert here document.
-   (sh-electric-here-document-mode -1)))
+   (sh-electric-here-document-mode 0)))
 
 ;; Use sh-mode to edit bashrc, *_bash, and bash_* files.
 (add-to-list 'auto-mode-alist '("\\.?bashrc\\'" . sh-mode))
