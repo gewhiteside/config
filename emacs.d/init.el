@@ -53,6 +53,7 @@
 (require 'desktop)
 (require 'exec-path-from-shell)
 (require 'git-commit)
+(require 'hideshow)
 (require 'ibuf-ext)
 (require 'llvm-mode)
 (require 'magit-diff)
@@ -459,6 +460,13 @@ Open this file with function `view-mode' and kill the buffer with q."
    (font-lock-add-keywords
     nil `(("\\(\\(?:TODO\\|NB\\)\\(?:(\\w*)\\)?:?\\)" 1
            'font-lock-constant-face prepend)))))
+
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Hide/show
+
+(setq hs-hide-comments-when-hiding-all nil)
 
 
 (provide 'init)
