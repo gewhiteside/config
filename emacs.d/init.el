@@ -199,6 +199,21 @@
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Running in a terminal
+
+(unless window-system
+  ;; Enable xterm-mouse-mode.
+  (xterm-mouse-mode)
+  (xclip-mode)
+  ;; Set the mouse wheel to scroll.
+  (global-set-key
+   [mouse-4] (lambda () (interactive) (mwheel-scroll mouse-wheel-down-event)))
+  (global-set-key
+   [mouse-5] (lambda () (interactive) (mwheel-scroll mouse-wheel-up-event))))
+
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Desktop save
 
 (desktop-save-mode)
