@@ -354,7 +354,7 @@
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Git
+;; Version control--git-commit, magit, and smerge
 
 (setq
  ;; Set the max length of the summary line.
@@ -369,11 +369,6 @@
 ;; When visiting a file from a hunk, open it in another window.
 (dolist (map (list magit-hunk-section-map magit-file-section-map))
   (define-key map (kbd "RET") 'magit-diff-visit-file-other-window))
-
-
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; SMerge
 
 ;; Change the command prefix to something easier.
 (add-hook 'smerge-mode-hook
