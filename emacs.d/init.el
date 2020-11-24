@@ -234,25 +234,18 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; IBuffer (https://www.emacswiki.org/emacs/IbufferMode)
 
-(add-hook
- 'ibuffer-mode-hook
- (lambda ()
-   ;; Auto refresh buffer list.
-   (ibuffer-auto-mode 1)
-   ;; Don't show a fill column indicator in IBuffer.
-   (display-fill-column-indicator-mode 0)))
+(add-hook 'ibuffer-hook (lambda () (ibuffer-vc-set-filter-groups-by-vc-root)))
 
 (setq
  ;; Turn off prompt to close unmodified buffers.
  ibuffer-expert t
- ;; Hide empty filter groups.
+ ;; Change the color of the group names.
+ ibuffer-filter-group-name-face 'font-lock-comment-face
  ibuffer-show-empty-filter-groups nil
- ;; Set default sorting to major mode.
- ibuffer-default-sorting-mode 'major-mode
- ;; Set custom formats.
+ ibuffer-default-sorting-mode 'filename/process
  ibuffer-formats
- '((mark modified read-only " " (name 40 40 :left :elide) " "
-         (mode 16 16 :left :elide) " " filename-and-process)))
+ '((mark modified read-only " " (name 30 -1 :left) " " (mode 16 16 :left :elide)
+         " " filename-and-process)))
 
 ;; Don't show special buffers and non-status magit buffers.
 (dolist (predicate '("^\\*" "^magit-"))
