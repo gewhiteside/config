@@ -164,9 +164,6 @@
 (dolist (hook '(help-mode-hook completion-list-mode-hook shell-mode-hook
                                dired-mode-hook))
   (add-hook hook (lambda () (display-fill-column-indicator-mode 0))))
-;; Disable the transparent toolbar on macOS.
-(push '(ns-transparent-titlebar . nil)
- (alist-get 'ns window-system-default-frame-alist))
 
 
 
@@ -195,6 +192,17 @@
 ;; Change the command prefix to something easier.
 (add-hook 'smerge-mode-hook
           (lambda () (local-set-key (kbd "C-c s") smerge-basic-map)))
+
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Frames
+(add-to-list 'default-frame-alist '(width  . 230))
+(add-to-list 'default-frame-alist '(height . 85))
+
+;; Disable the transparent toolbar on macOS.
+(push '(ns-transparent-titlebar . nil)
+ (alist-get 'ns window-system-default-frame-alist))
 
 
 
