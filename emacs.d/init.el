@@ -315,7 +315,9 @@
  ;; Add markdown to export backends.
  org-export-backends '(ascii html icalendar latex md odt)
  ;; Disable line truncation.
- org-startup-truncated nil)
+ org-startup-truncated nil
+ org-startup-indented t
+ org-hierarchical-todo-statistics nil)
 
 
 
