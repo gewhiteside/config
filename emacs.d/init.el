@@ -267,10 +267,14 @@
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Fill column indicator
+;; Fill column indicator and auto fill
 
 (dolist (hook '(prog-mode-hook text-mode-hook))
-  (add-hook hook 'display-fill-column-indicator-mode))
+  (add-hook hook (lambda () (display-fill-column-indicator-mode)
+                   (auto-fill-mode))))
+
+;; In programming modes, only auto-fill comments.
+(add-hook 'prog-mode-hook (lambda () (setq comment-auto-fill-only-comments t)))
 
 
 
@@ -308,23 +312,22 @@
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Flyspell and auto fill
+;; Flyspell
 
-;; Enable flyspell-mode and auto-fill-mode and bind ispell-buffer in text modes.
-(add-hook 'prog-mode-hook (lambda() (flyspell-mode) (auto-fill-mode)
-                           (local-set-key (kbd "C-c i") 'ispell-buffer)))
+;; Enable flyspell-mode in text modes. Bind "C-c i" to ispell-buffer.
+(add-hook 'text-mode-hook (lambda() (flyspell-mode)
+                            (local-set-key (kbd "C-c i") 'ispell-buffer)))
 
-;; Enable flyspell-prog-mode auto-fill-mode and bind ispell-comments-and-strings
-;; in programming modes.
+;; Enable flyspell-prog-mode in programming modes. Bind "C-c i" to
+;; ispell-comments-and-strings to avoid spell checking the whole buffer.
 (add-hook 'prog-mode-hook
-          (lambda() (flyspell-prog-mode) (auto-fill-mode)
-            ;; Only auto-fill inside comments.
-            (setq comment-auto-fill-only-comments t)
+          (lambda() (flyspell-prog-mode)
             (local-set-key (kbd "C-c i") 'ispell-comments-and-strings)))
 
 ;; Disable flyspell in sh-mode. There are too many non-English strings.
 (add-hook 'sh-mode-hook (lambda () (flyspell-mode 0)))
 
+;; Unset keys which conflict with org-mode.
 (define-key flyspell-mode-map (kbd "C-,") nil)
 (define-key flyspell-mode-map (kbd "C-.") nil)
 
