@@ -150,13 +150,6 @@
 
 (global-set-key (kbd "C-c C-s") 'sort-lines)
 
-;; A list of text modes for adding common hooks.
-(defvar text-modes '(text-mode-hook markdown-mode-hook))
-
-;; A list of programming modes for adding common hooks.
-(defvar prog-modes '(c-mode-common-hook emacs-lisp-mode-hook cmake-mode-hook
-                                   python-mode-hook sh-mode-hook))
-
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -334,17 +327,16 @@
 ;; Flyspell and auto fill
 
 ;; Enable flyspell-mode and auto-fill-mode and bind ispell-buffer in text modes.
-(dolist (hook text-modes)
-  (add-hook hook (lambda() (flyspell-mode) (auto-fill-mode)
-                   (local-set-key (kbd "C-c i") 'ispell-buffer))))
+(add-hook 'prog-mode-hook (lambda() (flyspell-mode) (auto-fill-mode)
+                           (local-set-key (kbd "C-c i") 'ispell-buffer)))
 
 ;; Enable flyspell-prog-mode auto-fill-mode and bind ispell-comments-and-strings
 ;; in programming modes.
-(dolist (hook prog-modes)
-  (add-hook hook (lambda() (flyspell-prog-mode) (auto-fill-mode)
-                   ;; Only auto-fill inside comments.
-                   (setq comment-auto-fill-only-comments t)
-                   (local-set-key (kbd "C-c i") 'ispell-comments-and-strings))))
+(add-hook 'prog-mode-hook
+          (lambda() (flyspell-prog-mode) (auto-fill-mode)
+            ;; Only auto-fill inside comments.
+            (setq comment-auto-fill-only-comments t)
+            (local-set-key (kbd "C-c i") 'ispell-comments-and-strings)))
 
 ;; Disable flyspell in sh-mode. There are too many non-English strings.
 (add-hook 'sh-mode-hook (lambda () (flyspell-mode 0)))
