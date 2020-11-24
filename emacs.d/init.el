@@ -216,7 +216,7 @@
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; IBuffer (https://www.emacswiki.org/emacs/IbufferMode)
+;; Ibuffer (https://www.emacswiki.org/emacs/IbufferMode)
 
 (add-hook 'ibuffer-hook 'ibuffer-vc-set-filter-groups-by-vc-root)
 
@@ -236,7 +236,7 @@
   (add-to-list 'ibuffer-never-show-predicates predicate))
 
 ;; Use IBuffer as buffer list.
-(global-set-key (kbd "C-x C-b") 'ibuffer)
+(define-key global-map [remap list-buffers] 'ibuffer)
 
 
 
