@@ -194,10 +194,13 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Desktop save
 
-(desktop-save-mode)
+(unless (daemonp)
+  (desktop-save-mode))
 
-;; Save all files (including remote files).
-(setq desktop-files-not-to-save "^$")
+(setq
+ ;; If the desktop is locked, don't ask to steal it or to save a new one.
+ desktop-load-locked-desktop nil
+ desktop-save 'if-exists)
 
 ;; Also save some of the minibuffer history.
 (add-to-list 'desktop-globals-to-save '(minibuffer-history . 50))
