@@ -9,11 +9,12 @@ of any given tool which supports this configuration may be lower.
 - Git 2.21.1
 
 * Improvements
-** Emacs [0/8]
+** Emacs [0/9]
 *** General
 **** TODO Use text-mode and prog-mode instead of manual lists of modes
 **** TODO Only enable whitespace and fill column indicator in prog/text modes
 **** TODO Prefer define-key over local-set-key
+**** TODO Add word delimiters to TODO highlighting
 *** Spacemacs
 **** TODO C/C++
 https://develop.spacemacs.org/layers/+lang/c-c++/README.html
