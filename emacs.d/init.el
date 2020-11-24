@@ -413,9 +413,6 @@ Open this file with function `view-mode' and kill the buffer with q."
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Org
 
-(define-key org-mode-map (kbd "C-,") 'outline-next-visible-heading)
-(define-key org-mode-map (kbd "C-.") 'outline-previous-visible-heading)
-
 (setq
  ;; Open links in this window.
  org-link-frame-setup '((file . find-file))
@@ -423,8 +420,13 @@ Open this file with function `view-mode' and kill the buffer with q."
  org-export-backends '(ascii html icalendar latex md odt)
  ;; Disable line truncation.
  org-startup-truncated nil
- org-startup-indented t
- org-hierarchical-todo-statistics nil)
+ ;; TODO statistics cover all entries in the subtree.
+ org-hierarchical-todo-statistics nil
+ ;; Don't show any separator lines in the outline.
+ org-cycle-separator-lines 0)
+
+(define-key org-mode-map (kbd "C-,") 'outline-next-visible-heading)
+(define-key org-mode-map (kbd "C-.") 'outline-previous-visible-heading)
 
 
 
