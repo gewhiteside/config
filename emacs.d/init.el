@@ -279,6 +279,7 @@
 
 ;; Set C default style.
 (setq c-default-style "llvm.org")
+(setq-default clang-format-style "LLVM")
 
 ;; Use c++-mode for .h files.
 (add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode))
