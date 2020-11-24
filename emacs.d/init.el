@@ -36,7 +36,7 @@
 
 (setq package-selected-packages
       '(projectile flycheck clang-format cmake-mode markdown-mode magit
-                   exec-path-from-shell xclip ibuffer-vc))
+                   exec-path-from-shell xclip ibuffer-vc ivy counsel))
 
 (dolist (package package-selected-packages)
   (unless (package-installed-p package)
@@ -289,6 +289,14 @@
    (font-lock-add-keywords
     nil `(("\\<\\(\\(?:TODO\\|NB\\)\\(?:(\\w*)\\)?:\\)" 1
            'font-lock-constant-face prepend)))))
+
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Ivy and counsel
+
+(ivy-mode)
+(counsel-mode)
 
 
 
