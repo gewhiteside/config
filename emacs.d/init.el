@@ -262,19 +262,13 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Whitespace
 
-(setq
- ;; Highlight tabs.
- whitespace-style '(face tabs)
- ;; Enable whitespace visualization for given modes.
- whitespace-global-modes
- '(c-mode c++-mode sh-mode emacs-lisp-mode cmake-mode python-mode))
+(add-hook 'prog-mode-hook 'whitespace-mode)
+
+;; Highlight tabs
+(setq whitespace-style '(face tabs))
 
 ;; Change the tab highlight color.
 (set-face-background 'whitespace-tab "orange red")
-
-;; Turn off whitespace visualization from global-whitespace-mode by disabling
-;; local whitespace-mode.
-(global-set-key (kbd "C-c w") (lambda () (interactive) (whitespace-mode 0)))
 
 
 
