@@ -319,9 +319,10 @@
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
 ;; Flycheck
 (global-flycheck-mode)
+
+(setq flycheck-emacs-lisp-load-path 'inherit)
 
 ;; Display the error list on the bottom of the frame occupying a tenth of the
 ;; height of the frame
