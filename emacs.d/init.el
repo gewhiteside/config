@@ -160,46 +160,6 @@
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Fill column indicator
-
-(global-display-fill-column-indicator-mode)
-
-;; Disable the fill column indicator in certain modes.
-(dolist (hook '(help-mode-hook completion-list-mode-hook shell-mode-hook
-                               dired-mode-hook))
-  (add-hook hook (lambda () (display-fill-column-indicator-mode 0))))
-
-
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Git
-
-(setq
- ;; Set the max length of the summary line.
- git-commit-summary-max-length 50
- ;; Check for both a non-empty second line and a long summary line.
- git-commit-style-convention-checks
- '(non-empty-second-line overlong-summary-line))
-
-;; Set the fill column in git-commit-mode to 72 characters.
-(add-hook 'git-commit-mode-hook (lambda () (setq fill-column 72)))
-
-;; When visiting a file from a hunk, open it in another window.
-(dolist (map (list magit-hunk-section-map magit-file-section-map))
-  (define-key map (kbd "RET") 'magit-diff-visit-file-other-window))
-
-
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; SMerge
-
-;; Change the command prefix to something easier.
-(add-hook 'smerge-mode-hook
-          (lambda () (local-set-key (kbd "C-c s") smerge-basic-map)))
-
-
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Frames
 (add-to-list 'default-frame-alist '(width  . 230))
 (add-to-list 'default-frame-alist '(height . 85))
@@ -226,6 +186,21 @@
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Environment variables
+
+;; In addition to PATH and MANPATH, set GIT_PAGER from the shell.
+(add-to-list 'exec-path-from-shell-variables "GIT_PAGER")
+
+;; My environment variables are set in bash_profile, so a non-interactive, login
+;; shell is sufficient.
+(setq exec-path-from-shell-arguments '("--login"))
+
+;; Only set variables from the shell if Emacs is running on a window system.
+(when window-system (exec-path-from-shell-initialize))
+
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Desktop save
 
 (desktop-save-mode)
@@ -236,21 +211,13 @@
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Whitespace
+;; TRAMP
 
-(setq
- ;; Highlight tabs.
- whitespace-style '(face tabs)
- ;; Enable whitespace visualization for given modes.
- whitespace-global-modes
- '(c-mode c++-mode sh-mode emacs-lisp-mode cmake-mode python-mode))
+;; Allow the method to be omitted.
+(tramp-change-syntax 'simplified)
 
-;; Change the tab highlight color.
-(set-face-background 'whitespace-tab "orange red")
-
-;; Turn off whitespace visualization from global-whitespace-mode by disabling
-;; local whitespace-mode.
-(global-set-key (kbd "C-c w") (lambda () (interactive) (whitespace-mode 0)))
+;; Use the path assigned to the remote user to search for remote programs.
+(add-to-list 'tramp-remote-path 'tramp-own-remote-path)
 
 
 
@@ -280,7 +247,7 @@
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; isearch/occur
+;; I-search/Occur
 
 ;; https://www.emacswiki.org/emacs/SearchAtPoint
 (global-set-key (kbd "C-S-s") 'isearch-forward-symbol-at-point)
@@ -299,60 +266,46 @@
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; C/C++
-
-(add-hook
- 'c-mode-common-hook
- (lambda ()
-   ;; Set key to find header file in the same directory.
-   (local-set-key (kbd "C-c o") 'ff-find-other-file)
-   (local-set-key (kbd "C-M-<tab>") 'clang-format-region)
-   ;; Set key to format the whole buffer.
-   (local-set-key (kbd "C-c f")
-                  (lambda () (interactive)
-                    (clang-format-region (point-min) (point-max))))))
-
-;; Set C default style.
-(setq c-default-style "llvm.org")
-(setq-default clang-format-style "LLVM")
-
-;; Use c++-mode for .h files.
-(add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode))
-
-
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Bash
-
-(add-hook
- 'sh-mode-hook
- (lambda ()
-   ;; Disable << as insert here document.
-   (sh-electric-here-document-mode -1)))
-
-;; Use sh-mode to edit bashrc, *_bash, and bash_* files.
-(add-to-list 'auto-mode-alist '("\\.?bashrc\\'" . sh-mode))
-(add-to-list 'auto-mode-alist '("_bash\\'" . sh-mode))
-(add-to-list 'auto-mode-alist '("\\.?bash_" . sh-mode))
-(add-to-list 'auto-mode-alist '("bash-fc" . sh-mode))
-
-
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Org
-
-(define-key org-mode-map (kbd "C-,") 'outline-next-visible-heading)
-(define-key org-mode-map (kbd "C-.") 'outline-previous-visible-heading)
+;; Whitespace
 
 (setq
- ;; Open links in this window.
- org-link-frame-setup '((file . find-file))
- ;; Add markdown to export backends.
- org-export-backends '(ascii html icalendar latex md odt)
- ;; Disable line truncation.
- org-startup-truncated nil
- org-startup-indented t
- org-hierarchical-todo-statistics nil)
+ ;; Highlight tabs.
+ whitespace-style '(face tabs)
+ ;; Enable whitespace visualization for given modes.
+ whitespace-global-modes
+ '(c-mode c++-mode sh-mode emacs-lisp-mode cmake-mode python-mode))
+
+;; Change the tab highlight color.
+(set-face-background 'whitespace-tab "orange red")
+
+;; Turn off whitespace visualization from global-whitespace-mode by disabling
+;; local whitespace-mode.
+(global-set-key (kbd "C-c w") (lambda () (interactive) (whitespace-mode 0)))
+
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Fill column indicator
+
+(global-display-fill-column-indicator-mode)
+
+;; Disable the fill column indicator in certain modes.
+(dolist (hook '(help-mode-hook completion-list-mode-hook shell-mode-hook
+                               dired-mode-hook))
+  (add-hook hook (lambda () (display-fill-column-indicator-mode 0))))
+
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Highlight custom keywords
+
+;; Highlight NB and TODO in programming modes.
+(add-hook
+ 'prog-mode-hook
+ (lambda ()
+   (font-lock-add-keywords
+    nil `(("\\(\\(?:TODO\\|NB\\)\\(?:(\\w*)\\)?:?\\)" 1
+           'font-lock-constant-face prepend)))))
 
 
 
@@ -400,6 +353,13 @@
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Hide/show
+
+(setq hs-hide-comments-when-hiding-all nil)
+
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Projectile
 
 (projectile-mode)
@@ -413,28 +373,47 @@
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; TRAMP
+;; Git
 
-;; Allow the method to be omitted.
-(tramp-change-syntax 'simplified)
+(setq
+ ;; Set the max length of the summary line.
+ git-commit-summary-max-length 50
+ ;; Check for both a non-empty second line and a long summary line.
+ git-commit-style-convention-checks
+ '(non-empty-second-line overlong-summary-line))
 
-;; Use the path assigned to the remote user to search for remote programs.
-(add-to-list 'tramp-remote-path 'tramp-own-remote-path)
+;; Set the fill column in git-commit-mode to 72 characters.
+(add-hook 'git-commit-mode-hook (lambda () (setq fill-column 72)))
+
+;; When visiting a file from a hunk, open it in another window.
+(dolist (map (list magit-hunk-section-map magit-file-section-map))
+  (define-key map (kbd "RET") 'magit-diff-visit-file-other-window))
 
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Environment variables
+;; SMerge
 
-;; In addition to PATH and MANPATH, set GIT_PAGER from the shell.
-(add-to-list 'exec-path-from-shell-variables "GIT_PAGER")
+;; Change the command prefix to something easier.
+(add-hook 'smerge-mode-hook
+          (lambda () (local-set-key (kbd "C-c s") smerge-basic-map)))
 
-;; My environment variables are set in bash_profile, so a non-interactive, login
-;; shell is sufficient.
-(setq exec-path-from-shell-arguments '("--login"))
 
-;; Only set variables from the shell if Emacs is running on a window system.
-(when window-system (exec-path-from-shell-initialize))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Bash
+
+(add-hook
+ 'sh-mode-hook
+ (lambda ()
+   ;; Disable << as insert here document.
+   (sh-electric-here-document-mode -1)))
+
+;; Use sh-mode to edit bashrc, *_bash, and bash_* files.
+(add-to-list 'auto-mode-alist '("\\.?bashrc\\'" . sh-mode))
+(add-to-list 'auto-mode-alist '("_bash\\'" . sh-mode))
+(add-to-list 'auto-mode-alist '("\\.?bash_" . sh-mode))
+(add-to-list 'auto-mode-alist '("bash-fc" . sh-mode))
 
 
 
@@ -454,22 +433,43 @@ Open this file with function `view-mode' and kill the buffer with q."
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Highlight custom keywords
+;; Org
 
-;; Highlight NB and TODO in programming modes.
-(add-hook
- 'prog-mode-hook
- (lambda ()
-   (font-lock-add-keywords
-    nil `(("\\(\\(?:TODO\\|NB\\)\\(?:(\\w*)\\)?:?\\)" 1
-           'font-lock-constant-face prepend)))))
+(define-key org-mode-map (kbd "C-,") 'outline-next-visible-heading)
+(define-key org-mode-map (kbd "C-.") 'outline-previous-visible-heading)
+
+(setq
+ ;; Open links in this window.
+ org-link-frame-setup '((file . find-file))
+ ;; Add markdown to export backends.
+ org-export-backends '(ascii html icalendar latex md odt)
+ ;; Disable line truncation.
+ org-startup-truncated nil
+ org-startup-indented t
+ org-hierarchical-todo-statistics nil)
 
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Hide/show
+;; C/C++
 
-(setq hs-hide-comments-when-hiding-all nil)
+(add-hook
+ 'c-mode-common-hook
+ (lambda ()
+   ;; Set key to find header file in the same directory.
+   (local-set-key (kbd "C-c o") 'ff-find-other-file)
+   (local-set-key (kbd "C-M-<tab>") 'clang-format-region)
+   ;; Set key to format the whole buffer.
+   (local-set-key (kbd "C-c f")
+                  (lambda () (interactive)
+                    (clang-format-region (point-min) (point-max))))))
+
+;; Set C default style.
+(setq c-default-style "llvm.org")
+(setq-default clang-format-style "LLVM")
+
+;; Use c++-mode for .h files.
+(add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode))
 
 
 (provide 'init)
