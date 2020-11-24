@@ -48,6 +48,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Load features
 
+(require 'cc-mode)
 (require 'cc-vars)
 (require 'clang-format)
 (require 'desktop)
@@ -315,6 +316,8 @@
 ;; Flyspell
 
 ;; Enable flyspell-mode in text modes. Bind "C-c i" to ispell-buffer.
+;; NB(whiteside): local-set-key is used instead of define-key here because
+;; flyspell-prog-mode doesn't have its own key map.
 (add-hook 'text-mode-hook (lambda() (flyspell-mode)
                             (local-set-key (kbd "C-c i") 'ispell-buffer)))
 
@@ -371,9 +374,7 @@
   (define-key map (kbd "RET") 'magit-diff-visit-file-other-window))
 
 ;; Change the command prefix to something easier.
-(add-hook 'smerge-mode-hook
-          (lambda () (local-set-key (kbd "C-c s") smerge-basic-map)))
-
+(define-key smerge-mode-map (kbd "C-c v") smerge-basic-map)
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -431,23 +432,21 @@ Open this file with function `view-mode' and kill the buffer with q."
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; C/C++
 
-(add-hook
- 'c-mode-common-hook
- (lambda ()
-   ;; Set key to find header file in the same directory.
-   (local-set-key (kbd "C-c o") 'ff-find-other-file)
-   (local-set-key (kbd "C-M-<tab>") 'clang-format-region)
-   ;; Set key to format the whole buffer.
-   (local-set-key (kbd "C-c f")
-                  (lambda () (interactive)
-                    (clang-format-region (point-min) (point-max))))))
-
-;; Set C default style.
+;; Set C and clang-format default styles.
 (setq c-default-style "llvm.org")
 (setq-default clang-format-style "LLVM")
 
 ;; Use c++-mode for .h files.
 (add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode))
+
+;; Find a header file in the same directory.
+(define-key c-mode-base-map (kbd "C-c o") 'ff-find-other-file)
+
+;; clang-format
+(define-key c-mode-base-map (kbd "C-M-<tab>") 'clang-format-region)
+(define-key c-mode-base-map (kbd "C-c f")
+  (lambda () (interactive) (clang-format-region (point-min) (point-max))))
+
 
 
 (provide 'init)
