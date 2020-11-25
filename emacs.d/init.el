@@ -287,9 +287,10 @@
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Show parentheses
+;; Parentheses/pairs
 
-(add-hook 'emacs-lisp-mode-hook 'show-paren-mode)
+(show-paren-mode)
+(electric-pair-mode)
 
 
 
