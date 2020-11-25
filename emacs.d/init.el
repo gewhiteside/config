@@ -36,7 +36,8 @@
 
 (setq package-selected-packages
       '(projectile flycheck clang-format cmake-mode markdown-mode magit
-                   exec-path-from-shell xclip ibuffer-vc ivy counsel company))
+                   exec-path-from-shell xclip ibuffer-vc ivy counsel company
+                   avy highlight-escape-sequences which-key))
 
 (dolist (package package-selected-packages)
   (unless (package-installed-p package)
@@ -153,6 +154,13 @@
 ;; If a server is not running, start it. If this is a daemon, server-start will
 ;; be called automatically, so don't call it here.
 (unless (or (server-running-p) (daemonp)) (server-start))
+
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Which key
+
+(which-key-mode)
 
 
 
@@ -320,6 +328,15 @@
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Highlight escape sequences
+
+(hes-mode)
+(put 'hes-escape-backslash-face 'face-alias 'font-lock-builtin-face)
+(put 'hes-escape-sequence-face 'face-alias 'font-lock-builtin-face)
+
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Ivy and counsel
 
 (ivy-mode)
@@ -394,6 +411,13 @@
 ;; Hide/show
 
 (setq hs-hide-comments-when-hiding-all nil)
+
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; avy
+
+(global-set-key (kbd "C-'") 'avy-goto-char-timer)
 
 
 
