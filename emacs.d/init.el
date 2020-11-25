@@ -155,6 +155,12 @@
 
 (global-set-key (kbd "C-c C-s") 'sort-lines)
 
+(defun whiteside/move-end-of-line-newline ()
+  "Insert a newline at the end of current line."
+  (interactive) (move-end-of-line nil) (newline-and-indent))
+
+(global-set-key (kbd "S-<return>") 'whiteside/move-end-of-line-newline)
+
 ;; M-^ is inconvenient, so also bind join-line to M-j.
 (global-set-key (kbd "M-j") 'join-line)
 
