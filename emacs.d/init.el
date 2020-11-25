@@ -515,6 +515,8 @@ function `view-mode' and kill the buffer with q."
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; C/C++
 
+(add-hook 'c++-mode-hook 'subword-mode)
+
 ;; Set C and clang-format default styles.
 (setq c-default-style "llvm.org")
 (setq-default clang-format-style "LLVM")
