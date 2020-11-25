@@ -14,14 +14,17 @@ fi
 # Add my bin to path.
 PATH=$HOME/bin:$PATH
 
-# Set my default editor to emacs. Don't set desktop-save-mode, don't use a
-# window system, and don't confirm killing these sessions. If emacs isn't
-# installed, use vim.
+# Set my default editor to emacsclient. If a server isn't available, then start
+# emacs without loading a saved desktop or a window system and don't confirm
+# killing the session. If emacs isn't installed, just use vim.
 #
 # NB: Using a \ before a new line causes issues, so just use += instead.
 if type emacs &>/dev/null; then
-    EDITOR='emacs --no-desktop --no-window-system '
-    EDITOR+='--eval "(setq confirm-kill-emacs nil)"'
+    ALTERNATE_EDITOR='emacs --no-desktop --no-window-system '
+    ALTERNATE_EDITOR+='--eval "(setq confirm-kill-emacs nil)"'
+
+    # Output stderr to /dev/null to silence warning.
+    EDITOR="emacsclient --tty 2>/dev/null"
 else
     EDITOR=vim
 fi
@@ -39,7 +42,7 @@ elif ! type diff-highlight &>/dev/null; then
     GIT_PAGER="$(git config --global core.pager)"
 fi
 
-export PATH EDITOR LESS GIT_PAGER
+export PATH ALTERNATE_EDITOR EDITOR LESS GIT_PAGER
 
 # Turn off the bash deprecation warning on Catalina.
 export BASH_SILENCE_DEPRECATION_WARNING=1

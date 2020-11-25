@@ -65,6 +65,7 @@
 (require 'paren)
 (require 'projectile)
 (require 'reservoir "~/reservoir/reservoir.el" 'noerror)
+(require 'server)
 (require 'sh-script)
 (require 'smerge-mode)
 (require 'tablegen-mode)
@@ -147,6 +148,10 @@
 
 (global-set-key (kbd "C-c C-s") 'sort-lines)
 
+;; If a server is not running, start it. If this is a daemon, server-start will
+;; be called automatically, so don't call it here.
+(unless (or (server-running-p) (daemonp)) (server-start))
+
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -194,8 +199,9 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Desktop save
 
-(unless (daemonp)
-  (desktop-save-mode))
+;; If this Emacs is a daemon, it will not be restarted across many sessions and
+;; therefore has no need to save state.
+(unless (daemonp) (desktop-save-mode))
 
 (setq
  ;; If the desktop is locked, don't ask to steal it or to save a new one.
@@ -496,7 +502,6 @@ function `view-mode' and kill the buffer with q."
 (define-key c-mode-base-map (kbd "C-M-<tab>") 'clang-format-region)
 (define-key c-mode-base-map (kbd "C-c f")
   (lambda () (interactive) (clang-format-region (point-min) (point-max))))
-
 
 
 (provide 'init)
