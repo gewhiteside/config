@@ -244,7 +244,9 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Ibuffer (https://www.emacswiki.org/emacs/IbufferMode)
 
-(add-hook 'ibuffer-hook 'ibuffer-vc-set-filter-groups-by-vc-root)
+(add-hook 'ibuffer-hook (lambda () (ibuffer-vc-set-filter-groups-by-vc-root)
+                          ;; Auto refresh buffer list.
+                          (ibuffer-auto-mode)))
 
 (setq
  ;; Turn off prompt to close unmodified buffers.
