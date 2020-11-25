@@ -132,6 +132,9 @@
  ;; Set fill column to 80.
  fill-column 80)
 
+;; Typed text replaces an active selection.
+(delete-selection-mode)
+
 ;; Disable menu, tool and scroll bars.
 (menu-bar-mode 0)
 ;; scroll-bar-mode and tool-bar-mode can be void.
