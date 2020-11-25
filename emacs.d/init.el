@@ -61,6 +61,7 @@
 (require 'ibuf-ext)
 (require 'llvm-mode)
 (require 'magit-diff)
+(require 'man)
 (require 'org)
 (require 'paren)
 (require 'projectile)
@@ -101,8 +102,9 @@
  initial-major-mode 'fundamental-mode
  initial-scratch-message "Welcome, Mr. Whiteside.\n\n"
  default-directory "~/"
- ;; Select the help window when it is opened.
+ ;; Select the man and help windows when they are opened.
  help-window-select t
+ Man-notify-method 'aggressive
  uniquify-buffer-name-style 'reverse
  make-backup-files nil)
 
