@@ -107,7 +107,8 @@
  help-window-select t
  Man-notify-method 'aggressive
  uniquify-buffer-name-style 'reverse
- make-backup-files nil)
+ make-backup-files nil
+ revert-without-query '(".*"))
 
 ;; Remove mode-line-mule-info and VC information from the mode line.
 (setq-default
