@@ -20,6 +20,8 @@ of any given tool which supports this configuration may be lower.
 
 
 *** TODO Purcell
+- [ ] diminish
+
 init-ivy
 
 
