@@ -301,11 +301,11 @@
 ;; Don't show whitespace when view-mode is enabled.
 (add-hook 'view-mode-hook (lambda () (whitespace-mode 0)))
 
-;; Highlight tabs.
-(setq whitespace-style '(face tabs))
+;; Highlight tabs and trailing whitespace.
+(setq whitespace-style '(face tabs trailing))
 
-;; Change the tab highlight color.
-(set-face-background 'whitespace-tab "orange red")
+;; Change the tab highlight color to match trailing whitespace.
+(set-face-background 'whitespace-tab "red1")
 
 
 
