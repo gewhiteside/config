@@ -37,7 +37,8 @@
 (setq package-selected-packages
       '(projectile flycheck clang-format cmake-mode markdown-mode magit
                    exec-path-from-shell xclip ibuffer-vc ivy counsel company
-                   avy highlight-escape-sequences which-key))
+                   avy highlight-escape-sequences which-key crontab-mode
+                   diminish))
 
 (dolist (package package-selected-packages)
   (unless (package-installed-p package)
@@ -560,6 +561,16 @@ function `view-mode' and kill the buffer with q."
 (define-key c-mode-base-map (kbd "C-M-<tab>") 'clang-format-region)
 (define-key c-mode-base-map (kbd "C-c C-f")
   (lambda () (interactive) (clang-format-region (point-min) (point-max))))
+
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Diminish
+
+(dolist (mode '(counsel-mode ivy-mode which-key-mode auto-revert-mode
+                             company-mode hs-minor-mode flyspell-mode
+                             auto-fill-function))
+  (diminish mode))
 
 
 (provide 'init)
