@@ -558,7 +558,7 @@ function `view-mode' and kill the buffer with q."
 
 ;; clang-format
 (define-key c-mode-base-map (kbd "C-M-<tab>") 'clang-format-region)
-(define-key c-mode-base-map (kbd "C-c f")
+(define-key c-mode-base-map (kbd "C-c C-f")
   (lambda () (interactive) (clang-format-region (point-min) (point-max))))
 
 
