@@ -38,7 +38,7 @@
       '(projectile flycheck clang-format cmake-mode markdown-mode magit
                    exec-path-from-shell xclip ibuffer-vc ivy counsel company
                    avy highlight-escape-sequences which-key crontab-mode
-                   diminish))
+                   diminish yasnippet))
 
 (dolist (package package-selected-packages)
   (unless (package-installed-p package)
@@ -75,6 +75,7 @@
 (require 'tramp)
 (require 'view)
 (require 'whitespace)
+(require 'yasnippet)
 
 ;; The LLVM style isn't provided, so just load the file.
 (load "llvm/emacs.el")
@@ -398,6 +399,15 @@
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; yasnippet
+
+(yas-global-mode)
+
+(define-key yas-minor-mode-map (kbd "s-/") 'yas-expand)
+
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Flycheck
 
 (global-flycheck-mode)
@@ -493,6 +503,7 @@
 
 ;; Change the command prefix to something easier.
 (define-key smerge-mode-map (kbd "C-c v") smerge-basic-map)
+
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
