@@ -10,28 +10,27 @@ of any given tool which supports this configuration may be lower.
 
 * Improvements
 ** Emacs
-*** DONE General
+*** TODO General
 - [X] Use text-mode and prog-mode instead of manual lists of modes
 - [X] Only enable whitespace and fill column indicator in prog/text modes
 - [X] Add word delimiters to TODO highlighting
 - [X] Separate flyspell and auto fill
 - [X] Combine Git and SMerge
 - [X] Prefer define-key over local-set-key
-
-
-*** TODO Purcell
-- [ ] diminish
-
-init-ivy
+- [X] Find a way to easily insert certain templates, e.g., a section header in
+  my init file or a file header in LLVM.
+- [ ] M-x compile
 
 
 *** TODO Spacemacs
 - [ ] C/C++ https://develop.spacemacs.org/layers/+lang/c-c++/README.html
 - [ ] Semantic https://develop.spacemacs.org/layers/LAYERS.html#semantic
-- [ ] diff-highlight
-  https://develop.spacemacs.org/layers/+source-control/version-control/README.html
 - [ ] CMake https://develop.spacemacs.org/layers/+tools/cmake/README.html
 - [ ] LSP https://develop.spacemacs.org/layers/+tools/lsp/README.html
+
+
+*** DONE Purcell
+- [X] diminish
 
 
 ** TODO ssh
