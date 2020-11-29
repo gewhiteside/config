@@ -435,6 +435,10 @@
 
 (setq hs-hide-comments-when-hiding-all nil)
 
+(add-hook 'prog-mode-hook 'hs-minor-mode)
+
+(define-key hs-minor-mode-map (kbd "C-c f") 'hs-toggle-hiding)
+
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
