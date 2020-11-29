@@ -192,16 +192,6 @@
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Diminish
-
-(dolist (mode '(counsel-mode ivy-mode which-key-mode auto-revert-mode
-                             company-mode hs-minor-mode flyspell-mode
-                             auto-fill-function))
-  (diminish mode))
-
-
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Running in a terminal
 
 (unless window-system
@@ -582,6 +572,18 @@ function `view-mode' and kill the buffer with q."
 (define-key c-mode-base-map (kbd "C-M-<tab>") 'clang-format-region)
 (define-key c-mode-base-map (kbd "C-c C-f")
   (lambda () (interactive) (clang-format-region (point-min) (point-max))))
+
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Diminish
+
+;; NB(whiteside): Modes must be diminished after they are activated, so this
+;; section should be at the end of this file.
+(dolist (mode '(counsel-mode ivy-mode which-key-mode auto-revert-mode
+                             company-mode hs-minor-mode flyspell-mode
+                             auto-fill-function yas-minor-mode))
+  (diminish mode))
 
 
 (provide 'init)
