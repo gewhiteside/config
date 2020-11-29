@@ -25,6 +25,8 @@ mkdir -p ~/.emacs.d/elisp
 ln -s "$@" $config/emacs.d/init.el ~/.emacs.d
 # Symlink elisp files to .emacs.d/elisp.
 ln -s "$@" $config/emacs.d/elisp/*[!~] ~/.emacs.d/elisp
+# Symlink the yasnippets snippets directory.
+ln -s "$@" $config/emacs.d/snippets ~/.emacs.d/snippets
 
 
 ## SSH
