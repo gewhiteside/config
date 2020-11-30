@@ -36,9 +36,9 @@
 
 (setq package-selected-packages
       '(projectile flycheck clang-format cmake-mode markdown-mode magit
-                   exec-path-from-shell xclip ibuffer-vc ivy counsel company
-                   avy highlight-escape-sequences which-key crontab-mode
-                   diminish yasnippet))
+                   exec-path-from-shell ibuffer-vc ivy counsel company avy
+                   highlight-escape-sequences which-key crontab-mode diminish
+                   yasnippet ssh-config-mode clipetty))
 
 (dolist (package package-selected-packages)
   (unless (package-installed-p package)
@@ -197,7 +197,7 @@
 (unless window-system
   ;; Enable xterm-mouse-mode.
   (xterm-mouse-mode)
-  (xclip-mode)
+  (global-clipetty-mode)
   ;; Set the mouse wheel to scroll.
   (global-set-key
    [mouse-4] (lambda () (interactive) (mwheel-scroll mouse-wheel-down-event)))
@@ -493,6 +493,13 @@
 
 ;; Change the command prefix to something easier.
 (define-key smerge-mode-map (kbd "C-c v") smerge-basic-map)
+
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; ssh_config
+
+(add-to-list 'auto-mode-alist '("/\\.?ssh/config\\'" . ssh-config-mode))
 
 
 
