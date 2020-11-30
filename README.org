@@ -33,8 +33,8 @@ of any given tool which supports this configuration may be lower.
 - [X] diminish
 
 
-** TODO ssh
-- [ ] Agent forwarding
-- [ ] Make sure that killing text in Emacs running in tmux on a remote machine
+** DONE ssh
+- [X] Agent forwarding
+- [X] Make sure that killing text in Emacs running in tmux on a remote machine
   copies the text to the client system's clipboard.
 
