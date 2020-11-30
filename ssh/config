@@ -1,6 +1,7 @@
-# Don't error if these options are unknown.
-IgnoreUnknown AddKeysToAgent,UseKeychain
+Host *
+  # Don't error if these options are unknown.
+  IgnoreUnknown AddKeysToAgent,UseKeychain
 
-AddKeysToAgent yes
-ForwardAgent yes
-UseKeychain yes
+  AddKeysToAgent yes
+  ForwardAgent yes
+  UseKeychain yes
