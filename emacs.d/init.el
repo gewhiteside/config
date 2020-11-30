@@ -67,7 +67,6 @@
 (require 'org)
 (require 'paren)
 (require 'projectile)
-(require 'reservoir "~/reservoir/reservoir.el" 'noerror)
 (require 'server)
 (require 'sh-script)
 (require 'smerge-mode)

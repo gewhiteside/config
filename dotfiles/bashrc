@@ -2,13 +2,13 @@
 [[ $- != *i* ]] && return
 
 source ~/.bash_aliases
-source ~/.bash_prompt
 source ~/.git-completion.bash
-[ -f ~/reservoir/bash_reservoir ] && source ~/reservoir/bash_reservoir
+source ~/.git-prompt.sh
+[ -f ~/reservoir/bash/bash_reservoir ] && source ~/reservoir/bash/bash_reservoir
 
 # Shells inside Emacs print a prompt for each file sourced. Source this file
 # last as a work around.
-source ~/.git-prompt.sh
+source ~/.bash_prompt
 
 # Increase the size of the  history file.
 HISTFILESIZE=3000
