@@ -21,3 +21,6 @@ alias grep="grep --directories=skip ${grep_options}"
 alias rgrep="grep --directories=recurse ${grep_options}"
 alias rgrep-cmake="grep --directories=recurse --include='[Cc][Mm]ake*' \
 ${grep_options}"
+
+# Add an alias for setting raw mouse input on OS X.
+alias raw-mouse="defaults write .GlobalPreferences com.apple.mouse.scaling -1"
