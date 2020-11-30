@@ -2,4 +2,5 @@
 IgnoreUnknown AddKeysToAgent,UseKeychain
 
 AddKeysToAgent yes
+ForwardAgent yes
 UseKeychain yes
