@@ -551,6 +551,11 @@ function `view-mode' and kill the buffer with q."
  ;; Don't show any separator lines in the outline.
  org-cycle-separator-lines 0)
 
+;; Enable speed commands on any star in a header.
+(setq org-use-speed-commands
+      (lambda () (and (looking-at org-outline-regexp)
+                      (looking-back "^\**" nil))))
+
 ;; Add markdown to export backends.
 (add-to-list 'org-export-backends 'md)
 
