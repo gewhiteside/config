@@ -19,6 +19,8 @@ of any given tool which supports this configuration may be lower.
 
 
 *** DONE General
+- [X] Hide Head and Recent commits sections by default
+
 - [X] Use text-mode and prog-mode instead of manual lists of modes
 - [X] Only enable whitespace and fill column indicator in prog/text modes
 - [X] Add word delimiters to TODO highlighting

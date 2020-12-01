@@ -490,6 +490,9 @@
 (dolist (map (list magit-hunk-section-map magit-file-section-map))
   (define-key map (kbd "RET") 'magit-diff-visit-file-other-window))
 
+(dolist (hide-section '(branch unpushed))
+  (add-to-list 'magit-section-initial-visibility-alist `(,hide-section . hide)))
+
 ;; Change the command prefix to something easier.
 (define-key smerge-mode-map (kbd "C-c v") smerge-basic-map)
 
