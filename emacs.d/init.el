@@ -194,10 +194,10 @@
 ;; Running in a terminal
 
 (defvar whiteside/scroll-down (lambda () (interactive) (scroll-down 3))
-  "The function to call when mouse-4 is called without a window system.")
+  "The function to call when mouse-4 is input without a window system.")
 
 (defvar whiteside/scroll-up (lambda () (interactive) (scroll-up 3))
-  "The function to call when mouse-5 is called without a window system.")
+  "The function to call when mouse-5 is input without a window system.")
 
 (when (and (fboundp 'mwheel-scroll) (boundp 'mouse-wheel-down-event)
            (boundp 'mouse-wheel-up-event))
