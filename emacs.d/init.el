@@ -199,7 +199,8 @@
 (defvar whiteside/scroll-up (lambda () (interactive) (scroll-up 3))
   "The function to call when mouse-5 is called without a window system.")
 
-(when (featurep 'mwheel)
+(when (and (fboundp 'mwheel-scroll) (boundp 'mouse-wheel-down-event)
+           (boundp 'mouse-wheel-up-event))
   (setq whiteside/scroll-down (lambda () (interactive)
                                 (mwheel-scroll mouse-wheel-down-event))
         whiteside/scroll-up (lambda () (interactive)
