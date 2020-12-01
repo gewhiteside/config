@@ -193,15 +193,25 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Running in a terminal
 
+(defvar whiteside/scroll-down (lambda () (interactive) (scroll-down 3))
+  "The function to call when mouse-4 is called without a window system.")
+
+(defvar whiteside/scroll-up (lambda () (interactive) (scroll-up 3))
+  "The function to call when mouse-5 is called without a window system.")
+
+(when (featurep 'mwheel)
+  (setq whiteside/scroll-down (lambda () (interactive)
+                                (mwheel-scroll mouse-wheel-down-event))
+        whiteside/scroll-up (lambda () (interactive)
+                              (mwheel-scroll mouse-wheel-up-event))))
+
 (unless window-system
   ;; Enable xterm-mouse-mode.
   (xterm-mouse-mode)
   (global-clipetty-mode)
   ;; Set the mouse wheel to scroll.
-  (global-set-key
-   [mouse-4] (lambda () (interactive) (mwheel-scroll mouse-wheel-down-event)))
-  (global-set-key
-   [mouse-5] (lambda () (interactive) (mwheel-scroll mouse-wheel-up-event))))
+  (global-set-key [mouse-4] whiteside/scroll-down)
+  (global-set-key [mouse-5] whiteside/scroll-up))
 
 
 
