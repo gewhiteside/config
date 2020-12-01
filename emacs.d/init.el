@@ -412,7 +412,8 @@
    (display-buffer-reuse-window display-buffer-in-side-window)
    (side            . bottom)
    (reusable-frames . visible)
-   (window-height   . 0.1)))
+   (window-height   . 0.1)
+   (dedicated       . t)))
 
 
 
