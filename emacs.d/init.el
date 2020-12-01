@@ -529,7 +529,8 @@ then open it for viewing, not editing. Open this file with
 function `view-mode' and kill the buffer with q."
   (when (and buffer-file-name
              (or (string-match-p "\\.el\\.gz\\'" buffer-file-name)
-                 (string-match-p package-user-dir buffer-file-name)))
+                 (string-match-p (expand-file-name package-user-dir )
+                                 buffer-file-name)))
     (view-mode) (setq view-exit-action 'kill-buffer)))
 
 (add-hook 'emacs-lisp-mode-hook
