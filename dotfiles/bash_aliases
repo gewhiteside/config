@@ -24,3 +24,6 @@ ${grep_options}"
 
 # Add an alias for setting raw mouse input on OS X.
 alias raw-mouse="defaults write .GlobalPreferences com.apple.mouse.scaling -1"
+
+# Alias emacsclient.
+alias ec="emacsclient --tty"
