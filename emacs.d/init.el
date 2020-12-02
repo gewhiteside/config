@@ -553,14 +553,11 @@
 ;; Emacs Lisp
 
 (defun whiteside/library-el-with-view-mode ()
-  "Open library .el files with function `view-mode'.
-If this elisp file ends with .el.gz, or is in an elpa directory,
-then open it for viewing, not editing. Open this file with
-function `view-mode' and kill the buffer with q."
-  (when (and buffer-file-name
-             (or (string-match-p "\\.el\\.gz\\'" buffer-file-name)
-                 (string-match-p (expand-file-name package-user-dir )
-                                 buffer-file-name)))
+  "Open library .el.gz files with function `view-mode'.
+If this elisp file ends with .el.gz, then open it for viewing,
+not editing. Open this file with function `view-mode' and kill
+the buffer with q."
+  (when (and buffer-file-name (string-match-p "\\.el\\.gz\\'" buffer-file-name))
     (view-mode) (setq view-exit-action 'kill-buffer)))
 
 (add-hook 'emacs-lisp-mode-hook
