@@ -593,7 +593,7 @@ function `view-mode' and kill the buffer with q."
 (add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode))
 
 ;; Find a header file in the same directory.
-(define-key c-mode-base-map (kbd "C-c o") 'ff-find-other-file)
+(define-key c-mode-base-map (kbd "C-c o") 'projectile-find-other-file)
 
 ;; clang-format
 (define-key c-mode-base-map (kbd "C-M-<tab>") 'clang-format-region)
