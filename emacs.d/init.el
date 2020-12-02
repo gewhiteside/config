@@ -34,11 +34,12 @@
 (setq package-enable-at-startup nil)
 (package-initialize)
 
-(setq package-selected-packages
-      '(projectile flycheck clang-format cmake-mode markdown-mode magit
-                   exec-path-from-shell ibuffer-vc ivy counsel company avy
-                   highlight-escape-sequences which-key crontab-mode diminish
-                   yasnippet ssh-config-mode clipetty))
+(setq
+ package-selected-packages
+ '(projectile flycheck clang-format cmake-mode markdown-mode magit
+              exec-path-from-shell ibuffer-vc ivy counsel company avy
+              highlight-escape-sequences which-key crontab-mode diminish
+              yasnippet ssh-config-mode clipetty lsp-mode lsp-ivy))
 
 (dolist (package package-selected-packages)
   (unless (package-installed-p package)
@@ -62,6 +63,7 @@
 (require 'hideshow)
 (require 'ibuf-ext)
 (require 'llvm-mode)
+(require 'lsp-mode)
 (require 'magit-diff)
 (require 'man)
 (require 'org)
@@ -480,6 +482,14 @@
 
 ;; Set the projectile prefix key.
 (define-key projectile-mode-map (kbd "C-c a") 'projectile-command-map)
+
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; lsp
+
+(add-hook 'c++-mode-hook 'lsp)
+(add-hook 'lsp-mode-hook 'lsp-enable-which-key-integration)
 
 
 
