@@ -1,5 +1,8 @@
 [ -f ~/.bashrc ] && source ~/.bashrc
 
+# If ccache is installed, add the standard ccache drivers to PATH.
+type ccache &>/dev/null && PATH=/usr/lib/ccache:$PATH
+
 # Add my bin to path.
 PATH=$HOME/bin:$PATH
 
