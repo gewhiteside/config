@@ -72,6 +72,7 @@
 (require 'server)
 (require 'sh-script)
 (require 'smerge-mode)
+(require 'subword)
 (require 'tablegen-mode)
 (require 'tramp)
 (require 'view)
@@ -617,10 +618,11 @@ function `view-mode' and kill the buffer with q."
 
 ;; NB(whiteside): Modes must be diminished after they are activated, so this
 ;; section should be at the end of this file.
-(dolist (mode '(counsel-mode ivy-mode which-key-mode auto-revert-mode
-                             company-mode hs-minor-mode flyspell-mode
-                             auto-fill-function yas-minor-mode clipetty-mode
-                             subword-mode))
+(dolist
+    (mode
+     '(counsel-mode ivy-mode which-key-mode auto-revert-mode company-mode
+                    hs-minor-mode flyspell-mode auto-fill-function
+                    yas-minor-mode clipetty-mode subword-mode))
   (diminish mode))
 
 
