@@ -9,13 +9,14 @@ of any given tool which supports this configuration may be lower.
 - Git 2.21.1
 
 * Improvements
-** Emacs
-*** TODO C++
-- [ ] M-x compile
-- [ ] C/C++ https://develop.spacemacs.org/layers/+lang/c-c++/README.html
-- [ ] Semantic https://develop.spacemacs.org/layers/LAYERS.html#semantic
-- [ ] CMake https://develop.spacemacs.org/layers/+tools/cmake/README.html
-- [ ] LSP https://develop.spacemacs.org/layers/+tools/lsp/README.html
+** DONE ccache
+** DONE Emacs
+*** DONE C++
+- [X] M-x compile
+- [X] C/C++ https://develop.spacemacs.org/layers/+lang/c-c++/README.html
+- [X] Semantic https://develop.spacemacs.org/layers/LAYERS.html#semantic
+- [X] CMake https://develop.spacemacs.org/layers/+tools/cmake/README.html
+- [X] LSP https://develop.spacemacs.org/layers/+tools/lsp/README.html
 
 
 *** DONE General
