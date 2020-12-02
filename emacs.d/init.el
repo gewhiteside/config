@@ -241,6 +241,10 @@
 ;; therefore has no need to save state.
 (unless (daemonp) (desktop-save-mode))
 
+(defun desktop-read-force ()
+  "Force reading from a locked desktop."
+  (interactive) (let ((desktop-load-locked-desktop 't)) (desktop-read)))
+
 (setq
  ;; If the desktop is locked, don't ask to steal it or to save a new one.
  desktop-load-locked-desktop nil
