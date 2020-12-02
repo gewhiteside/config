@@ -609,7 +609,8 @@ function `view-mode' and kill the buffer with q."
 ;; section should be at the end of this file.
 (dolist (mode '(counsel-mode ivy-mode which-key-mode auto-revert-mode
                              company-mode hs-minor-mode flyspell-mode
-                             auto-fill-function yas-minor-mode clipetty-mode))
+                             auto-fill-function yas-minor-mode clipetty-mode
+                             subword-mode))
   (diminish mode))
 
 
