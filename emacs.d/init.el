@@ -51,11 +51,13 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Load features
 
+(require 'abbrev)
 (require 'cc-mode)
 (require 'cc-vars)
 (require 'clang-format)
 (require 'company)
 (require 'desktop)
+(require 'eldoc)
 (require 'exec-path-from-shell)
 (require 'flycheck)
 (require 'flyspell)
@@ -620,7 +622,8 @@ the buffer with q."
     (mode
      '(counsel-mode ivy-mode which-key-mode auto-revert-mode company-mode
                     hs-minor-mode flyspell-mode auto-fill-function
-                    yas-minor-mode clipetty-mode subword-mode))
+                    yas-minor-mode clipetty-mode subword-mode abbrev-mode
+                    eldoc-mode))
   (diminish mode))
 
 
