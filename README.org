@@ -9,6 +9,8 @@ of any given tool which supports this configuration may be lower.
 - Git 2.21.1
 
 * Improvements
+** TODO git
+- [ ] clang-format (and clang-tidy?) commit hook
 ** DONE ccache
 ** DONE Emacs
 *** DONE C++
