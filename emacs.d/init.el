@@ -368,10 +368,13 @@
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Ivy and counsel
+;; Ivy, counsel, and swiper
 
 (ivy-mode)
 (counsel-mode)
+
+(global-set-key (kbd "C-s") 'swiper)
+(global-set-key (kbd "C-r") 'swiper-backward)
 
 
 
