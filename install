@@ -13,12 +13,12 @@ config=$PWD
 ## Dotfiles
 # Symlink dotfiles to home directory, adding a leading dot.
 for dotfile in $config/dotfiles/* ; do
-    ln -s "$@" $dotfile ~/.${dotfile##*/}
+    ln --symbolic "$@" $dotfile ~/.${dotfile##*/}
 done
 
 
 ## Emacs
-ln -s "$@" $config/emacs.d ~/.emacs.d
+ln --symbolic "$@" $config/emacs.d ~/.emacs.d
 
 ## SSH
 # Set the permissions for the ssh config. It must be read/write
@@ -26,4 +26,4 @@ ln -s "$@" $config/emacs.d ~/.emacs.d
 chmod 644 $config/ssh/config
 
 # Symlink the ssh directory to .ssh.
-ln -s "$@" $config/ssh ~/.ssh
+ln --symbolic "$@" $config/ssh ~/.ssh
