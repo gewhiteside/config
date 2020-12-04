@@ -1,0 +1,8 @@
+#!/bin/bash
+
+# Support agent forwarding over multiple ssh sesssions, i.e., the Emacs daemon
+# and tmux, by symlinking the current authentication socket, if any, to a
+# standard location.
+if [ -S "$SSH_AUTH_SOCK" ] && [ ! -S ~/.ssh/ssh_auth_sock ]; then
+    ln --symbolic --force $SSH_AUTH_SOCK ~/.ssh/ssh_auth_sock
+fi
