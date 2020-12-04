@@ -221,6 +221,12 @@
 ;; Only set variables from the shell if Emacs is running on a window system.
 (when window-system (exec-path-from-shell-initialize))
 
+;; If this Emacs is a daemon, update the value of SSH_AUTH_SOCK when a new frame
+;; is created, i.e., when a new client connects.
+(when (daemonp)
+  (add-hook 'before-make-frame-hook
+            (lambda () (exec-path-from-shell-copy-env "SSH_AUTH_SOCK"))))
+
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
