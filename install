@@ -1,39 +1,29 @@
 #!/bin/bash
-#
-# Installs config files and some scripts and configures git for this
-# repo. Should be run from the project root.
+
+# Installs config files and some scripts and configures git for this repo.
+# Should be run from the project root.
 #
 # Usage: install [OPTION]...
 #
-# Options are passed directly to ln (see man ln). Some usefull options are
+# Options are passed directly to ln (see man ln). Some useful options are
 # --force and --interactive.
 
 config=$PWD
 
 ## Dotfiles
 # Symlink dotfiles to home directory, adding a leading dot.
-for dotfile in $config/dotfiles/*[!~]; do
+for dotfile in $config/dotfiles/* ; do
     ln -s "$@" $dotfile ~/.${dotfile##*/}
 done
 
 
 ## Emacs
-# Create ~/.emacs.d and ~/.emacs.d/elisp if they don't already exist.
-mkdir -p ~/.emacs.d/elisp
-
-# Symlink emacs init file to .emacs.d.
-ln -s "$@" $config/emacs.d/init.el ~/.emacs.d
-# Symlink elisp files to .emacs.d/elisp.
-ln -s "$@" $config/emacs.d/elisp/*[!~] ~/.emacs.d/elisp
-# Symlink the yasnippets snippets directory.
-ln -s "$@" $config/emacs.d/snippets ~/.emacs.d/snippets
-
+ln -s "$@" $config/emacs.d ~/.emacs.d
 
 ## SSH
 # Set the permissions for the ssh config. It must be read/write
 # for the user, and not writable by others.
 chmod 644 $config/ssh/config
-# Create user ssh directory.
-mkdir -p ~/.ssh
-# Symlink the ssh config file.
-ln -s "$@" $config/ssh/config ~/.ssh
+
+# Symlink the ssh directory to .ssh.
+ln -s "$@" $config/ssh ~/.ssh
