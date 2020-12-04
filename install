@@ -10,7 +10,14 @@
 
 config=$PWD
 
+if [[ "$config" != *"$HOME"* ]]; then
+    echo "This config can only be installed from inside your HOME directory."
+    exit 1
+fi
+
+
 ## Dotfiles
+
 # Symlink dotfiles to home directory, adding a leading dot.
 for dotfile in $config/dotfiles/* ; do
     ln --symbolic "$@" $dotfile ~/.${dotfile##*/}
