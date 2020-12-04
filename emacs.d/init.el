@@ -380,7 +380,6 @@
 (counsel-mode)
 
 (global-set-key (kbd "C-s") 'swiper)
-(global-set-key (kbd "C-r") 'swiper-backward)
 
 
 
