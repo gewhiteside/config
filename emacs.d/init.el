@@ -492,7 +492,8 @@
 ;; Don't show code actions or project diagnostics in the mode line.
 (setq lsp-modeline-code-actions-enable nil lsp-modeline-diagnostics-enable nil)
 
-(add-hook 'c++-mode-hook 'lsp)
+(dolist (mode-hook '(c++-mode-hook python-mode-hook))
+  (add-hook mode-hook 'lsp))
 (add-hook 'lsp-mode-hook 'lsp-enable-which-key-integration)
 
 
