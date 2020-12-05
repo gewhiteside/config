@@ -8,8 +8,8 @@ for ccache_lib_path in /usr/lib{,64}/ccache; do
     fi
 done
 
-# Add my bin to path.
-PATH=$HOME/bin:$PATH
+# Add my bin and pip's user bin to path.
+PATH=$HOME/bin:$HOME/.local/bin:$PATH
 
 # Set my default editor to emacsclient. If a server isn't available, then start
 # emacs without loading a saved desktop or a window system and don't confirm
