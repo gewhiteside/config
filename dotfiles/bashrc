@@ -18,6 +18,60 @@ shopt -s histappend
 # Don't try to complete an empty command.
 shopt -s no_empty_cmd_completion
 
+set_editor() {
+    # If emacs isn't installed, just use vim.
+    if ! type emacs &>/dev/null; then
+        EDITOR=vim
+        return
+    fi
+
+    # If this terminal is dumb, then use emacsclient to ship the editing off to
+    # the server, as this terminal can't handle running an editor. As far as I
+    # know, I only use dumb terminals inside of Emacs, so there should always be
+    # a server available.
+    if [ "$TERM" = "dumb" ]; then
+        EDITOR=emacsclient
+        return
+    fi
+
+    # Otherwise, this is a normal terminal. Set the default editor to
+    # emacsclient running in this terminal. If the server isn't available, then
+    # start Emacs without loading a saved destkop or a window system and don't
+    # confirm killing the session.
+
+    # NB(whiteside): Using a \ before a new line caused issues, so just use
+    # += instead.
+    ALTERNATE_EDITOR='emacs --no-desktop --no-window-system '
+    ALTERNATE_EDITOR+='--eval "(setq confirm-kill-emacs nil)"'
+
+    # Output stderr to /dev/null to silence warning.
+    EDITOR="emacsclient --tty 2>/dev/null"
+}
+set_editor
+export EDITOR ALTERNATE_EDITOR
+
+# Set PAGER and GIT_PAGER for this terminal. GIT_PAGER overrides the settings of
+# PAGER, core.pager, and pager.<cmd> when paging output from Git.
+set_pager() {
+    # If this terminal is dumb, avoid paging at all with by using cat.
+    if [ "$TERM" = "dumb" ]; then
+        PAGER="cat"
+        GIT_PAGER="cat"
+        return
+    fi
+
+    # Otherwise, this is a normal terminal and the default setting of PAGER,
+    # usually less, is just fine.
+
+    # If diff-highlight can't be found, set GIT_PAGER to core.pager to ignore
+    # the settings of pager.<cmd>.
+    if ! type diff-highlight &>/dev/null; then
+        GIT_PAGER="$(git config --global core.pager)"
+    fi
+}
+set_pager
+export PAGER GIT_PAGER
+
 # Add a project-specific symlink in <project_root>/.symlinks.
 project-symlink() {
     if [ -z "$PROJECT" ]; then

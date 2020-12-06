@@ -8,8 +8,8 @@
         # Git less options--don't clear the screen on exit.
         #
         # NB(whiteside): This value and the value of pager.<cmd> are overriden
-        # if GIT_PAGER is set. GIT_PAGER is set in bash_profile if the terminal
-        # is dumb or diff-highlight isn't available.
+        # if GIT_PAGER is set. GIT_PAGER is set in bashrc if the terminal is
+        # dumb or diff-highlight isn't available.
         pager = less -X
 [color]
         ui = auto

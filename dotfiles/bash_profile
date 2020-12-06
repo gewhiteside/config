@@ -1,45 +1,21 @@
-[ -f ~/.bashrc ] && source ~/.bashrc
-
-# If ccache drivers are present, add them to PATH.
-for ccache_lib_path in /usr/lib{,64}/ccache; do
-    if [ -d "$ccache_lib_path" ]; then
-        PATH="$ccache_lib_path:$PATH"
-        break
-    fi
+# Add ccache drivers to PATH.
+for ccache_lib_path in /usr/lib{64,}/ccache; do
+    PATH="$ccache_lib_path:$PATH"
 done
 
-# Add my bin and pip's user bin to path.
-PATH=$HOME/bin:$HOME/.local/bin:$PATH
+# Add my bin directory to PATH.
+PATH="$HOME/bin:$PATH"
 
-# Set my default editor to emacsclient. If a server isn't available, then start
-# emacs without loading a saved desktop or a window system and don't confirm
-# killing the session. If emacs isn't installed, just use vim.
-#
-# NB: Using a \ before a new line causes issues, so just use += instead.
-if type emacs &>/dev/null; then
-    ALTERNATE_EDITOR='emacs --no-desktop --no-window-system '
-    ALTERNATE_EDITOR+='--eval "(setq confirm-kill-emacs nil)"'
+# Add pip's user-specific bin directory to PATH.
+PATH="$HOME/.local/bin:$PATH"
 
-    # Output stderr to /dev/null to silence warning.
-    EDITOR="emacsclient --tty 2>/dev/null"
-else
-    EDITOR=vim
-fi
+export PATH
 
 # Set default less options--turn off the terminal bell, display raw control
 # characters for ANSI color escape sequences, and ignore case in search.
-LESS='RQi'
-
-# If the current terminal is dumb, set the pager to cat. If the terminal isn't
-# dumb and diff-highlight can't be found, set GIT_PAGER to the value of
-# core.pager so that the pager.<cmd> settings are ignore.
-if [ "$TERM" = "dumb" ]; then
-    GIT_PAGER='cat'
-elif ! type diff-highlight &>/dev/null; then
-    GIT_PAGER="$(git config --global core.pager)"
-fi
-
-export PATH ALTERNATE_EDITOR EDITOR LESS GIT_PAGER
+export LESS='RQi'
 
 # Turn off the bash deprecation warning on Catalina.
 export BASH_SILENCE_DEPRECATION_WARNING=1
+
+[ -f ~/.bashrc ] && source ~/.bashrc
