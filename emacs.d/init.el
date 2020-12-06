@@ -66,6 +66,7 @@
 (require 'ibuf-ext)
 (require 'llvm-mode)
 (require 'lsp-mode)
+(require 'lsp-pyls)
 (require 'magit-diff)
 (require 'man)
 (require 'org)
@@ -492,9 +493,14 @@
 ;; Don't show code actions or project diagnostics in the mode line.
 (setq lsp-modeline-code-actions-enable nil lsp-modeline-diagnostics-enable nil)
 
+(setq lsp-pyls-plugins-pydocstyle-enabled 't)
+
 (dolist (mode-hook '(c++-mode-hook python-mode-hook))
   (add-hook mode-hook 'lsp))
+
 (add-hook 'lsp-mode-hook 'lsp-enable-which-key-integration)
+
+(global-set-key (kbd "C-M-<tab>") 'lsp-format-region)
 
 
 
