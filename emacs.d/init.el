@@ -279,11 +279,11 @@
  '((mark modified read-only " " (name 30 -1 :left) " " (mode 16 16 :left :elide)
          " " filename-and-process)))
 
-;; Don't show special buffers and non-status magit buffers.
+;; Don't show special buffers and non-status Magit buffers.
 (dolist (predicate '("^\\*" "^magit-"))
   (add-to-list 'ibuffer-never-show-predicates predicate))
 
-;; Use IBuffer as buffer list.
+;; Use Ibuffer as buffer list.
 (define-key global-map [remap list-buffers] 'ibuffer)
 
 
@@ -294,7 +294,7 @@
 ;; https://www.emacswiki.org/emacs/SearchAtPoint
 (global-set-key (kbd "C-S-s") 'isearch-forward-symbol-at-point)
 
-;; DEL during isearch should edit the search string, not jump back to the
+;; DEL during Isearch should edit the search string, not jump back to the
 ;; previous result.
 (define-key isearch-mode-map [remap isearch-delete-char] 'isearch-del-char)
 
@@ -403,7 +403,7 @@
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; yasnippet
+;; yas-snippet
 
 (yas-global-mode)
 
@@ -514,7 +514,7 @@
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Version control--git-commit, magit, and smerge
+;; Version control--git-commit, Magit, and Smerge
 
 (setq
  ;; Set the max length of the summary line.
@@ -599,7 +599,7 @@ the buffer with q."
       (lambda () (and (looking-at org-outline-regexp)
                       (looking-back "^\**" nil))))
 
-;; Add markdown to export backends.
+;; Add markdown to export back ends.
 (add-to-list 'org-export-backends 'md)
 
 (define-key org-mode-map (kbd "C-,") 'outline-next-visible-heading)
