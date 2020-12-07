@@ -409,7 +409,24 @@ not visiting a file, then return the empty string."
       (if (string-match-p "/include/" buffer-file-name)
           (replace-regexp-in-string ".*/include/" "" buffer-file-name )
         (file-name-nondirectory buffer-file-name)
-    "")))
+        "")))
+
+(defun whiteside/llvm-include-guard ()
+  "Return the include guard for this file.
+Return a string to be used as an include guard for this file
+accoring to
+https://llvm.org/docs/CodingStandards.html#header-guard. If this
+buffer is not visiting a file or this file is not in an include
+directory, then return an empty string."
+  (if (and buffer-file-name (string-match-p "/include/" buffer-file-name))
+      (concat
+       (upcase
+        (replace-regexp-in-string
+         "/" "_"
+         (replace-regexp-in-string
+          ".*/include/" "" (file-name-sans-extension buffer-file-name))))
+       "_H")
+    ""))
 
 (defun whiteside/pad-with-dashes (pad-width &rest strings)
   "Return a string with 0 or more dashes padding to PAD-WIDTH.

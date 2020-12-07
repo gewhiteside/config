@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# name: llvm-include-guard
+# key: llvmig
+# --
+
+#ifndef ${1:`(whiteside/llvm-include-guard)`}
+#define $1
+
+$0
+
+#endif // #ifndef $1
