@@ -416,9 +416,10 @@
 
 (global-flycheck-mode)
 
+;; Disable Flycheck in the scratch buffer.
 (add-hook 'flycheck-mode-hook
-          (lambda () (when (string-match-p "^\\*scratch\\*$" (buffer-name)))
-            (flycheck-mode 0)))
+          (lambda () (when (string-match-p "^\\*scratch\\*$" (buffer-name))
+                       (flycheck-mode 0))))
 
 (setq flycheck-emacs-lisp-load-path 'inherit)
 
