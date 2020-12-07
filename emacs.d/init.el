@@ -212,9 +212,6 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Environment variables
 
-;; In addition to PATH and MANPATH, set GIT_PAGER from the shell.
-(add-to-list 'exec-path-from-shell-variables "GIT_PAGER")
-
 ;; My environment variables are set in bash_profile, so a non-interactive, login
 ;; shell is sufficient.
 (setq exec-path-from-shell-arguments '("--login"))
