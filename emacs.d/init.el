@@ -458,7 +458,8 @@
       ispell-extra-args '("--run-together"))
 
 ;; Don't spell check strings in programming modes; there are just too many
-;; non-English strings.
+;; non-English strings
+;; (https://emacs.stackexchange.com/questions/31300/can-you-turn-on-flyspell-for-comments-but-not-strings).
 (setq flyspell-prog-text-faces
       (delq 'font-lock-string-face flyspell-prog-text-faces))
 
