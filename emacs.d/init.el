@@ -108,7 +108,7 @@
  sentence-end-double-space nil
  ;; Open the *scratch* buffer in fundamental-mode.
  initial-major-mode 'fundamental-mode
- initial-scratch-message "Welcome, Mr. Whiteside.\n\n"
+ initial-scratch-message nil
  default-directory "~/"
  ;; Select the man and help windows when they are opened.
  help-window-select t
