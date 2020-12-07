@@ -451,14 +451,15 @@
           (lambda() (flyspell-prog-mode)
             (local-set-key (kbd "C-c i i") 'ispell-comments-and-strings)))
 
-;; Automatically highlight the whole buffer.
-(dolist (mode-hook 'text-mode-hook 'prog-mode-hook)
-  (add-hook mode-hook 'flyspell-buffer))
-
 (setq ispell-silently-savep 't
       ispell-program-name "aspell"
       ;; Enable spell checking for CamelCase words.
       ispell-extra-args '("--run-together"))
+
+;; Don't spell check strings in programming modes; there are just too many
+;; non-English strings.
+(setq flyspell-prog-text-faces
+      (delq 'font-lock-string-face flyspell-prog-text-faces))
 
 ;; Unset keys which conflict with org-mode.
 (define-key flyspell-mode-map (kbd "C-,") nil)
