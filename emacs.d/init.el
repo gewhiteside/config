@@ -498,6 +498,10 @@
 
 (setq lsp-pyls-plugins-pydocstyle-enabled 't)
 
+;; Prefer YAPF over autopep8.
+(setq lsp-pyls-plugins-autopep8-enabled nil
+      lsp-pyls-plugins-yapf-enabled 't)
+
 (dolist (mode-hook '(c++-mode-hook python-mode-hook))
   (add-hook mode-hook 'lsp))
 
