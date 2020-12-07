@@ -386,17 +386,10 @@
 
 (global-company-mode)
 
-;; Use tab to activate company completion when the current line has been
-;; indented.
-(setq tab-always-indent 'complete)
+(setq company-idle-delay 0.1
+      company-show-numbers t)
+
 (define-key company-mode-map [remap completion-at-point] 'company-complete)
-
-;; Use company instead of dabbrev-expand.
-(define-key company-mode-map (kbd "M-/") 'company-complete)
-
-;; Use the same keys as ivy.
-(define-key company-active-map (kbd "C-n") 'company-select-next)
-(define-key company-active-map (kbd "C-p") 'company-select-previous)
 
 
 
