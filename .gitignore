@@ -1,4 +1,4 @@
-emacs.d/.emacs.desktop
+emacs.d/.emacs.desktop*
 emacs.d/.lsp-session*
 emacs.d/elpa/
 emacs.d/projectile-bookmarks.eld
