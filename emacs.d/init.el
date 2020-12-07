@@ -407,8 +407,6 @@
 
 (add-to-list 'yas-snippet-dirs "~/reservoir/snippets" 't)
 
-(define-key yas-minor-mode-map (kbd "s-/") 'yas-expand)
-
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
