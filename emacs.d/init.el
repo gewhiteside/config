@@ -416,6 +416,10 @@
 
 (global-flycheck-mode)
 
+(add-hook 'flycheck-mode-hook
+          (lambda () (when (string-match-p "^\\*scratch\\*$" (buffer-name)))
+            (flycheck-mode 0)))
+
 (setq flycheck-emacs-lisp-load-path 'inherit)
 
 ;; Display the error list on the bottom of the frame occupying a tenth of the
