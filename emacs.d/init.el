@@ -442,20 +442,28 @@
 ;; NB(whiteside): local-set-key is used instead of define-key here because
 ;; flyspell-prog-mode doesn't have its own key map.
 (add-hook 'text-mode-hook (lambda() (flyspell-mode)
-                            (local-set-key (kbd "C-c i") 'ispell-buffer)))
+                            (local-set-key (kbd "C-c i i") 'ispell-buffer)))
 
 ;; Enable flyspell-prog-mode in programming modes. Bind "C-c i" to
 ;; ispell-comments-and-strings to avoid spell checking the whole buffer.
 (add-hook 'prog-mode-hook
           (lambda() (flyspell-prog-mode)
-            (local-set-key (kbd "C-c i") 'ispell-comments-and-strings)))
+            (local-set-key (kbd "C-c i i") 'ispell-comments-and-strings)))
 
-;; Disable flyspell in sh-mode. There are too many non-English strings.
-(add-hook 'sh-mode-hook (lambda () (flyspell-mode 0)))
+;; Automatically highlight the whole buffer.
+(dolist (mode-hook 'text-mode-hook 'prog-mode-hook)
+  (add-hook mode-hook 'flyspell-buffer))
+
+(setq ispell-silently-savep 't
+      ispell-program-name "aspell"
+      ;; Enable spell checking for CamelCase words.
+      ispell-extra-args '("--run-together"))
 
 ;; Unset keys which conflict with org-mode.
 (define-key flyspell-mode-map (kbd "C-,") nil)
 (define-key flyspell-mode-map (kbd "C-.") nil)
+
+(define-key flyspell-mode-map (kbd "C-c i o") 'flyspell-buffer)
 
 
 
