@@ -14,8 +14,8 @@ not visiting a file, then return the empty string."
   (if buffer-file-name
       (if (string-match-p "/include/" buffer-file-name)
           (replace-regexp-in-string ".*/include/" "" buffer-file-name )
-        (file-name-nondirectory buffer-file-name)
-        "")))
+        (file-name-nondirectory buffer-file-name))
+    ""))
 
 (defun whiteside/llvm-include-guard ()
   "Return the include guard for this file.
