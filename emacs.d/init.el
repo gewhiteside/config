@@ -65,6 +65,7 @@
 (require 'hideshow)
 (require 'ibuf-ext)
 (require 'llvm-mode)
+(require 'lsp-clangd)
 (require 'lsp-mode)
 (require 'lsp-pyls)
 (require 'magit-diff)
@@ -500,6 +501,10 @@
 ;; Don't show code actions or project diagnostics in the mode line.
 (setq lsp-modeline-code-actions-enable nil lsp-modeline-diagnostics-enable nil)
 
+;; clangd
+(setq lsp-clients-clangd-args '("--header-insertion=never"))
+
+;; pyls
 (setq lsp-pyls-plugins-pydocstyle-enabled 't)
 
 ;; Prefer YAPF over autopep8.
