@@ -390,6 +390,8 @@
 
 (global-company-mode)
 
+(add-hook 'shell-mode-hook (lambda () (company-mode 0)))
+
 (setq company-idle-delay 0.1
       company-show-numbers t)
 
