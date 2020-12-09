@@ -9,6 +9,9 @@ PATH="$HOME/bin:$PATH"
 # Add pip's user-specific bin directory to PATH.
 PATH="$HOME/.local/bin:$PATH"
 
+# Add Homebrew's un-prefixed coreutils to PATH.
+PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
+
 export PATH
 
 # Set default less options--turn off the terminal bell, display raw control
