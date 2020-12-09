@@ -111,6 +111,7 @@
  ;; Open the *scratch* buffer in fundamental-mode.
  initial-major-mode 'fundamental-mode
  initial-scratch-message nil
+ command-line-default-directory "~/"
  default-directory "~/"
  ;; Select the man and help windows when they are opened.
  help-window-select t
