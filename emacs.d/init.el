@@ -36,10 +36,10 @@
 
 (setq
  package-selected-packages
- '(projectile flycheck clang-format cmake-mode markdown-mode magit
-              exec-path-from-shell ibuffer-vc ivy counsel company avy
-              highlight-escape-sequences which-key crontab-mode diminish
-              yasnippet ssh-config-mode clipetty lsp-mode lsp-ivy))
+ '(avy clang-format clipetty cmake-mode company counsel crontab-mode diminish
+       exec-path-from-shell flycheck highlight-escape-sequences ibuffer-vc ivy
+       lsp-ivy lsp-mode magit markdown-mode projectile ssh-config-mode which-key
+       yasnippet))
 
 (dolist (package package-selected-packages)
   (unless (package-installed-p package)
@@ -173,6 +173,12 @@
 
 ;; M-^ is inconvenient, so also bind join-line to M-j.
 (global-set-key (kbd "M-j") 'join-line)
+
+(defun sort-elisp-symbols (beg end)
+  "Sort Emacs Lisp symbols in the active region.
+Lexicographical sort the symbols, i.e. characters in the [:word:]
+character class, possibly joined by a dash, from BEG to END."
+  (interactive"r") (sort-regexp-fields nil "[[:word:]-]+" "\\&" beg end))
 
 ;; If a server is not running, start it. If this is a daemon, server-start will
 ;; be called automatically, so don't call it here.
@@ -651,10 +657,10 @@ the buffer with q."
 ;; section should be at the end of this file.
 (dolist
     (mode
-     '(counsel-mode ivy-mode which-key-mode auto-revert-mode company-mode
-                    hs-minor-mode flyspell-mode auto-fill-function
-                    yas-minor-mode clipetty-mode subword-mode abbrev-mode
-                    eldoc-mode))
+     '(abbrev-mode auto-fill-function auto-revert-mode clipetty-mode
+                   company-mode counsel-mode eldoc-mode flyspell-mode
+                   hs-minor-mode ivy-mode subword-mode which-key-mode
+                   yas-minor-mode))
   (diminish mode))
 
 
