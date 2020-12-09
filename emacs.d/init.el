@@ -164,6 +164,7 @@
 (global-set-key (kbd "M-I") (lambda () (interactive) (other-window -1)))
 
 (global-set-key (kbd "C-c C-s") 'sort-lines)
+(global-set-key (kbd "C-c c") 'compile)
 
 (defun whiteside/move-end-of-line-newline ()
   "Insert a newline at the end of current line."
