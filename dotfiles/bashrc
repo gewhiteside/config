@@ -81,7 +81,7 @@ project-symlink() {
 
     mkdir -p $project_root/.symlinks
 
-    local target="$1"
+    local target="$(realpath $1)"
     local link_name=
     if [ "$2" ]; then
         link_name="$2"
