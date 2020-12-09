@@ -174,12 +174,6 @@
 ;; M-^ is inconvenient, so also bind join-line to M-j.
 (global-set-key (kbd "M-j") 'join-line)
 
-(defun sort-elisp-symbols (beg end)
-  "Sort Emacs Lisp symbols in the active region.
-Lexicographical sort the symbols, i.e. characters in the [:word:]
-character class, possibly joined by a dash, from BEG to END."
-  (interactive"r") (sort-regexp-fields nil "[[:word:]-]+" "\\&" beg end))
-
 ;; If a server is not running, start it. If this is a daemon, server-start will
 ;; be called automatically, so don't call it here.
 (unless (or (server-running-p) (daemonp)) (server-start))
@@ -587,6 +581,12 @@ character class, possibly joined by a dash, from BEG to END."
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Emacs Lisp
+
+(defun sort-elisp-symbols (beg end)
+  "Sort Emacs Lisp symbols in the active region.
+Lexicographical sort the symbols, i.e. characters in the [:word:]
+character class, possibly joined by a dash, from BEG to END."
+  (interactive"r") (sort-regexp-fields nil "[[:word:]-]+" "\\&" beg end))
 
 (defun whiteside/library-el-with-view-mode ()
   "Open library .el.gz files with function `view-mode'.
