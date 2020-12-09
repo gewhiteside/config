@@ -15,24 +15,31 @@ if [[ "$config" != *"$HOME"* ]]; then
     exit 1
 fi
 
+ln() {
+    # macOS doesn't support the "--no-target-directory" option to ln.
+    [[ "$(uname)" != Darwin ]] && local no_target_directory=--no-target-directory
+
+    command ln $no_target_directory -s "$@"
+}
+
 
 ## Dotfiles
 
 # Symlink dotfiles to home directory, adding a leading dot.
 for dotfile in $config/dotfiles/* ; do
-    ln --symbolic "$@" $dotfile ~/.${dotfile##*/}
+    ln "$@" $dotfile ~/.${dotfile##*/}
 done
 
 
 ## Emacs
 
-ln --no-target-directory --symbolic "$@" $config/emacs.d ~/.emacs.d
+ln "$@" $config/emacs.d ~/.emacs.d
 
 
 ## SSH
 
 # Symlink the ssh directory to .ssh.
-ln --no-target-directory --symbolic "$@" $config/ssh ~/.ssh
+ln "$@" $config/ssh ~/.ssh
 
 # Set appropriate permissions for ssh. The ssh directory and its parent
 # directories, up to and including the home directory, cannot be writable by
