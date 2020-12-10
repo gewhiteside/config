@@ -39,8 +39,6 @@
         log = diff-highlight | less -X
         show = diff-highlight | less -X
         diff = diff-highlight | less -X
-[pull]
-        rebase = true
 [merge]
 	ff = only
 [fetch]
