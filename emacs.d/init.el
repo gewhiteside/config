@@ -599,9 +599,9 @@ the buffer with q."
   (when (and buffer-file-name (string-match-p "\\.el\\.gz\\'" buffer-file-name))
     (view-mode) (setq view-exit-action 'kill-buffer)))
 
-(add-hook 'emacs-lisp-mode-hook
-          (lambda () (whiteside/library-el-with-view-mode)
-            (add-hook 'after-save-hook 'check-parens)))
+(add-hook 'after-save-hook (if (eq major-mode 'emacs-lisp-mode) 'check-parens))
+
+(add-hook 'emacs-lisp-mode-hook 'whiteside/library-el-with-view-mode)
 
 
 
