@@ -25,7 +25,8 @@ ln() {
 }
 
 
-## Dotfiles
+######################################################################
+# Dotfiles
 
 # Symlink dotfiles to home directory, adding a leading dot.
 for dotfile in $config/dotfiles/* ; do
@@ -33,12 +34,14 @@ for dotfile in $config/dotfiles/* ; do
 done
 
 
-## Emacs
+######################################################################
+# Emacs
 
 ln "$@" $config/emacs.d ~/.emacs.d
 
 
-## SSH
+######################################################################
+# SSH
 
 # Symlink the ssh directory to .ssh.
 ln "$@" $config/ssh ~/.ssh
