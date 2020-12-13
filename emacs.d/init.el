@@ -172,9 +172,6 @@
 
 (global-set-key (kbd "S-<return>") 'whiteside/move-end-of-line-newline)
 
-;; M-^ is inconvenient, so also bind join-line to M-j.
-(global-set-key (kbd "M-j") 'join-line)
-
 ;; If a server is not running, start it. If this is a daemon, server-start will
 ;; be called automatically, so don't call it here.
 (unless (or (server-running-p) (daemonp)) (server-start))
