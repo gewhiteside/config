@@ -58,3 +58,10 @@ done
 # The config file must be read/write for the user, and not writable by others.
 chmod 644 $config/ssh/config
 
+######################################################################
+# Git hooks
+
+ln "$@" $config/githooks ~/.githooks
+
+# Git hooks must be executable.
+chmod +x $config/githooks/*

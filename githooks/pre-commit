@@ -1,0 +1,35 @@
+#!/bin/bash
+
+# Redirect standard output to standard error.
+exec 1>&2
+
+# Check staged changes with clang-format.
+#
+# Return 0 if the changes are compliant with clang-format. Return 1 if
+# git-clang-format is not installed, if git-clang-format exits with a non-zero
+# exit code (usually due to the presence of unstaged changes), or if
+# clang-format detects formatting issues with the change.
+#
+# This check is controlled by the config option "hooks.clangFormat".
+check_clang_format() {
+    local clang_format_enabled=$(git config --type bool hooks.clangFormat)
+    [ "$clang_format_enabled" != "true" ] && return 0
+
+    if ! type git-clang-format &>/dev/null; then
+        echo "error: git-clang-format is not installed. " \
+             "The contents of this commit have not been checked."
+        return 1
+    fi
+
+    if ! diff="$(git-clang-format --quiet --diff)"; then
+        echo "error: clang-format exited with an error. " \
+             "Are there unstaged changes?"
+        return 1
+    fi
+
+    if [ "$diff" ]; then
+        echo "error: clang-format detected formatting issues"
+        return 1
+    fi
+}
+check_clang_format

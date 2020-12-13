@@ -9,6 +9,7 @@
         # isn't available.
         pager = less -X
         whitespace = tab-in-indent
+        hooksPath = ~/.githooks
 [pager]
         branch = off
         # See <git>/contrib/diff-higlight/README for more information about
