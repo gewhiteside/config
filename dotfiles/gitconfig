@@ -1,16 +1,20 @@
 [user]
         name = George Whiteside
         email = whiteside@reservoir.com
-[push]
-	default = upstream
 [core]
         excludesfile = ~/.gitignore
-        # Git less options--don't clear the screen on exit.
-        #
-        # NB(whiteside): This value and the value of pager.<cmd> are overriden
-        # if GIT_PAGER is set. GIT_PAGER is set in bashrc if the terminal is
-        # dumb or diff-highlight isn't available.
+        # Git less options--don't clear the screen on exit. NB(whiteside): This
+        # value and the value of pager.<cmd> are overriden if GIT_PAGER is set.
+        # GIT_PAGER is set in bashrc if the terminal is dumb or diff-highlight
+        # isn't available.
         pager = less -X
+[pager]
+        branch = off
+        # See <git>/contrib/diff-higlight/README for more information about
+        # diff-highlight.
+        log = diff-highlight | less -X
+        show = diff-highlight | less -X
+        diff = diff-highlight | less -X
 [color]
         ui = auto
 [alias]
@@ -27,19 +31,14 @@
 [diff]
         # Enable basic rename detection.
         renames = true
+[fetch]
+        prune = true
+[push]
+	default = upstream
+[merge]
+	ff = only
 [rebase]
         autosquash = true
 [rerere]
         enabled = true
         autoupdate = true
-[pager]
-        branch = off
-        # See <git>/contrib/diff-higlight/README for more information about
-        # diff-highlight.
-        log = diff-highlight | less -X
-        show = diff-highlight | less -X
-        diff = diff-highlight | less -X
-[merge]
-	ff = only
-[fetch]
-        prune = true
