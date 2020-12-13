@@ -17,7 +17,9 @@ fi
 
 ln() {
     # macOS doesn't support the "--no-target-directory" option to ln.
-    [[ "$(uname)" != Darwin ]] && local no_target_directory=--no-target-directory
+    if [[ "$(uname)" != Darwin ]]; then
+        local no_target_directory=--no-target-directory
+    fi
 
     command ln $no_target_directory -s "$@"
 }
