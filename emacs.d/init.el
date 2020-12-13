@@ -568,12 +568,6 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Bash
 
-(add-hook
- 'sh-mode-hook
- (lambda ()
-   ;; Disable << as insert here document.
-   (sh-electric-here-document-mode 0)))
-
 ;; Use sh-mode to edit bashrc, *_bash, and bash_* files.
 (add-to-list 'auto-mode-alist '("\\.?bashrc\\'" . sh-mode))
 (add-to-list 'auto-mode-alist '("_bash\\'" . sh-mode))
