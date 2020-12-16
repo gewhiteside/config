@@ -64,13 +64,16 @@ check_clang_tidy() {
         return 1
     fi
 
-    # If the output of clang-tidy-diff is non-null and has non-whitespace
-    # characters, it detected issues.
-    if [ "$issues" ] && [[ "$issues" == *[![:space:]]*  ]]; then
-        echo "$issues"
-        echo "error: clang-tidy detected issues"
-        return 1
-    fi
+    # If the output of clang-tidy-diff is null or only whitespace characters,
+    # then there were no issues.
+    [[ "$issues" == *([[:space:]])  ]] && return
+
+    # If the output is "No relevant changes found.", then there were no issues.
+    [ "$issues" = "No relevant changes found."  ] && return
+
+    echo "$issues"
+    echo "error: clang-tidy detected issues"
+    return 1
 }
 check_clang_tidy || exit_code=1
 
