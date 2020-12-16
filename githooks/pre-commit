@@ -1,7 +1,12 @@
 #!/bin/bash
+#
+# A Git pre-commit hook for checking the staged changes with clang-format and
+# clang-tidy.
 
 # Redirect standard output to standard error.
 exec 1>&2
+
+exit_code=0
 
 # Check staged changes with clang-format.
 #
@@ -16,14 +21,14 @@ check_clang_format() {
     [ "$clang_format_enabled" != "true" ] && return 0
 
     if ! type git-clang-format &>/dev/null; then
-        echo "error: git-clang-format is not installed. " \
-             "The contents of this commit have not been checked."
+        echo "error: git-clang-format is not installed. The contents of this " \
+             "commit have not been checked by clang-format."
         return 1
     fi
 
-    if ! diff="$(git-clang-format --quiet --diff)"; then
-        echo "error: clang-format exited with an error. " \
-             "Are there unstaged changes?"
+    if ! local diff="$(git-clang-format --quiet --diff)"; then
+        echo "error: clang-format exited with an error. Are there unstaged " \
+             "changes?"
         return 1
     fi
 
@@ -32,4 +37,41 @@ check_clang_format() {
         return 1
     fi
 }
-check_clang_format
+check_clang_format || exit_code=1
+
+# Check staged changes with clang-tidy.
+#
+# Return 0 if the changes don't introduce any warnings or errors from
+# clang-tidy. Return 1 if clang-format-diff is not installed, if clang-tidy-diff
+# exits with a non-zero exit code, or if the change introduces new warnings or
+# errors from clang-tidy.
+#
+# This check is controlled by the config option "hooks.clangTidy".
+check_clang_tidy() {
+    local clang_tidy_enabled=$(git config --type bool hooks.clangTidy)
+    [ "$clang_tidy_enabled" != "true" ] && return 0
+
+    if ! type clang-tidy-diff &>/dev/null; then
+        echo "error: clang-tidy-diff is not installed. The contents of this " \
+             "commit have not been checked by clang-tidy."
+        return 1
+    fi
+
+    local diff="$(git diff --cached -U0)"
+    if ! local issues="$(clang-tidy-diff -p1 -quiet 2>/dev/null <<<$diff)"
+    then
+        echo "error: clang-tidy exited with an error"
+        return 1
+    fi
+
+    # If the output of clang-tidy-diff is non-null and has non-whitespace
+    # characters, it detected issues.
+    if [ "$issues" ] && [[ "$issues" == *[![:space:]]*  ]]; then
+        echo "$issues"
+        echo "error: clang-tidy detected issues"
+        return 1
+    fi
+}
+check_clang_tidy || exit_code=1
+
+exit $exit_code
