@@ -9,21 +9,12 @@ of any given tool which supports this configuration may be lower.
 - Git 2.21.1
 
 * Improvements
-** TODO git
-- [ ] clang-format (and clang-tidy?) commit hook
-** DONE ccache
-** DONE Emacs
-*** DONE C++
-- [X] M-x compile
-- [X] C/C++ https://develop.spacemacs.org/layers/+lang/c-c++/README.html
-- [X] Semantic https://develop.spacemacs.org/layers/LAYERS.html#semantic
-- [X] CMake https://develop.spacemacs.org/layers/+tools/cmake/README.html
-- [X] LSP https://develop.spacemacs.org/layers/+tools/lsp/README.html
+** TODO Emacs
+*** TODO General
+- [ ] crux
+- [ ] use-package
 
-
-*** DONE General
 - [X] Hide Head and Recent commits sections by default
-
 - [X] Use text-mode and prog-mode instead of manual lists of modes
 - [X] Only enable whitespace and fill column indicator in prog/text modes
 - [X] Add word delimiters to TODO highlighting
@@ -34,10 +25,21 @@ of any given tool which supports this configuration may be lower.
   my init file or a file header in LLVM.
 
 
+*** DONE C++
+- [X] M-x compile
+- [X] C/C++ https://develop.spacemacs.org/layers/+lang/c-c++/README.html
+- [X] Semantic https://develop.spacemacs.org/layers/LAYERS.html#semantic
+- [X] CMake https://develop.spacemacs.org/layers/+tools/cmake/README.html
+- [X] LSP https://develop.spacemacs.org/layers/+tools/lsp/README.html
+
+
 *** DONE Purcell
 - [X] diminish
 
 
+** TODO git
+- [ ] clang-format (and clang-tidy?) commit hook
+** DONE ccache
 ** DONE ssh
 - [X] Agent forwarding
 - [X] Make sure that killing text in Emacs running in tmux on a remote machine
