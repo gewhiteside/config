@@ -37,6 +37,8 @@
         prune = true
 [push]
 	default = upstream
+[pull]
+        ff = only
 [merge]
 	ff = only
 [rebase]
