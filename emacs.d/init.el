@@ -499,8 +499,11 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; lsp
 
-;; Don't show code actions or project diagnostics in the mode line.
-(setq lsp-modeline-code-actions-enable nil lsp-modeline-diagnostics-enable nil)
+(setq
+ ;; Don't show code actions or project diagnostics in the mode line.
+ lsp-modeline-code-actions-enable nil lsp-modeline-diagnostics-enable nil
+ ;; Disable the breadcrumb headline.
+ lsp-headerline-breadcrumb-enable nil)
 
 ;; clangd
 (setq lsp-clients-clangd-args '("--header-insertion=never"))
