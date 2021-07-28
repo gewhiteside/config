@@ -537,7 +537,9 @@
 ;; Set the fill column in git-commit-mode to 72 characters.
 (add-hook 'git-commit-mode-hook (lambda () (setq fill-column 72)))
 
-(setq magit-diff-refine-hunk 'all)
+(setq
+ magit-diff-refine-hunk 'all
+ magit-display-buffer-function 'magit-display-buffer-fullframe-status-v1)
 
 ;; When visiting a file from a hunk, open it in another window.
 (dolist (map (list magit-hunk-section-map magit-file-section-map))
