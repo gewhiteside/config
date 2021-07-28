@@ -622,6 +622,7 @@ the buffer with q."
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; C/C++
 
+(add-hook 'c-mode-hook (lambda () (c-toggle-comment-style -1)))
 (add-hook 'c++-mode-hook 'subword-mode)
 
 ;; Set C and clang-format default styles.
