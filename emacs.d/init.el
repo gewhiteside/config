@@ -518,7 +518,7 @@
 (dolist (mode-hook '(c++-mode-hook python-mode-hook))
   (add-hook mode-hook 'lsp))
 
-(add-hook 'lsp-mode-hook 'lsp-enable-which-key-integration)
+;; (add-hook 'lsp-mode-hook 'lsp-enable-which-key-integration)
 
 (global-set-key (kbd "C-M-<tab>") 'lsp-format-region)
 
