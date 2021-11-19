@@ -39,7 +39,7 @@
  '(avy clang-format clipetty cmake-mode company counsel crontab-mode diminish
        exec-path-from-shell flycheck highlight-escape-sequences ibuffer-vc ivy
        lsp-ivy lsp-mode magit markdown-mode projectile ssh-config-mode which-key
-       yasnippet))
+       yaml-mode yasnippet))
 
 (dolist (package package-selected-packages)
   (unless (package-installed-p package)
