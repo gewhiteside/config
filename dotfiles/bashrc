@@ -89,7 +89,7 @@ set_pager
 export PAGER GIT_PAGER
 
 # Add a project-specific symlink in <project_root>/.symlinks.
-project-symlink() {
+project_symlink() {
     if [ -z "$PROJECT" ]; then
         echo "error: set PROJECT before calling ${FUNCNAME[0]}"
         return 1
