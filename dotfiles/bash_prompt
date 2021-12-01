@@ -143,8 +143,12 @@ prompt() {
     local title="\u@\h"
     title="\[\e]0;$title\a\]"
 
-    # If this terminal is dumb, don't set the title.
-    [ "$TERM" = "dumb" ] && unset title
+    # If this terminal is dumb or an Emacs terminal, don't set the title.
+    case "$TERM" in
+        "dumb" | "eterm-color")
+            unset title
+            ;;
+    esac
 
     # If the last exit status is non-zero, print the exit code and make the
     # final symbol red.
