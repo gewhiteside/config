@@ -5,3 +5,4 @@ Host *
   AddKeysToAgent yes
   ForwardAgent yes
   UseKeychain yes
+  ServerAliveInterval 600
