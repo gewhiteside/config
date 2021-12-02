@@ -15,36 +15,27 @@ if [[ "$config" != *"$HOME"* ]]; then
     exit 1
 fi
 
-ln() {
-    # macOS doesn't support the "--no-target-directory" option to ln.
-    if [[ "$(uname)" != Darwin ]]; then
-        local no_target_directory=--no-target-directory
-    fi
-
-    command ln $no_target_directory -s "$@"
-}
-
 
 ######################################################################
 # Dotfiles
 
 # Symlink dotfiles to home directory, adding a leading dot.
 for dotfile in $config/dotfiles/* ; do
-    ln "$@" $dotfile ~/.${dotfile##*/}
+    ln -s "$@" $dotfile ~/.${dotfile##*/}
 done
 
 
 ######################################################################
 # Emacs
 
-ln "$@" $config/emacs.d ~/.emacs.d
+ln -s --no-target-directory "$@" $config/emacs.d ~/.emacs.d
 
 
 ######################################################################
 # SSH
 
 # Symlink the ssh directory to .ssh.
-ln "$@" $config/ssh ~/.ssh
+ln -s --no-target-directory "$@" $config/ssh ~/.ssh
 
 # Set appropriate permissions for ssh. The ssh directory and its parent
 # directories, up to and including the home directory, cannot be writable by
@@ -61,7 +52,7 @@ chmod 644 $config/ssh/config
 ######################################################################
 # Git hooks
 
-ln "$@" $config/githooks ~/.githooks
+ln -s --no-target-directory "$@" $config/githooks ~/.githooks
 
 # Git hooks must be executable.
 chmod +x $config/githooks/*

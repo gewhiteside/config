@@ -8,6 +8,12 @@ of any given tool which supports this configuration may be lower.
 - Bash 4.2.46(2)
 - Git 2.21.1
 
+** macOS dependencies
+- GNU coreutils 8.32
+
+  GNU coreutils are required on macOS because the system ln does not support the
+  --no-target-directory option.
+
 * Improvements
 ** TODO Emacs
 *** TODO General
