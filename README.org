@@ -15,6 +15,10 @@ of any given tool which supports this configuration may be lower.
   --no-target-directory option.
 
 * Improvements
+** Installation
+- [ ] Remove all code I didn't write
+  - LLVM Emacs configuration
+  - Git (git-completion.sh git-prompt)
 ** TODO Emacs
 *** TODO General
 - [ ] crux
