@@ -6,6 +6,8 @@
 # Redirect standard output to standard error.
 exec 1>&2
 
+shopt -s extglob
+
 exit_code=0
 
 # Check staged changes with clang-format.
@@ -66,7 +68,7 @@ check_clang_tidy() {
 
     # If the output of clang-tidy-diff is null or only whitespace characters,
     # then there were no issues.
-    [[ "$issues" == *([[:space:]])  ]] && return
+    [[ "$issues" == *([[:space:]]) ]] && return
 
     # If the output is "No relevant changes found.", then there were no issues.
     [ "$issues" = "No relevant changes found."  ] && return
