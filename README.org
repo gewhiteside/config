@@ -43,8 +43,8 @@ of any given tool which supports this configuration may be lower.
 - [X] diminish
 
 
-** TODO git
-- [ ] clang-format (and clang-tidy?) commit hook
+** DONE git
+- [X] clang-format (and clang-tidy?) commit hook
 ** DONE ccache
 ** DONE ssh
 - [X] Agent forwarding
