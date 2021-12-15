@@ -41,14 +41,15 @@ set_editor() {
         return
     fi
 
-    # If this terminal is dumb, then use emacsclient to ship the editing off to
-    # the server, as this terminal can't handle running an editor. As far as I
-    # know, I only use dumb terminals inside of Emacs, so there should always be
-    # a server available.
-    if [ "$TERM" = "dumb" ]; then
-        EDITOR=emacsclient
-        return
-    fi
+    # If this terminal is an eterm or dumb, then this terminal is running inside
+    # of Emacs and emacsclient should be used to ship the editing off to
+    # the server.
+    case "$TERM" in
+        dumb | eterm-* )
+            EDITOR=emacsclient
+            return
+            ;;
+    esac
 
     # Otherwise, this is a normal terminal. Set the default editor to
     # emacsclient running in this terminal. If the server isn't available, then
