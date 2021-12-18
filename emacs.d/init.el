@@ -520,7 +520,8 @@
 
 ;; (add-hook 'lsp-mode-hook 'lsp-enable-which-key-integration)
 
-(global-set-key (kbd "C-M-<tab>") 'lsp-format-region)
+(define-key lsp-mode-map (kbd "C-c r") 'lsp-format-region)
+(define-key lsp-mode-map (kbd "C-c C-f") 'lsp-format-buffer)
 
 
 
@@ -636,11 +637,6 @@ the buffer with q."
 
 ;; Find a header file in the same directory.
 (define-key c-mode-base-map (kbd "C-c o") 'projectile-find-other-file)
-
-;; clang-format
-(define-key c-mode-base-map (kbd "C-M-<tab>") 'clang-format-region)
-(define-key c-mode-base-map (kbd "C-c C-f")
-  (lambda () (interactive) (clang-format-region (point-min) (point-max))))
 
 
 

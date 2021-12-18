@@ -24,6 +24,7 @@ of any given tool which supports this configuration may be lower.
 - [ ] crux
 - [ ] use-package
 
+- [X] Rebind clang-format keybinds to lsp-format-region
 - [X] Hide Head and Recent commits sections by default
 - [X] Use text-mode and prog-mode instead of manual lists of modes
 - [X] Only enable whitespace and fill column indicator in prog/text modes
