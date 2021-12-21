@@ -163,6 +163,9 @@
 (global-set-key (kbd "M-i") 'other-window)
 (global-set-key (kbd "M-I") (lambda () (interactive) (other-window -1)))
 
+;; Prefer comment-line to comment-dwim.
+(global-set-key (kbd "M-;") 'comment-line)
+
 (global-set-key (kbd "C-c C-s") 'sort-lines)
 (global-set-key (kbd "C-c c") 'compile)
 
